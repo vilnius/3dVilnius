@@ -1,0 +1,19 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'dijit/_editor/nls/commands':{"bold":"Paryškintasis","copy":"Kopijuoti","cut":"Kirpti","delete":"Pašalinti","indent":"Įtrauka","insertHorizontalRule":"Horizontali linija","insertOrderedList":"Sunumeruotas sąrašas","insertUnorderedList":"Sąrašas su ženkleliais","italic":"Pasvirasis","justifyCenter":"Lygiuoti centre","justifyFull":"Abipusė lygiuotė","justifyLeft":"Lygiuoti kairėje","justifyRight":"Lygiuoti dešinėje","outdent":"Atvirkštinė įtrauka","paste":"Įklijuoti","redo":"Grąžinti","removeFormat":"Pašalinti formatavimą","selectAll":"Žymėti viską","strikethrough":"Perbrauktasis","subscript":"Apatinis indeksas","superscript":"Viršutinis indeksas","underline":"Pabrauktasis","undo":"Atšaukti","unlink":"Pašalinti nuorodą","createLink":"Kurti nuorodą","toggleDir":"Perjungti kryptį","insertImage":"Įterpti vaizdą","insertTable":"Įterpti / redaguoti vaizdą","toggleTableBorder":"Perjungti lentelės kraštinę","deleteTable":"Pašalinti lentelę","tableProp":"Lentelės savybė","htmlToggle":"HTML šaltinis","foreColor":"Priekinio plano spalva","hiliteColor":"Fono spalva","plainFormatBlock":"Pastraipos stilius","formatBlock":"Pastraipos stilius","fontSize":"Šrifto dydis","fontName":"Šrifto pavadinimas","tabIndent":"Tabuliacijos įtrauka","fullScreen":"Perjungti visą ekraną","viewSource":"Peržiūrėti HTML šaltinį","print":"Spausdinti","newPage":"Naujas puslapis","systemShortcut":"\"${0}\" veiksmą galima atlikti naršyklėje tik naudojant spartųjį klavišą. Naudokite ${1}.","ctrlKey":"ctrl+${0}","appleKey":"⌘${0}","_localized":{}}
+,
+'dijit/_editor/nls/FontChoice':{"fontSize":"Dydis","fontName":"Šriftas","formatBlock":"Formatuoti","serif":"serif","sans-serif":"sans-serif","monospace":"monospace","cursive":"cursive","fantasy":"fantasy","noFormat":"Nėra","p":"Pastraipa","h1":"Antraštė","h2":"Paantraštė","h3":"Antrinė paantraštė","pre":"Iš anksto suformatuota","1":"xx mažas","2":"x mažas","3":"mažas","4":"vidutinis","5":"didelis","6":"x didelis","7":"xx didelis","_localized":{}}
+,
+'dojox/editor/plugins/nls/Preview':{"preview":"Preview","_localized":{}}
+,
+'dojox/editor/plugins/nls/FindReplace':{"findLabel":"Find:","findTooltip":"Enter text to find","replaceLabel":"Replace with:","replaceTooltip":"Enter text to replace with","findReplace":"Find and Replace","matchCase":"Match case","matchCaseTooltip":"Match case","backwards":"Backwards","backwardsTooltip":"Search backwards for text","replaceAllButton":"Replace All","replaceAllButtonTooltip":"Replace all the text","findButton":"Find","findButtonTooltip":"Find the text","replaceButton":"Replace","replaceButtonTooltip":"Replace the text","replaceDialogText":"Replaced ${0} occurrences.","eofDialogText":"Last occurrence ${0}","eofDialogTextFind":"found","eofDialogTextReplace":"replaced","_localized":{}}
+,
+'dojox/editor/plugins/nls/PasteFromWord':{"pasteFromWord":"Paste From Word","instructions":"Paste the content from Word into the text box below.  Once you are satisfied with the content to insert, press the paste button.  To abort inserting text, press the cancel button.","_localized":{}}
+,
+'dojox/editor/plugins/nls/InsertAnchor':{"insertAnchor":"Insert Anchor","title":"Anchor Properties","anchor":"Name:","text":"Description:","set":"Set","cancel":"Cancel","_localized":{}}
+,
+'dojox/editor/plugins/nls/Blockquote':{"blockquote":"Blockquote","_localized":{}}
+,
+'widgets/About/setting/nls/strings':{"instruction":"Kurkite turinį, kuris bus rodomas šiame valdiklyje.","defaultContent":"Čia pridėkite teksto, nuorodų ir mažų grafinių elementų.","productVersion":"Produkto versija: ","kernelVersion":"Branduolio versija: ","_localized":{}}
+});

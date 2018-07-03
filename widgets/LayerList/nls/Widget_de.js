@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"esri/widgets/LayerList/nls/LayerList":{noItemsToDisplay:"Zurzeit sind keine anzuzeigenden Elemente vorhanden.",layerInvisibleAtScale:"Im aktuellen Ma\u00dfstab unsichtbar",layerError:"Beim Laden dieses Layers ist ein Fehler aufgetreten.",untitledLayer:"Unbenannter Layer",_localized:{}},"widgets/LayerList/nls/strings":{_widgetLabel:"Layer-Liste",fullExtentTip:"Zur vollen Ausdehnung wechseln",ground:"Oberfl\u00e4che",_localized:{}}});

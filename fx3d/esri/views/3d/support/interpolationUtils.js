@@ -1,0 +1,3 @@
+//>>built
+define(["dojo/_base/lang"],function(l){var d={_b3p0:function(a,b){a=1-a;return a*a*a*b},_b3p1:function(a,b){var c=1-a;return 3*c*c*a*b},_b3p2:function(a,b){return 3*(1-a)*a*a*b},_b3p3:function(a,b){return a*a*a*b},_b3:function(a,b,c,e,f){return d._b3p0(a,b)+d._b3p1(a,c)+d._b3p2(a,e)+d._b3p3(a,f)},_getPoint:function(a,b,c,e,f){var h,g,k;return h=d._b3(a,b[0],c[0],e[0],f[0]),g=d._b3(a,b[1],c[1],e[1],f[1]),k=d._b3(a,b[2],c[2],e[2],f[2]),[h,g,k]},getPoints:function(a,b,c,e,f){a||(a=10);for(var h=[],g=
+0;g<=a;g++)h.push(d._getPoint(g/a,b,c,e,f));return h}};return d});

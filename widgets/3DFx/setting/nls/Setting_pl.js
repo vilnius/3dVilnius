@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/3DFx/setting/nls/strings":{viz_settings:"Ustawienia wizualizacji",viz_type:"Typ wizualizacji",max_height:"Maks. wysoko\u015b\u0107 symbolu (metry)",max_width:"Maks. szeroko\u015b\u0107 symbolu (metry)",interval:"Interwa\u0142 (milisekundy)",show_percent:"Poka\u017c warto\u015bci jako procenty wszystkich warto\u015bci",show_jettrail_end_points:"Poka\u017c punkty ko\u0144cowe",show_percentage_limited:"Wy\u0142\u0105czono, poniewa\u017c liczba rekord\u00f3w przekracza 400.",cycle_colors:"Automatycznie zmie\u0144 kolory",
+area_extrusion:"Wyniesienie obszaru",bounce:"Odbicie",fireball:"Kula ognia",grid_surface:" Powierzchnia siatki",jet_trail:"Smuga odrzutowca",point_extrusion:"Wyniesienie punktu",pulse:"Puls",layer_settings:"Ustawienia warstwy",viz_layer:"Warstwa wizualizacji",display_field:"Pole wy\u015bwietlania",add_field:"Dodaj pole wizualizacji",field:"Pole",label:"Etykieta",actions:"Dzia\u0142ania",no_layers:" W wybranej scenie internetowej nie ma dost\u0119pnych warstw.",viz_not_supported:"Nieobs\u0142ugiwane dla typu geometrii wybranej warstwy.",
+_localized:{}}});

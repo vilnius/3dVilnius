@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'widgets/3DFx/setting/nls/strings':{"viz_settings":"הגדרות תצוגה חזותית","viz_type":"סוג תצוגה חזותית","max_height":"גובה סמל מקסימלי (מטרים)","max_width":"רוחב סמל מקסימלי (מטרים)","interval":"מרווח (אלפיות שניה)","show_percent":"הצג ערכים כאחוזים עבור כל הערכים","show_jettrail_end_points":"הצג נקודות סיום","show_percentage_limited":"פעולה זו הושבתה מכיוון שמספר הרשומות גדול מ-400.","cycle_colors":"שנה צבעים באופן אוטומטי","area_extrusion":"הבלטת שטח","bounce":"דילוג","fireball":"כדור אש","grid_surface":" שטח הגריד","jet_trail":"עקבות סילון","point_extrusion":"מתיחה של נקודה","pulse":"פעימה","layer_settings":"הגדרות שכבה","viz_layer":"שכבת תצוגה חזותית","display_field":"הצג שדה","add_field":"הוסף שדה של תצוגה חזותית","field":"שדה","label":"תווית","actions":"פעולות","no_layers":" אין שכבות זמינות ב-Web Scene שנבחר.","viz_not_supported":"לא נתמך עבור סוג הגיאומטריה של השכבה שנבחרה.","_localized":{}}
+});

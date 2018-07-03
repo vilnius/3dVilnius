@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"esri/widgets/Legend/nls/Legend":{points:"Punkter",lines:"Linjer",polygons:"Polygoner",creatingLegend:"Opretter forklaring",noLegend:"Ingen forklaring",dotValue:"1 prik \x3d {value} {unit}",currentObservations:"Aktuelle observationer",previousObservations:"Tidligere observationer",high:"H\u00f8j",low:"Lav",esriMetersPerSecond:"m/s",esriKilometersPerHour:"km/t",esriKnots:"knob",esriFeetPerSecond:"fod/sek",esriMilesPerHour:"mil/t",showField:"{field}",showNormField:"{field} divideret med {normField}",
+showNormPct:"{field} som en procent af den samlede v\u00e6rdi",showRatio:"Forholdet af {field} til {normField}",showRatioPercent:"{field} som en procent af {normField}",showRatioPercentTotal:"{field} som en procent af {field} og {normField}",_localized:{}},"widgets/Legend/nls/strings":{_widgetLabel:"Signaturforklaring",_localized:{}}});

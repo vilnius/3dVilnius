@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/3DFx/setting/nls/strings":{viz_settings:"Visualisierungseinstellungen",viz_type:"Visualisierungstyp",max_height:"Maximale Symbolh\u00f6he (Meter)",max_width:"Maximale Symbolbreite (Meter)",interval:"Intervall (Millisekunden)",show_percent:"Werte als Prozentsatz aller Werte anzeigen",show_jettrail_end_points:"Endpunkte anzeigen",show_percentage_limited:"Diese Option ist deaktiviert, da die Anzahl der Datens\u00e4tze mehr als 400 betr\u00e4gt.",cycle_colors:"Farben automatisch \u00e4ndern",
+area_extrusion:"Fl\u00e4chenextrusion",bounce:"Springen",fireball:"Feuerball",grid_surface:" Gitternetzoberfl\u00e4che",jet_trail:"Kondensstreifen",point_extrusion:"Punktextrusion",pulse:"Impuls",layer_settings:"Layer-Einstellungen",viz_layer:"Visualisierungs-Layer",display_field:"Feld anzeigen",add_field:"Visualisierungsfeld hinzuf\u00fcgen",field:"Feld",label:"Beschriftung",actions:"Aktionen",no_layers:" In der ausgew\u00e4hlten Webszene sind keine Layer verf\u00fcgbar.",viz_not_supported:"Wird f\u00fcr den Geometrietyp des ausgew\u00e4hlten Layers nicht unterst\u00fctzt.",
+_localized:{}}});

@@ -1,0 +1,19 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'dijit/_editor/nls/commands':{"bold":"Boldirano","copy":"Kopiraj","cut":"Izreži","delete":"Izbriši","indent":"Uvlači","insertHorizontalRule":"Horizontalno pravilo","insertOrderedList":"Numerisana lista","insertUnorderedList":"Lista oznaka","italic":"Kurziv","justifyCenter":"Poravnaj po sredini","justifyFull":"Poravnaj","justifyLeft":"Poravnaj na lijevo","justifyRight":"Poravnaj na desno","outdent":"Izvuci","paste":"Zalijepi","redo":"Ponovo napravi","removeFormat":"Ukloni format","selectAll":"Izaberi sve","strikethrough":"Precrtaj","subscript":"Indeks","superscript":"Superskript","underline":"Podvuci","undo":"Poništi","unlink":"Ukloni link","createLink":"Kreiraj link","toggleDir":"Promijeni smjer","insertImage":"Umetni sliku","insertTable":"Umetni/uredi tabelu","toggleTableBorder":"Promijeni rub tabele","deleteTable":"Briši tabelu","tableProp":"Osobina tabele","htmlToggle":"HTML izvor","foreColor":"Boja prednjeg plana","hiliteColor":"Boja pozadine","plainFormatBlock":"Stil paragrafa","formatBlock":"Stil paragrafa","fontSize":"Veličina fonta","fontName":"Ime fonta","tabIndent":"Uvlačenje kartice","fullScreen":"Promijeni pun ekran","viewSource":"Pogledaj HTML izvor","print":"Ispiši","newPage":"Nova stranica","systemShortcut":"Akcija \"${0}\"je dostupna u vašem pretraživaču kad koristite prečicu tastature. Koristite ${1}.","ctrlKey":"ctrl+${0}","appleKey":"⌘${0}","_localized":{}}
+,
+'dijit/_editor/nls/FontChoice':{"fontSize":"Veličina","fontName":"Font","formatBlock":"Format","serif":"serif","sans-serif":"bez-serifa","monospace":"monoprostor","cursive":"kurziv","fantasy":"Fantazija","noFormat":"ništa","p":"Paragraf","h1":"Naslov","h2":"Podnaslov","h3":"Pod-podnaslov","pre":"Predformatizovano","1":"xx-malo","2":"x-malo","3":"maleno","4":"srednje","5":"veliko","6":"x-veliko","7":"xx-veliko","_localized":{}}
+,
+'dojox/editor/plugins/nls/Preview':{"preview":"Pregled","_localized":{}}
+,
+'dojox/editor/plugins/nls/FindReplace':{"findLabel":"Nađi:","findTooltip":"Unesite tekst koji treba naći","replaceLabel":"Zamijeni sa:","replaceTooltip":"Unesite tekst s kojim zamijeniti","findReplace":"Nađi i zamijeni","matchCase":"Spari slovo","matchCaseTooltip":"Spari slovo","backwards":"Unazad","backwardsTooltip":"Pretražuj unazad za tekst","replaceAllButton":"Zamijeni sve","replaceAllButtonTooltip":"Zamijeni cijeli tekst","findButton":"Nađi","findButtonTooltip":"Nađi tekst","replaceButton":"Zamijeni","replaceButtonTooltip":"Zamijeni tekst","replaceDialogText":"Zamijenjena ${0} pojavljivanja","eofDialogText":"zadnje pojavljivanje ${0}","eofDialogTextFind":"pronađeno","eofDialogTextReplace":"zamijenjeno","_localized":{}}
+,
+'dojox/editor/plugins/nls/PasteFromWord':{"pasteFromWord":"Zalijepi iz Worda","instructions":"Zalijepi sadržaj iz Worda ispod okvira s tekstom. Kad ste jednom zadovoljni sa sadržajem koji umećete, pritisnite dugme za lijepljenje. Za prekid umetanja teksta, pritisnite dugme odustani.","_localized":{}}
+,
+'dojox/editor/plugins/nls/InsertAnchor':{"insertAnchor":"Umetni sidro","title":"Osobine sidra","anchor":"Ime:","text":"Opis:","set":"Postav","cancel":"Odustani","_localized":{}}
+,
+'dojox/editor/plugins/nls/Blockquote':{"blockquote":"Citat bloka","_localized":{}}
+,
+'widgets/About/setting/nls/strings':{"instruction":"Stvorite sadržaj koji se prikazuje u ovom widgetu.","defaultContent":"Ovdje dodajte tekst, poveznice i male grafičke elemente.","productVersion":"Verzija proizvoda: ","kernelVersion":"Verzija jezgre sustava: ","_localized":{}}
+});

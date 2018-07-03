@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/3DFx/nls/strings":{_widgetLabel:"3DFx",viz_error:"\u0394\u03b5\u03bd \u03ad\u03c7\u03b5\u03b9 \u03ba\u03b1\u03b8\u03bf\u03c1\u03b9\u03c3\u03c4\u03b5\u03af \u03b8\u03b5\u03bc\u03b1\u03c4\u03b9\u03ba\u03cc \u03b5\u03c0\u03af\u03c0\u03b5\u03b4\u03bf \u03ae \u03c0\u03b5\u03b4\u03af\u03b1 \u03bf\u03c0\u03c4\u03b9\u03ba\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7\u03c2",_localized:{}}});

@@ -1,0 +1,1181 @@
+{
+  "themes/FoldableTheme/main": {
+    "name": "FoldableTheme",
+    "platform": "HTML3D",
+    "panels": [
+      {
+        "name": "FoldablePanel",
+        "description": "This is foldable panel"
+      }
+    ],
+    "styles": [
+      {
+        "name": "default",
+        "description": "this is default style",
+        "styleColor": "#586679"
+      },
+      {
+        "name": "black",
+        "description": "this is black style",
+        "styleColor": "#000000"
+      },
+      {
+        "name": "green",
+        "description": "this is green style",
+        "styleColor": "#2aaa8a"
+      },
+      {
+        "name": "cyan",
+        "description": "this is cyan style",
+        "styleColor": "#267030"
+      },
+      {
+        "name": "red",
+        "description": "this is red style",
+        "styleColor": "#c93048"
+      },
+      {
+        "name": "purple",
+        "description": "this is purple style",
+        "styleColor": "#aa6fad"
+      },
+      {
+        "name": "blue",
+        "description": "this is blue style",
+        "styleColor": "#005fa2"
+      },
+      {
+        "name": "yellow",
+        "description": "this is yellow style",
+        "styleColor": "#d07d0e"
+      }
+    ],
+    "layouts": [
+      {
+        "name": "default",
+        "description": "this is default layout"
+      },
+      {
+        "name": "layout1",
+        "description": "this is layout1"
+      }
+    ],
+    "widgets": [
+      {
+        "name": "HeaderController",
+        "description": "this is theme widget controller"
+      }
+    ],
+    "version": "2.6",
+    "wabVersion": "2.6",
+    "author": "Esri R&D Center Beijing",
+    "description": "",
+    "copyright": "",
+    "license": "http://www.apache.org/licenses/LICENSE-2.0",
+    "category": "theme",
+    "i18nLabels": {
+      "defaultLabel": "Foldable Theme",
+      "ar": "موضوع قابل للطي",
+      "bs": "Preklopiva tema",
+      "cs": "Rozkládací motiv",
+      "da": "Foldbart tema",
+      "de": "Foldable-Design",
+      "el": "Foldable Theme",
+      "es": "Plegable",
+      "et": "Kokkuvolditav kujundus",
+      "fi": "Taitettava teema",
+      "fr": "Thème pliable",
+      "he": "ערכת נושא מתקפלת",
+      "hi": "फोल्डेबल थीम",
+      "hr": "Preklopiva tema",
+      "it": "Tema avviluppabile",
+      "id": "Tema Foldable",
+      "ja": "折りたたみ可能なテーマ",
+      "ko": "접을 수 있는 테마",
+      "lt": "Langų tema",
+      "lv": "Salokāms dizains",
+      "nb": "Temaet Foldbar",
+      "nl": "Inklapbaar thema",
+      "pl": "Motyw Składane",
+      "pt-br": "Tema Dobrável",
+      "pt-pt": "Tema Dobrável",
+      "ro": "Temă cu pliere",
+      "ru": "Сворачиваемая тема",
+      "sr": "Sklopiva tema",
+      "sv": "Vikbart tema",
+      "th": "ธีมพับ",
+      "tr": "Katlanabilir Tema",
+      "vi": "Chủ đề Có thể gấp được",
+      "zh-cn": "折叠式主题",
+      "zh-hk": "折疊式主題",
+      "zh-tw": "折疊式主題"
+    },
+    "i18nLabels_layout_default": {
+      "defaultLabel": "Default layout",
+      "ar": "تخطيط افتراضي",
+      "bs": "Zadani izgled",
+      "cs": "Výchozí rozvržení",
+      "da": "Standardlayout",
+      "de": "Standard-Layout",
+      "el": "Προεπιλεγμένη διάταξη",
+      "es": "Diseño predeterminado",
+      "et": "Vaikimisi paigutus",
+      "fi": "Oletusasettelu",
+      "fr": "Mise en page par défaut",
+      "he": "פריסת ברירת מחדל",
+      "hi": "डिफ़ॉल्ट रूपरेखा",
+      "hr": "Zadani izgled",
+      "it": "Layout predefinito",
+      "id": "Tata letak default",
+      "ja": "デフォルトのレイアウト",
+      "ko": "기본 레이아웃",
+      "lt": "Numatytasis maketas",
+      "lv": "Noklusējuma izkārtojums",
+      "nb": "Standardoppsett",
+      "nl": "Standaardlay-out",
+      "pl": "Kompozycja domyślna",
+      "pt-br": "Layout padrão",
+      "pt-pt": "Layout predefinido",
+      "ro": "Aspect implicit",
+      "ru": "Компоновка по умолчанию",
+      "sr": "Podrazumevani raspored",
+      "sv": "Standardlayout",
+      "th": "เค้าโครงเริ่มต้น",
+      "tr": "Varsayılan düzen",
+      "vi": "Bố cục mặc định",
+      "zh-cn": "默认布局",
+      "zh-hk": "預設版面配置",
+      "zh-tw": "預設版面配置"
+    },
+    "i18nLabels_layout_layout1": {
+      "defaultLabel": "Layout 1",
+      "ar": "تخطيط 1",
+      "bs": "Izgled 1",
+      "cs": "Rozvržení 1",
+      "da": "Layout 1",
+      "de": "Layout 1",
+      "el": "Διάταξη 1",
+      "es": "Diseño 1",
+      "et": "Paigutus 1",
+      "fi": "Asettelu 1",
+      "fr": "Mise en page 1",
+      "he": "פריסה 1",
+      "hi": "रूपरेखा 1",
+      "hr": "Izgled 1",
+      "it": "Layout 1",
+      "id": "Tata Letak 1",
+      "ja": "レイアウト 1",
+      "ko": "레이아웃 1",
+      "lt": "1 maketas",
+      "lv": "1. izkārtojums",
+      "nb": "Oppsett 1",
+      "nl": "Lay-out 1",
+      "pl": "Układ 1",
+      "pt-br": "Layout 1",
+      "pt-pt": "Layout 1",
+      "ro": "Aspectul 1",
+      "ru": "Компоновка 1",
+      "sr": "Raspored 1",
+      "sv": "Layout 1",
+      "th": "โครงร่าง 1",
+      "tr": "Düzen 1",
+      "vi": "Bố cục 1",
+      "zh-cn": "布局 1",
+      "zh-hk": "排版 1",
+      "zh-tw": "排版 1"
+    },
+    "i18nLabels_style_default": {},
+    "i18nLabels_style_black": {},
+    "i18nLabels_style_green": {},
+    "i18nLabels_style_cyan": {},
+    "i18nLabels_style_red": {},
+    "i18nLabels_style_purple": {},
+    "i18nLabels_style_blue": {},
+    "i18nLabels_style_yellow": {}
+  },
+  "themes/TabTheme/main": {
+    "name": "TabTheme",
+    "platform": "HTML3D",
+    "panels": [
+      {
+        "name": "TabPanel",
+        "description": "abc..."
+      }
+    ],
+    "styles": [
+      {
+        "name": "default",
+        "description": "this is default style",
+        "styleColor": "#292929"
+      },
+      {
+        "name": "simpleblue",
+        "description": "this is simpleblue style",
+        "styleColor": "#3499dc"
+      },
+      {
+        "name": "purple",
+        "description": "this is purple style",
+        "styleColor": "#ab6ead"
+      },
+      {
+        "name": "red",
+        "description": "this is red style",
+        "styleColor": "#c82f47"
+      },
+      {
+        "name": "yellow",
+        "description": "this is yellow style",
+        "styleColor": "#d07d0e"
+      },
+      {
+        "name": "green",
+        "description": "this is green style",
+        "styleColor": "#05ab08"
+      },
+      {
+        "name": "blue",
+        "description": "this is blue style",
+        "styleColor": "#0057b9"
+      },
+      {
+        "name": "cyan",
+        "description": "this is cyan style",
+        "styleColor": "#2aaa8a"
+      }
+    ],
+    "layouts": [
+      {
+        "name": "default",
+        "description": "this is default layout"
+      },
+      {
+        "name": "layout1",
+        "description": "this is layout1"
+      }
+    ],
+    "widgets": [
+      {
+        "name": "SidebarController",
+        "description": "this is theme widget controller"
+      },
+      {
+        "name": "Header",
+        "description": "this is theme header widget"
+      },
+      {
+        "name": "Footer",
+        "description": "this is theme footer widget"
+      }
+    ],
+    "version": "2.6",
+    "wabVersion": "2.6",
+    "author": "Esri R&D Center Beijing",
+    "description": "",
+    "copyright": "",
+    "license": "http://www.apache.org/licenses/LICENSE-2.0",
+    "category": "theme",
+    "i18nLabels": {
+      "defaultLabel": "Tab Theme",
+      "ar": "موضوع علامة التبويب",
+      "bs": "Tema kartice",
+      "cs": "Rozvržení záložek",
+      "da": "Tabulatortema",
+      "de": "Tab-Design",
+      "el": "Θέμα καρτέλας",
+      "es": "Pestañas",
+      "et": "Vahekaardi kujundus",
+      "fi": "Välilehdet -teema",
+      "fr": "Thème par onglet",
+      "he": "ערכת נושא עם לשוניות",
+      "hi": "टैब थीम",
+      "hr": "Tema kartice",
+      "it": "Tema a schede",
+      "id": "Tema Tab",
+      "ja": "タブ テーマ",
+      "ko": "탭 테마",
+      "lt": "Skirtukų tema",
+      "lv": "Cilnes dizains",
+      "nb": "Temaet Fane",
+      "nl": "Tabbladthema",
+      "pl": "Układ Karty",
+      "pt-br": "Tema da Guia",
+      "pt-pt": "Tema do Separador",
+      "ro": "Temă cu file",
+      "ru": "Тема с закладками",
+      "sr": "Tema kartice",
+      "sv": "Fliktema",
+      "th": "ธีมแท็บ",
+      "tr": "Sekme Teması",
+      "vi": "Chủ đề Tab",
+      "zh-cn": "选项卡主题",
+      "zh-hk": "索引標籤主題",
+      "zh-tw": "索引標籤主題"
+    },
+    "i18nLabels_layout_default": {
+      "defaultLabel": "Default layout",
+      "ar": "تخطيط افتراضي",
+      "bs": "Zadani izgled",
+      "cs": "Výchozí rozvržení",
+      "da": "Standardlayout",
+      "de": "Standard-Layout",
+      "el": "Προεπιλεγμένη διάταξη",
+      "es": "Diseño predeterminado",
+      "et": "Vaikimisi paigutus",
+      "fi": "Oletusasettelu",
+      "fr": "Mise en page par défaut",
+      "he": "פריסת ברירת מחדל",
+      "hi": "डिफ़ॉल्ट रूपरेखा",
+      "hr": "Zadani izgled",
+      "it": "Layout predefinito",
+      "id": "Tata letak default",
+      "ja": "デフォルトのレイアウト",
+      "ko": "기본 레이아웃",
+      "lt": "Numatytasis maketas",
+      "lv": "Noklusējuma izkārtojums",
+      "nb": "Standardoppsett",
+      "nl": "Standaardlay-out",
+      "pl": "Kompozycja domyślna",
+      "pt-br": "Layout padrão",
+      "pt-pt": "Layout predefinido",
+      "ro": "Aspect implicit",
+      "ru": "Компоновка по умолчанию",
+      "sr": "Podrazumevani raspored",
+      "sv": "Standardlayout",
+      "th": "เค้าโครงเริ่มต้น",
+      "tr": "Varsayılan düzen",
+      "vi": "Bố cục mặc định",
+      "zh-cn": "默认布局",
+      "zh-hk": "預設版面配置",
+      "zh-tw": "預設版面配置"
+    },
+    "i18nLabels_layout_layout1": {
+      "defaultLabel": "Layout 1",
+      "ar": "تخطيط 1",
+      "bs": "Izgled 1",
+      "cs": "Rozvržení 1",
+      "da": "Layout 1",
+      "de": "Layout 1",
+      "el": "Διάταξη 1",
+      "es": "Diseño 1",
+      "et": "Paigutus 1",
+      "fi": "Asettelu 1",
+      "fr": "Mise en page 1",
+      "he": "פריסה 1",
+      "hi": "रूपरेखा 1",
+      "hr": "Izgled 1",
+      "it": "Layout 1",
+      "id": "Tata Letak 1",
+      "ja": "レイアウト 1",
+      "ko": "레이아웃 1",
+      "lt": "1 maketas",
+      "lv": "1. izkārtojums",
+      "nb": "Oppsett 1",
+      "nl": "Lay-out 1",
+      "pl": "Układ 1",
+      "pt-br": "Layout 1",
+      "pt-pt": "Layout 1",
+      "ro": "Aspectul 1",
+      "ru": "Компоновка 1",
+      "sr": "Raspored 1",
+      "sv": "Layout 1",
+      "th": "โครงร่าง 1",
+      "tr": "Düzen 1",
+      "vi": "Bố cục 1",
+      "zh-cn": "布局 1",
+      "zh-hk": "排版 1",
+      "zh-tw": "排版 1"
+    },
+    "i18nLabels_style_default": {},
+    "i18nLabels_style_simpleblue": {},
+    "i18nLabels_style_purple": {},
+    "i18nLabels_style_red": {},
+    "i18nLabels_style_yellow": {},
+    "i18nLabels_style_green": {},
+    "i18nLabels_style_blue": {},
+    "i18nLabels_style_cyan": {}
+  },
+  "themes/LaunchpadTheme/main": {
+    "name": "LaunchpadTheme",
+    "label": "Launchpad Theme",
+    "platform": "HTML3D",
+    "panels": [],
+    "styles": [
+      {
+        "name": "default",
+        "description": "this is default style",
+        "styleColor": "#3b8fc4"
+      },
+      {
+        "name": "style2",
+        "description": "this is an alternative style",
+        "styleColor": "#333"
+      },
+      {
+        "name": "style3",
+        "description": "this is an alternative style",
+        "styleColor": "#8b572a"
+      }
+    ],
+    "layouts": [
+      {
+        "name": "default",
+        "description": "this is the default layout"
+      },
+      {
+        "name": "layout2",
+        "description": "this is an alternative layout"
+      }
+    ],
+    "version": "2.6",
+    "wabVersion": "2.6",
+    "author": "Esri R&D Center Beijing",
+    "description": "",
+    "copyright": "",
+    "license": "http://www.apache.org/licenses/LICENSE-2.0",
+    "properties": {
+      "hasLocale": true
+    },
+    "category": "theme",
+    "i18nLabels": {
+      "defaultLabel": "Launchpad Theme",
+      "ar": "موضوع لوحة التشغيل",
+      "bs": "Tema prozora za pokretanje",
+      "cs": "Motiv hlavního panelu",
+      "da": "Launchpad-tema",
+      "de": "Launchpad-Design",
+      "el": "Θέμα Launchpad",
+      "es": "Launchpad",
+      "et": "Teema Launchpad",
+      "fi": "Launchpad-teema",
+      "fr": "Thème Launchpad",
+      "he": "ערכת נושא משגר",
+      "hi": "लॉन्चपैड थीम",
+      "hr": "Tema prozora za pokretanje",
+      "it": "Tema Rampa di lancio",
+      "id": "Tema Launchpad",
+      "ja": "ローンチパッド テーマ",
+      "ko": "실행 패드 테마",
+      "lt": "Paleisties klaviatūros tema",
+      "lv": "Palaišanas paneļa dizains",
+      "nb": "Startfelt-tema",
+      "nl": "Launchpad Thema",
+      "pl": "Motyw Launchpad",
+      "pt-br": "Tema da Plataforma de Inicialização",
+      "pt-pt": "Tema Plataforma de Lançamento",
+      "ro": "Temă platformă lansare",
+      "ru": "Тема Launchpad",
+      "sr": "Tema trake za pokretanje",
+      "sv": "Tema för startplatta",
+      "th": "ธีมลอนช์แพด",
+      "tr": "Fırlatma Rampası Teması",
+      "vi": "Chủ đề Bệ phóng",
+      "zh-cn": "快速启动主题",
+      "zh-hk": "快速啟動板主題",
+      "zh-tw": "快速啟動板主題"
+    },
+    "i18nLabels_layout_default": {
+      "defaultLabel": "Default layout",
+      "ar": "تخطيط افتراضي",
+      "bs": "Zadani izgled",
+      "cs": "Výchozí rozvržení",
+      "da": "Standardlayout",
+      "de": "Standard-Layout",
+      "el": "Προεπιλεγμένη διάταξη",
+      "es": "Diseño predeterminado",
+      "et": "Vaikimisi paigutus",
+      "fi": "Oletusasettelu",
+      "fr": "Mise en page par défaut",
+      "he": "פריסת ברירת מחדל",
+      "hi": "डिफ़ॉल्ट रूपरेखा",
+      "hr": "Zadani izgled",
+      "it": "Layout predefinito",
+      "id": "Tata letak default",
+      "ja": "デフォルトのレイアウト",
+      "ko": "기본 레이아웃",
+      "lt": "Numatytasis maketas",
+      "lv": "Noklusējuma izkārtojums",
+      "nb": "Standardoppsett",
+      "nl": "Standaardlay-out",
+      "pl": "Kompozycja domyślna",
+      "pt-br": "Layout padrão",
+      "pt-pt": "Layout predefinido",
+      "ro": "Aspect implicit",
+      "ru": "Компоновка по умолчанию",
+      "sr": "Podrazumevani raspored",
+      "sv": "Standardlayout",
+      "th": "เค้าโครงเริ่มต้น",
+      "tr": "Varsayılan düzen",
+      "vi": "Bố cục mặc định",
+      "zh-cn": "默认布局",
+      "zh-hk": "預設版面配置",
+      "zh-tw": "預設版面配置"
+    },
+    "i18nLabels_layout_layout2": {},
+    "i18nLabels_style_default": {},
+    "i18nLabels_style_style2": {},
+    "i18nLabels_style_style3": {}
+  },
+  "themes/BoxTheme/main": {
+    "name": "BoxTheme",
+    "platform": "HTML3D",
+    "panels": [
+      {
+        "name": "BoxPanel",
+        "description": "Box panel"
+      }
+    ],
+    "styles": [
+      {
+        "name": "default",
+        "description": "Default style",
+        "styleColor": "#646464"
+      },
+      {
+        "name": "purple",
+        "description": "Purple style",
+        "styleColor": "#886197"
+      },
+      {
+        "name": "blue",
+        "description": "Blue style",
+        "styleColor": "#2d70e4"
+      },
+      {
+        "name": "turquoise",
+        "description": "Turquoise style",
+        "styleColor": "#2faacd"
+      },
+      {
+        "name": "green",
+        "description": "Green style",
+        "styleColor": "#80ab00"
+      },
+      {
+        "name": "orange",
+        "description": "Orange style",
+        "styleColor": "#ff9b00"
+      },
+      {
+        "name": "red",
+        "description": "Red style",
+        "styleColor": "#cf0000"
+      },
+      {
+        "name": "pink",
+        "description": "Pink style",
+        "styleColor": "#ed008c"
+      }
+    ],
+    "layouts": [
+      {
+        "name": "default",
+        "description": "Default layout"
+      },
+      {
+        "name": "left",
+        "description": "Left layout"
+      }
+    ],
+    "widgets": [
+      {
+        "name": "BoxController",
+        "description": "Theme widget controller"
+      }
+    ],
+    "version": "2.6",
+    "wabVersion": "2.6",
+    "author": "@SpatialAgent",
+    "description": "",
+    "copyright": "",
+    "license": "http://www.apache.org/licenses/LICENSE-2.0",
+    "category": "theme",
+    "i18nLabels": {
+      "defaultLabel": "Box Theme",
+      "ar": "موضوع المربع",
+      "bs": "Tema okvira",
+      "cs": "Motiv rámečku",
+      "da": "Bokstema",
+      "de": "Box-Design",
+      "el": "Θέμα Box",
+      "es": "Caja",
+      "et": "Teema Box",
+      "fi": "Ruututeema",
+      "fr": "Thème encart",
+      "he": "ערכת נושא תיבה",
+      "hi": "बॉक्स थीम",
+      "hr": "Tema okvira",
+      "it": "Tema Riquadro",
+      "id": "Tema Box",
+      "ja": "ボックス テーマ",
+      "ko": "상자 테마",
+      "lt": "Dėžučių tema",
+      "lv": "Lodziņa dizains",
+      "nb": "Bokstema",
+      "nl": "Boxthema",
+      "pl": "Motyw Pole",
+      "pt-br": "Tema da Caixa",
+      "pt-pt": "Tema Caixa",
+      "ro": "Temă cutie",
+      "ru": "Тема \"коробка\"",
+      "sr": "Tema okvira",
+      "sv": "Tema för ruta",
+      "th": "กล่องธีม",
+      "tr": "Kutu Teması",
+      "vi": "Chủ đề Hộp",
+      "zh-cn": "盒子主题",
+      "zh-hk": "方塊主題",
+      "zh-tw": "方塊主題"
+    },
+    "i18nLabels_layout_default": {
+      "defaultLabel": "Default layout",
+      "ar": "تخطيط افتراضي",
+      "bs": "Zadani izgled",
+      "cs": "Výchozí rozvržení",
+      "da": "Standardlayout",
+      "de": "Standard-Layout",
+      "el": "Προεπιλεγμένη διάταξη",
+      "es": "Diseño predeterminado",
+      "et": "Vaikimisi paigutus",
+      "fi": "Oletusasettelu",
+      "fr": "Mise en page par défaut",
+      "he": "פריסת ברירת מחדל",
+      "hi": "डिफ़ॉल्ट रूपरेखा",
+      "hr": "Zadani izgled",
+      "it": "Layout predefinito",
+      "id": "Tata letak default",
+      "ja": "デフォルトのレイアウト",
+      "ko": "기본 레이아웃",
+      "lt": "Numatytasis maketas",
+      "lv": "Noklusējuma izkārtojums",
+      "nb": "Standardoppsett",
+      "nl": "Standaardlay-out",
+      "pl": "Kompozycja domyślna",
+      "pt-br": "Layout padrão",
+      "pt-pt": "Layout predefinido",
+      "ro": "Aspect implicit",
+      "ru": "Компоновка по умолчанию",
+      "sr": "Podrazumevani raspored",
+      "sv": "Standardlayout",
+      "th": "เค้าโครงเริ่มต้น",
+      "tr": "Varsayılan düzen",
+      "vi": "Bố cục mặc định",
+      "zh-cn": "默认布局",
+      "zh-hk": "預設版面配置",
+      "zh-tw": "預設版面配置"
+    },
+    "i18nLabels_layout_left": {},
+    "i18nLabels_style_default": {},
+    "i18nLabels_style_purple": {},
+    "i18nLabels_style_blue": {},
+    "i18nLabels_style_turquoise": {},
+    "i18nLabels_style_green": {},
+    "i18nLabels_style_orange": {},
+    "i18nLabels_style_red": {},
+    "i18nLabels_style_pink": {}
+  },
+  "themes/BillboardTheme/main": {
+    "name": "BillboardTheme",
+    "label": "Billboard Theme",
+    "platform": "HTML3D",
+    "panels": [],
+    "styles": [
+      {
+        "name": "default",
+        "description": "Default style",
+        "styleColor": "#2e3641"
+      },
+      {
+        "name": "purple",
+        "description": "Purple style",
+        "styleColor": "#856d9c"
+      },
+      {
+        "name": "blue",
+        "description": "Blue style",
+        "styleColor": "#2f70e4"
+      },
+      {
+        "name": "turquoise",
+        "description": "Turquoise style",
+        "styleColor": "#2d95a0"
+      },
+      {
+        "name": "green",
+        "description": "Green style",
+        "styleColor": "#6db8ac"
+      },
+      {
+        "name": "orange",
+        "description": "Orange style",
+        "styleColor": "#edbd35"
+      },
+      {
+        "name": "red",
+        "description": "Red style",
+        "styleColor": "#e83428"
+      },
+      {
+        "name": "pink",
+        "description": "Pink style",
+        "styleColor": "#fe6960"
+      }
+    ],
+    "layouts": [
+      {
+        "name": "default",
+        "description": "this is the default layout"
+      },
+      {
+        "name": "layout1",
+        "description": "this is layout1"
+      }
+    ],
+    "version": "2.6",
+    "wabVersion": "2.6",
+    "author": "Esri R&D Center Beijing",
+    "description": "",
+    "copyright": "",
+    "license": "http://www.apache.org/licenses/LICENSE-2.0",
+    "category": "theme",
+    "i18nLabels": {
+      "defaultLabel": "Billboard Theme",
+      "ar": "موضوع لوحة الإعلانات",
+      "bs": "Tema panoa",
+      "cs": "Motiv billboardu",
+      "da": "Tema til reklameplakat",
+      "de": "Billboard-Design",
+      "el": "Θέμα Πίνακας ανακοινώσεων",
+      "es": "Cartel",
+      "et": "Teema Billboard",
+      "fi": "Tauluteema",
+      "fr": "Thème allégé",
+      "he": "ערכת נושא לוח מודעות",
+      "hi": "बिलबोर्ड थीम",
+      "hr": "Tema panoa",
+      "it": "Tema Cartellone",
+      "id": "Tema Billboard",
+      "ja": "ビルボード テーマ",
+      "ko": "게시판 테마",
+      "lt": "Stendo tema",
+      "lv": "Reklāmas zonas dizains",
+      "nb": "Reklametavletema",
+      "nl": "Billboard-thema",
+      "pl": "Motyw na billboardzie",
+      "pt-br": "Tema do Painel",
+      "pt-pt": "Tema de Quadro de Aviso",
+      "ro": "Temă panou publicitar",
+      "ru": "Тема билборда",
+      "sr": "Tema bilborda",
+      "sv": "Affischtema",
+      "th": "บิลบอร์ดธีม",
+      "tr": "İlan Panosu Teması",
+      "vi": "Chủ đề Bảng thông báo",
+      "zh-cn": "广告牌主题",
+      "zh-hk": "佈告欄主題",
+      "zh-tw": "佈告欄主題"
+    },
+    "i18nLabels_layout_default": {
+      "defaultLabel": "Default layout",
+      "ar": "تخطيط افتراضي",
+      "bs": "Zadani izgled",
+      "cs": "Výchozí rozvržení",
+      "da": "Standardlayout",
+      "de": "Standard-Layout",
+      "el": "Προεπιλεγμένη διάταξη",
+      "es": "Diseño predeterminado",
+      "et": "Vaikimisi paigutus",
+      "fi": "Oletusasettelu",
+      "fr": "Mise en page par défaut",
+      "he": "פריסת ברירת מחדל",
+      "hi": "डिफ़ॉल्ट रूपरेखा",
+      "hr": "Zadani izgled",
+      "it": "Layout predefinito",
+      "id": "Tata letak default",
+      "ja": "デフォルトのレイアウト",
+      "ko": "기본 레이아웃",
+      "lt": "Numatytasis maketas",
+      "lv": "Noklusējuma izkārtojums",
+      "nb": "Standardoppsett",
+      "nl": "Standaardlay-out",
+      "pl": "Kompozycja domyślna",
+      "pt-br": "Layout padrão",
+      "pt-pt": "Layout predefinido",
+      "ro": "Aspect implicit",
+      "ru": "Компоновка по умолчанию",
+      "sr": "Podrazumevani raspored",
+      "sv": "Standardlayout",
+      "th": "เค้าโครงเริ่มต้น",
+      "tr": "Varsayılan düzen",
+      "vi": "Bố cục mặc định",
+      "zh-cn": "默认布局",
+      "zh-hk": "預設版面配置",
+      "zh-tw": "預設版面配置"
+    },
+    "i18nLabels_layout_layout1": {},
+    "i18nLabels_style_default": {},
+    "i18nLabels_style_purple": {},
+    "i18nLabels_style_blue": {},
+    "i18nLabels_style_turquoise": {},
+    "i18nLabels_style_green": {},
+    "i18nLabels_style_orange": {},
+    "i18nLabels_style_red": {},
+    "i18nLabels_style_pink": {}
+  },
+  "themes/JewelryBoxTheme/main": {
+    "name": "JewelryBoxTheme",
+    "platform": "HTML3D",
+    "panels": [
+      {
+        "name": "FoldablePanel",
+        "description": "This is foldable panel"
+      },
+      {
+        "name": "LDockablePanel",
+        "description": "This is LDockable panel"
+      }
+    ],
+    "styles": [
+      {
+        "name": "default",
+        "description": "this is default style",
+        "styleColor": "#596679"
+      },
+      {
+        "name": "black",
+        "description": "this is black style",
+        "styleColor": "#000000"
+      },
+      {
+        "name": "green",
+        "description": "this is green style",
+        "styleColor": "#2aaa8a"
+      },
+      {
+        "name": "cyan",
+        "description": "this is cyan style",
+        "styleColor": "#267030"
+      },
+      {
+        "name": "red",
+        "description": "this is red style",
+        "styleColor": "#c93048"
+      },
+      {
+        "name": "purple",
+        "description": "this is purple style",
+        "styleColor": "#ab6ead"
+      },
+      {
+        "name": "blue",
+        "description": "this is blue style",
+        "styleColor": "#005fa2"
+      },
+      {
+        "name": "yellow",
+        "description": "this is yellow style",
+        "styleColor": "#d07d0e"
+      }
+    ],
+    "layouts": [
+      {
+        "name": "default",
+        "description": "this is default layout"
+      },
+      {
+        "name": "layout1",
+        "description": "this is layout1"
+      }
+    ],
+    "widgets": [
+      {
+        "name": "HeaderController",
+        "description": "this is theme widget controller"
+      }
+    ],
+    "version": "2.6",
+    "wabVersion": "2.6",
+    "author": "Esri R&D Center Beijing",
+    "description": "",
+    "copyright": "",
+    "license": "http://www.apache.org/licenses/LICENSE-2.0",
+    "category": "theme",
+    "i18nLabels": {
+      "defaultLabel": "Jewelry Box Theme",
+      "ar": "موضوع مربع الضوء",
+      "bs": "Tema kutije s nakitom",
+      "cs": "Motiv šperkovnice",
+      "da": "Smykkeskrinstema",
+      "de": "Jewelry Box-Design",
+      "el": "Θέμα Jewelry Box",
+      "es": "Estuche",
+      "et": "Teema Jewelry Box",
+      "fi": "Korurasiateema",
+      "fr": "Thème multi-fenêtres",
+      "he": "ערכת נושא תיבת תכשיטים",
+      "hi": "आभूषण बॉक्स थीम",
+      "hr": "Tema kutije s nakitom",
+      "it": "Tema Portagioie",
+      "id": "Tema Jewelry Box",
+      "ja": "ジュエリー ボックス テーマ",
+      "ko": "보석 상자 테마",
+      "lt": "Papuošalų dėžutės tema",
+      "lv": "Rotaslietu kārbiņas dizains",
+      "nb": "Smykkeskrintema",
+      "nl": "Jewelry Box-thema",
+      "pl": "Motyw Pudełko z biżuterią",
+      "pt-br": "Tema do Jewelry Box",
+      "pt-pt": "Tema Caixa de Joias",
+      "ro": "Temă cutie bijuterii",
+      "ru": "Тема \"шкатулка\"",
+      "sr": "Tema Kutija za nakit",
+      "sv": "Tema för smyckeskrin",
+      "th": "ธืมกล่องจิวเวอรี่",
+      "tr": "Mücevher Kutusu Teması",
+      "vi": "Chủ đề Hộp Trang sức",
+      "zh-cn": "珠宝盒主题",
+      "zh-hk": "珠寶箱主題",
+      "zh-tw": "珠寶箱主題"
+    },
+    "i18nLabels_layout_default": {
+      "defaultLabel": "Default layout",
+      "ar": "تخطيط افتراضي",
+      "bs": "Zadani izgled",
+      "cs": "Výchozí rozvržení",
+      "da": "Standardlayout",
+      "de": "Standard-Layout",
+      "el": "Προεπιλεγμένη διάταξη",
+      "es": "Diseño predeterminado",
+      "et": "Vaikimisi paigutus",
+      "fi": "Oletusasettelu",
+      "fr": "Mise en page par défaut",
+      "he": "פריסת ברירת מחדל",
+      "hi": "डिफ़ॉल्ट रूपरेखा",
+      "hr": "Zadani izgled",
+      "it": "Layout predefinito",
+      "id": "Tata letak default",
+      "ja": "デフォルトのレイアウト",
+      "ko": "기본 레이아웃",
+      "lt": "Numatytasis maketas",
+      "lv": "Noklusējuma izkārtojums",
+      "nb": "Standardoppsett",
+      "nl": "Standaardlay-out",
+      "pl": "Kompozycja domyślna",
+      "pt-br": "Layout padrão",
+      "pt-pt": "Layout predefinido",
+      "ro": "Aspect implicit",
+      "ru": "Компоновка по умолчанию",
+      "sr": "Podrazumevani raspored",
+      "sv": "Standardlayout",
+      "th": "เค้าโครงเริ่มต้น",
+      "tr": "Varsayılan düzen",
+      "vi": "Bố cục mặc định",
+      "zh-cn": "默认布局",
+      "zh-hk": "預設版面配置",
+      "zh-tw": "預設版面配置"
+    },
+    "i18nLabels_layout_layout1": {
+      "defaultLabel": "Layout 1",
+      "ar": "تخطيط 1",
+      "bs": "Izgled 1",
+      "cs": "Rozvržení 1",
+      "da": "Layout 1",
+      "de": "Layout 1",
+      "el": "Διάταξη 1",
+      "es": "Diseño 1",
+      "et": "Paigutus 1",
+      "fi": "Asettelu 1",
+      "fr": "Mise en page 1",
+      "he": "פריסה 1",
+      "hi": "रूपरेखा 1",
+      "hr": "Izgled 1",
+      "it": "Layout 1",
+      "id": "Tata Letak 1",
+      "ja": "レイアウト 1",
+      "ko": "레이아웃 1",
+      "lt": "1 maketas",
+      "lv": "1. izkārtojums",
+      "nb": "Oppsett 1",
+      "nl": "Lay-out 1",
+      "pl": "Układ 1",
+      "pt-br": "Layout 1",
+      "pt-pt": "Layout 1",
+      "ro": "Aspectul 1",
+      "ru": "Компоновка 1",
+      "sr": "Raspored 1",
+      "sv": "Layout 1",
+      "th": "โครงร่าง 1",
+      "tr": "Düzen 1",
+      "vi": "Bố cục 1",
+      "zh-cn": "布局 1",
+      "zh-hk": "版面配置 1",
+      "zh-tw": "版面配置 1"
+    },
+    "i18nLabels_style_default": {},
+    "i18nLabels_style_black": {},
+    "i18nLabels_style_green": {},
+    "i18nLabels_style_cyan": {},
+    "i18nLabels_style_red": {},
+    "i18nLabels_style_purple": {},
+    "i18nLabels_style_blue": {},
+    "i18nLabels_style_yellow": {}
+  },
+  "themes/DartTheme/main": {
+    "name": "DartTheme",
+    "platform": "HTML3D",
+    "panels": [
+      {
+        "name": "DartPanel",
+        "description": "Dart panel"
+      }
+    ],
+    "styles": [
+      {
+        "name": "default",
+        "description": "Default style",
+        "styleColor": "#646464"
+      },
+      {
+        "name": "purple",
+        "description": "Purple style",
+        "styleColor": "#886197"
+      },
+      {
+        "name": "blue",
+        "description": "Blue style",
+        "styleColor": "#2d70e4"
+      },
+      {
+        "name": "turquoise",
+        "description": "Turquoise style",
+        "styleColor": "#2faacd"
+      },
+      {
+        "name": "green",
+        "description": "Green style",
+        "styleColor": "#80ab00"
+      },
+      {
+        "name": "orange",
+        "description": "Orange style",
+        "styleColor": "#ff9b00"
+      },
+      {
+        "name": "red",
+        "description": "Red style",
+        "styleColor": "#cf0000"
+      },
+      {
+        "name": "pink",
+        "description": "Pink style",
+        "styleColor": "#ed008c"
+      }
+    ],
+    "layouts": [
+      {
+        "name": "default",
+        "description": "Default layout"
+      },
+      {
+        "name": "layout1",
+        "description": "layout1"
+      }
+    ],
+    "widgets": [
+      {
+        "name": "DartController",
+        "description": "Widget controller"
+      }
+    ],
+    "version": "2.6",
+    "wabVersion": "2.6",
+    "author": "@SpatialAgent",
+    "description": "",
+    "copyright": "",
+    "license": "http://www.apache.org/licenses/LICENSE-2.0",
+    "category": "theme",
+    "i18nLabels": {
+      "defaultLabel": "Dart Theme",
+      "ar": "موضوع الانطلاق",
+      "bs": "Tema strelice",
+      "cs": "Motiv šipek",
+      "da": "Dart-tema",
+      "de": "Dart-Design",
+      "el": "Θέμα Dart",
+      "es": "Dardos",
+      "et": "Teema Dart",
+      "fi": "Nuoliteema",
+      "fr": "Thème Fléchette",
+      "he": "ערכת נושא רצועה תחתונה",
+      "hi": "डार्ट थीम",
+      "hr": "Tema strelice",
+      "it": "Tema Freccetta",
+      "id": "Tema Dart",
+      "ja": "ダート テーマ",
+      "ko": "다트 테마",
+      "lt": "Smiginio tema",
+      "lv": "Šautras dizains",
+      "nb": "Dart-tema",
+      "nl": "Dartthema",
+      "pl": "Motyw Rzutka",
+      "pt-br": "Tema de Lançamento",
+      "pt-pt": "Tema Dardo",
+      "ro": "Temă săgeţi",
+      "ru": "Тема дротика",
+      "sr": "Tema Dart",
+      "sv": "Piltema",
+      "th": "ดาร์ทธีม",
+      "tr": "Dart Teması",
+      "vi": "Chủ đề Phi tiêu",
+      "zh-cn": "飞镖主题",
+      "zh-hk": "鏢主題",
+      "zh-tw": "鏢主題"
+    },
+    "i18nLabels_layout_default": {
+      "defaultLabel": "Default layout",
+      "ar": "تخطيط افتراضي",
+      "bs": "Zadani izgled",
+      "cs": "Výchozí rozvržení",
+      "da": "Standardlayout",
+      "de": "Standard-Layout",
+      "el": "Προεπιλεγμένη διάταξη",
+      "es": "Diseño predeterminado",
+      "et": "Vaikimisi paigutus",
+      "fi": "Oletusasettelu",
+      "fr": "Mise en page par défaut",
+      "he": "פריסת ברירת מחדל",
+      "hi": "डिफ़ॉल्ट रूपरेखा",
+      "hr": "Zadani izgled",
+      "it": "Layout predefinito",
+      "id": "Tata letak default",
+      "ja": "デフォルトのレイアウト",
+      "ko": "기본 레이아웃",
+      "lt": "Numatytasis maketas",
+      "lv": "Noklusējuma izkārtojums",
+      "nb": "Standardoppsett",
+      "nl": "Standaardlay-out",
+      "pl": "Kompozycja domyślna",
+      "pt-br": "Layout padrão",
+      "pt-pt": "Layout predefinido",
+      "ro": "Aspect implicit",
+      "ru": "Компоновка по умолчанию",
+      "sr": "Podrazumevani raspored",
+      "sv": "Standardlayout",
+      "th": "เค้าโครงเริ่มต้น",
+      "tr": "Varsayılan düzen",
+      "vi": "Bố cục mặc định",
+      "zh-cn": "默认布局",
+      "zh-hk": "預設版面配置",
+      "zh-tw": "預設版面配置"
+    },
+    "i18nLabels_layout_layout1": {},
+    "i18nLabels_style_default": {},
+    "i18nLabels_style_purple": {},
+    "i18nLabels_style_blue": {},
+    "i18nLabels_style_turquoise": {},
+    "i18nLabels_style_green": {},
+    "i18nLabels_style_orange": {},
+    "i18nLabels_style_red": {},
+    "i18nLabels_style_pink": {}
+  }
+}

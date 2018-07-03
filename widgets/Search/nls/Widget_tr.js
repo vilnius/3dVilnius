@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"esri/widgets/Search/nls/Search":{searchButtonTitle:"Ara",clearButtonTitle:"Aramay\u0131 temizle",placeholder:"Adres veya yer bul",searchIn:"\u015eurada Ara:",all:"T\u00fcm\u00fc",allPlaceholder:"Adres veya yer bul",emptyValue:"Arama terimi girin.",untitledResult:"Ba\u015fl\u0131ks\u0131z",untitledSource:"Ba\u015fl\u0131ks\u0131z kaynak",noResults:"Sonu\u00e7 yok",noResultsFound:"{value} i\u00e7in herhangi bir sonu\u00e7 bulunamad\u0131.",showMoreResults:"Daha fazla sonu\u00e7 g\u00f6ster",
+hideMoreResults:"Gizle",searchResult:"Sonu\u00e7 ara",moreResultsHeader:"Di\u011fer sonu\u00e7lar",esriLocatorName:"Esri D\u00fcnya Co\u011frafi Kodlay\u0131c\u0131s\u0131",_localized:{}},"widgets/Search/nls/strings":{_widgetLabel:"Ara",searchResult:"Sonu\u00e7 ara",showAllResults:"\u015eunun i\u00e7in sonu\u00e7lar\u0131 g\u00f6ster: ",showAll:"Arama sonu\u00e7lar\u0131n\u0131 g\u00f6ster",more:"di\u011fer",untitled:"Ads\u0131z",_localized:{}}});

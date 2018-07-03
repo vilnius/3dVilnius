@@ -1,0 +1,8 @@
+{
+  "wabVersion": "2.4",
+  "wabVersions": ["2.0beta", "2.0", "2.0.1", "2.1", "2.2", "2.3", "2.4"],
+  "description": "For online 5.1",
+  "downloadUrl": "webappviewer3d-2.4.zip",
+  "releaseNoteUrl": "http://www.arcgis.com",
+  "releaseDate": 1488266124466
+}

@@ -1,0 +1,19 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'dijit/_editor/nls/commands':{"bold":"Negrita","copy":"Copiar","cut":"Cortar","delete":"Suprimir","indent":"Sangría","insertHorizontalRule":"Regla horizontal","insertOrderedList":"Lista numerada","insertUnorderedList":"Lista con viñetas","italic":"Cursiva","justifyCenter":"Alinear centro","justifyFull":"Justificar","justifyLeft":"Alinear izquierda","justifyRight":"Alinear derecha","outdent":"Anular sangría","paste":"Pegar","redo":"Rehacer","removeFormat":"Eliminar formato","selectAll":"Seleccionar todo","strikethrough":"Tachado","subscript":"Subíndice","superscript":"Superíndice","underline":"Subrayado","undo":"Deshacer","unlink":"Eliminar enlace","createLink":"Crear enlace","toggleDir":"Conmutar dirección","insertImage":"Insertar imagen","insertTable":"Insertar/Editar tabla","toggleTableBorder":"Conmutar borde de tabla","deleteTable":"Suprimir tabla","tableProp":"Propiedad de tabla","htmlToggle":"Fuente HTML","foreColor":"Color de primer plano","hiliteColor":"Color de segundo plano","plainFormatBlock":"Estilo de párrafo","formatBlock":"Estilo de párrafo","fontSize":"Tamaño de font","fontName":"Nombre de font","tabIndent":"Sangría de tabulador","fullScreen":"Conmutar pantalla completa","viewSource":"Ver fuente HTML","print":"Imprimir","newPage":"Nueva página","systemShortcut":"La acción \"${0}\" sólo está disponible en su navegador mediante un atajo de teclado. Utilice ${1}.","ctrlKey":"control+${0}","appleKey":"⌘${0}","_localized":{}}
+,
+'dijit/_editor/nls/FontChoice':{"fontSize":"Tamaño","fontName":"Font","formatBlock":"Formato","serif":"serif","sans-serif":"sans-serif","monospace":"espacio sencillo","cursive":"cursiva","fantasy":"fantasía","noFormat":"Ninguno","p":"Párrafo","h1":"Cabecera","h2":"Subcabecera","h3":"Sub-subcabecera","pre":"Preformateado","1":"xx-pequeño","2":"x-pequeño","3":"pequeño","4":"medio","5":"grande","6":"x-grande","7":"xx-grande","_localized":{}}
+,
+'dojox/editor/plugins/nls/Preview':{"preview":"Previsualización","_localized":{}}
+,
+'dojox/editor/plugins/nls/FindReplace':{"findLabel":"Buscar:","findTooltip":"Especifique el texto que desee buscar","replaceLabel":"Sustituir por:","replaceTooltip":"Especifique el texto por el que se debe sustituir","findReplace":"Conmutar Buscar/Sustituir","matchCase":"Coincidir mayúsculas y minúsculas","matchCaseTooltip":"Coincidir mayúsculas y minúsculas","backwards":"Hacia atrás","backwardsTooltip":"Buscar texto hacia atrás","replaceAllButton":"Sustituir todo","replaceAllButtonTooltip":"Sustituir todo el texto","findButton":"Buscar","findButtonTooltip":"Buscar el texto","replaceButton":"Sustituir","replaceButtonTooltip":"Sustituir el texto","replaceDialogText":"Se han sustituido ${0} apariciones.","eofDialogText":"Última aparición ${0}","eofDialogTextFind":"encontrado","eofDialogTextReplace":"sustituido","_localized":{}}
+,
+'dojox/editor/plugins/nls/PasteFromWord':{"pasteFromWord":"Pegar desde Word","instructions":"Pegue el contenido de Word en el siguiente recuadro de texto. Cuando esté satisfecho con el contenido que se debe insertar, pulse el botón pegar. Para abortar la inserción de texto, pulse el botón cancelar.","_localized":{}}
+,
+'dojox/editor/plugins/nls/InsertAnchor':{"insertAnchor":"Insertar ancla","title":"Propiedades del ancla","anchor":"Nombre:","text":"Descripción:","set":"Establecer","cancel":"Cancelar","_localized":{}}
+,
+'dojox/editor/plugins/nls/Blockquote':{"blockquote":"Cita en bloque","_localized":{}}
+,
+'widgets/About/setting/nls/strings':{"instruction":"Crea el contenido que aparecerá en este widget.","defaultContent":"Agrega texto, vínculos y pequeños gráficos aquí.","productVersion":"Versión del producto: ","kernelVersion":"Versión del kernel: ","_localized":{}}
+});

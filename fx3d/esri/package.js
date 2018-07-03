@@ -1,0 +1,2 @@
+//>>built
+var profile={resourceTags:{test:function(a,b){return/test/.test(b)},copyOnly:function(a,b){return/libs/.test(a)},amd:function(a,b){return!this.copyOnly(a,b)&&/\.js$/.test(a)},miniExclude:function(a,b){return b in{"jimu/package":1}}}};

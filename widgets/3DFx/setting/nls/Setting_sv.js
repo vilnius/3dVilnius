@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/3DFx/setting/nls/strings":{viz_settings:"Visualiseringsinst\u00e4llningar",viz_type:"Visualiseringstyp",max_height:"Maximal symbolh\u00f6jd (meter)",max_width:"Maximal symbolbredd (meter)",interval:"Intervall (millisekunder)",show_percent:"Visa v\u00e4rden som procentandelar av alla v\u00e4rden",show_jettrail_end_points:"Visa slutpunkter",show_percentage_limited:"Detta \u00e4r inaktiverat eftersom antalet poster \u00e4r st\u00f6rre \u00e4n 400.",cycle_colors:"\u00c4ndra f\u00e4rger automatiskt",
+area_extrusion:"Omr\u00e5desprojektion",bounce:"Hopp",fireball:"Eldklot",grid_surface:" Rutn\u00e4tsyta",jet_trail:"Kondensationsstrimma",point_extrusion:"Punktprojektion",pulse:"Puls",layer_settings:"Lagerinst\u00e4llningar",viz_layer:"Visualiseringslager",display_field:"Visningsf\u00e4lt",add_field:"L\u00e4gg till visualiseringsf\u00e4lt",field:"F\u00e4lt",label:"Etikett",actions:"\u00c5tg\u00e4rder",no_layers:" Inga lager \u00e4r tillg\u00e4ngliga i den valda webbscenen.",viz_not_supported:"St\u00f6ds inte f\u00f6r det valda lagrets geometrityp.",
+_localized:{}}});

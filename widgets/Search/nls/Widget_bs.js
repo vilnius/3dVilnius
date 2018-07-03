@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"esri/widgets/Search/nls/Search":{searchButtonTitle:"Pretra\u017ei",clearButtonTitle:"O\u010disti pretragu",placeholder:"Prona\u0111i adresu ili mjesto",searchIn:"Tra\u017ei u",all:"Sve",allPlaceholder:"Prona\u0111i adresu ili mjesto",emptyValue:"Unesite termin za pretra\u017eivanje.",untitledResult:"Neimenovano",untitledSource:"Neimenovani izvor",noResults:"Nema rezultata",noResultsFound:"Nema prona\u0111enih rezultata za {value}.",showMoreResults:"Prika\u017ei jo\u0161 rezultata",hideMoreResults:"Sakrij",
+searchResult:"Rezultat pretra\u017eivanja",moreResultsHeader:"Vi\u0161e rezultata",esriLocatorName:"Svjetski geokoder Esrija",_localized:{}},"widgets/Search/nls/strings":{_widgetLabel:"Pretra\u017ei",searchResult:"Rezultat pretra\u017eivanja",showAllResults:"Prika\u017ei rezultate pretra\u017eivanja za ",showAll:"Prika\u017ei rezultate pretra\u017eivanja",more:"vi\u0161e",untitled:"Neimenovano",_localized:{}}});

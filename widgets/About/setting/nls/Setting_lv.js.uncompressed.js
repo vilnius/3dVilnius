@@ -1,0 +1,19 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'dijit/_editor/nls/commands':{"bold":"Treknraksts","copy":"Kopēt","cut":"Izgriezt","delete":"Dzēst","indent":"Atkāpe","insertHorizontalRule":"Horizontālā mērjosla","insertOrderedList":"Numurēts saraksts","insertUnorderedList":"Saraksts ar aizzīmēm","italic":"Slīpraksts","justifyCenter":"Līdzināt uz centru","justifyFull":"Taisnot","justifyLeft":"Līdzināt pa kreisi","justifyRight":"Līdzināt pa labi","outdent":"Pārkares atkāpe","paste":"Ielīmēt","redo":"Atcelt atsaukšanu","removeFormat":"Noņemt formatējumu","selectAll":"Izvēlēties visu","strikethrough":"Pārsvītrojums","subscript":"Apakšraksts","superscript":"Augšraksts","underline":"Pasvītrojums","undo":"Atsaukt","unlink":"Noņemt saiti","createLink":"Izveidot saiti","toggleDir":"Pārslēgt virzienu","insertImage":"Ievietot attēlu","insertTable":"Ievietot/rediģēt tabulu","toggleTableBorder":"Pārslēgt tabulas robežu","deleteTable":"Dzēst tabulu","tableProp":"Tabulas rekvizīts","htmlToggle":"HTML avots","foreColor":"Priekšplāna krāsa","hiliteColor":"Fona krāsa","plainFormatBlock":"Rindkopu stils","formatBlock":"Rindkopu stils","fontSize":"Fonta lielums","fontName":"Fonta nosaukums","tabIndent":"Tabulēšanas atkāpe","fullScreen":"Pārslēgt pilnekrānu","viewSource":"Skatīt HTML avotu","print":"Drukāt","newPage":"Jauna lapa","systemShortcut":"Darbība ${0} ir pieejama jūsu pārlūkprogrammā, tikai izmantojot tastatūras saīsni. Izmantojiet ${1}.","ctrlKey":"ctrl+${0}","appleKey":"⌘${0}","_localized":{}}
+,
+'dijit/_editor/nls/FontChoice':{"fontSize":"Lielums","fontName":"Fonts","formatBlock":"Formāts","serif":"serif","sans-serif":"sans-serif","monospace":"monospace","cursive":"cursive","fantasy":"fantasy","noFormat":"Nav","p":"Rindkopa","h1":"Virsraksts","h2":"Apakšvirsraksts","h3":"Apakšapakšvirsraksts","pre":"Iepriekš formatēts","1":"xx mazs","2":"x mazs","3":"mazs","4":"vidējs","5":"liels","6":"x liels","7":"xx liels","_localized":{}}
+,
+'dojox/editor/plugins/nls/Preview':{"preview":"Preview","_localized":{}}
+,
+'dojox/editor/plugins/nls/FindReplace':{"findLabel":"Find:","findTooltip":"Enter text to find","replaceLabel":"Replace with:","replaceTooltip":"Enter text to replace with","findReplace":"Find and Replace","matchCase":"Match case","matchCaseTooltip":"Match case","backwards":"Backwards","backwardsTooltip":"Search backwards for text","replaceAllButton":"Replace All","replaceAllButtonTooltip":"Replace all the text","findButton":"Find","findButtonTooltip":"Find the text","replaceButton":"Replace","replaceButtonTooltip":"Replace the text","replaceDialogText":"Replaced ${0} occurrences.","eofDialogText":"Last occurrence ${0}","eofDialogTextFind":"found","eofDialogTextReplace":"replaced","_localized":{}}
+,
+'dojox/editor/plugins/nls/PasteFromWord':{"pasteFromWord":"Paste From Word","instructions":"Paste the content from Word into the text box below.  Once you are satisfied with the content to insert, press the paste button.  To abort inserting text, press the cancel button.","_localized":{}}
+,
+'dojox/editor/plugins/nls/InsertAnchor':{"insertAnchor":"Insert Anchor","title":"Anchor Properties","anchor":"Name:","text":"Description:","set":"Set","cancel":"Cancel","_localized":{}}
+,
+'dojox/editor/plugins/nls/Blockquote':{"blockquote":"Blockquote","_localized":{}}
+,
+'widgets/About/setting/nls/strings':{"instruction":"Izveidojiet saturu, kas tiks rādīts šajā logrīkā.","defaultContent":"Šeit pievienojiet tekstu, saites un nelielas grafikas.","productVersion":"Izstrādājuma versija: ","kernelVersion":"Kodola versija: ","_localized":{}}
+});

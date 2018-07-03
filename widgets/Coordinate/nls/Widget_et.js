@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Coordinate/nls/strings":{_widgetLabel:"Koordinaat",hintMessage:"Klikkige koordinaatide hankimiseks kaardile",defaultLabel:"Vaikimisi",realtimeLabel:"Koordinaatide hankimiseks liigutage kursorit",computing:"Arvutamine...",latitudeLabel:"Laiuskraad",longitudeLabel:"Pikkuskraad",loading:"laadimine...",enableClick:"Klikkige, et lubada klikkimise kaudu kaardilt koordinaate hankida",disableClick:"Klikkige, et keelata klikkimise kaudu kaardilt koordinaate hankida",Default:"Vaikimisi",Inches:"Tolli",
+Foot:"Jalga",Yards:"Jardi",Miles:"Miili",Nautical_Miles:"Meremiili",Millimeters:"Millimeetrit",Centimeters:"Sentimeetrit",Meter:"Meetrit",Kilometers:"Kilomeetrit",Decimeters:"Detsimeetrit",Decimal_Degrees:"Kraadi",Degree_Minutes_Seconds:"Kraadid minutid sekundid",MGRS:"MGRS",USNG:"USNG",EYE_ALT:"vaate k\u00f5rgus",ELEV:"k\u00f5rgus",_localized:{}}});

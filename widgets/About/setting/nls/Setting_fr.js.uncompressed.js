@@ -1,0 +1,19 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'dijit/_editor/nls/commands':{"bold":"Gras","copy":"Copier","cut":"Couper","delete":"Supprimer","indent":"Retrait","insertHorizontalRule":"Règle horizontale","insertOrderedList":"Liste numérotée","insertUnorderedList":"Liste à puces","italic":"Italique","justifyCenter":"Aligner au centre","justifyFull":"Justifier","justifyLeft":"Aligner à gauche","justifyRight":"Aligner à droite","outdent":"Retrait négatif","paste":"Coller","redo":"Rétablir","removeFormat":"Supprimer la mise en forme","selectAll":"Sélectionner tout","strikethrough":"Barrer","subscript":"Indice","superscript":"Exposant","underline":"Souligner","undo":"Annuler","unlink":"Supprimer le lien","createLink":"Créer un lien","toggleDir":"Changer de sens","insertImage":"Insérer une image","insertTable":"Insérer/Modifier un tableau","toggleTableBorder":"Afficher/Masquer la bordure du tableau","deleteTable":"Supprimer le tableau","tableProp":"Propriété du tableau","htmlToggle":"Source HTML","foreColor":"Couleur avant-plan","hiliteColor":"Couleur arrière-plan","plainFormatBlock":"Style de paragraphe","formatBlock":"Style de paragraphe","fontSize":"Taille de police","fontName":"Nom de police","tabIndent":"Retrait de tabulation","fullScreen":"Basculer en plein écran","viewSource":"Afficher la source HTML","print":"Imprimer","newPage":"Nouvelle page","systemShortcut":"Action \"${0}\" uniquement disponible dans votre navigateur via un raccourci clavier. Utilisez ${1}.","ctrlKey":"ctrl+${0}","appleKey":"⌘${0}","_localized":{}}
+,
+'dijit/_editor/nls/FontChoice':{"fontSize":"Taille","fontName":"Police","formatBlock":"Mise en forme","serif":"serif","sans-serif":"sans serif","monospace":"espacement fixe","cursive":"cursive","fantasy":"fantaisie","noFormat":"Néant","p":"Paragraphe","h1":"En-tête","h2":"Sous-en-tête","h3":"Sous-sous-en-tête","pre":"Pré-mise en forme","1":"très très petite","2":"très petite","3":"petite","4":"moyenne","5":"grande","6":"très grande","7":"très très grande","_localized":{}}
+,
+'dojox/editor/plugins/nls/Preview':{"preview":"Aperçu","_localized":{}}
+,
+'dojox/editor/plugins/nls/FindReplace':{"findLabel":"Rechercher :","findTooltip":"Entrez le texte à rechercher","replaceLabel":"Remplacer par :","replaceTooltip":"Entrez le texte de remplacement","findReplace":"Rechercher et remplacer","matchCase":"Respecter la casse","matchCaseTooltip":"Respecter la casse","backwards":"Vers l'arrière","backwardsTooltip":"Recherchez le texte vers l'arrière","replaceAllButton":"Remplacer tout","replaceAllButtonTooltip":"Remplacez tout le texte","findButton":"Rechercher","findButtonTooltip":"Recherchez le texte","replaceButton":"Remplacer","replaceButtonTooltip":"Remplacez le texte","replaceDialogText":"${0} occurrence(s) remplacée(s)","eofDialogText":"Dernière occurrence ${0}","eofDialogTextFind":"trouvé","eofDialogTextReplace":"remplacé","_localized":{}}
+,
+'dojox/editor/plugins/nls/PasteFromWord':{"pasteFromWord":"Coller depuis Word","instructions":"Collez le contenu Word dans la zone de texte ci-dessous. Quand le contenu à insérer vous convient, appuyez sur le bouton Coller. Pour annuler l'insertion du texte, utilisez le bouton Annuler.","_localized":{}}
+,
+'dojox/editor/plugins/nls/InsertAnchor':{"insertAnchor":"Insérer un point d'ancrage","title":"Propriétés du point d'ancrage","anchor":"Nom :","text":"Description :","set":"Définir","cancel":"Annuler","_localized":{}}
+,
+'dojox/editor/plugins/nls/Blockquote':{"blockquote":"Bloc de citation","_localized":{}}
+,
+'widgets/About/setting/nls/strings':{"instruction":"Créez le contenu qui apparaît dans ce widget.","defaultContent":"Ajoutez du texte, des liens et de petits graphiques ici.","productVersion":"Version du produit : ","kernelVersion":"Version du noyau : ","_localized":{}}
+});

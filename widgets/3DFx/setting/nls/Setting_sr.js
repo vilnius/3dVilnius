@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/3DFx/setting/nls/strings":{viz_settings:"Postavke vizuelizacije",viz_type:"Tip vizuelizacije",max_height:"Maksimalna visina simbola (u metrima)",max_width:"Maksimalna \u0161irina simbola (u metrima)",interval:"Interval (u milisekundama)",show_percent:"Prika\u017ei vrednosti kao procenat svih vrednosti",show_jettrail_end_points:"Prika\u017ei krajnje ta\u010dke",show_percentage_limited:"Ovo je onemogu\u0107eno po\u0161to je broj zapisa ve\u0107i od 400.",cycle_colors:"Automatski menjaj boje",
+area_extrusion:"Povr\u0161ina ekstruzije",bounce:"Odskok",fireball:"Vatrena lopta",grid_surface:" Povr\u0161ina mre\u017ee",jet_trail:"Mlazni trag",point_extrusion:"Istiskivanje ta\u010dke",pulse:"Puls",layer_settings:"Postavke sloja",viz_layer:"Sloj vizuelizacije",display_field:"Prika\u017ei polje",add_field:"Dodaj polje vizuelizacije",field:"Polje",label:"Oznaka",actions:"Radnje",no_layers:" Nema dostupnih slojeva u izabranoj veb sceni.",viz_not_supported:"Nije podr\u017eano za tip geometrije izabranog sloja.",
+_localized:{}}});

@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"esri/widgets/Search/nls/Search":{searchButtonTitle:"Pesquisar",clearButtonTitle:"Limpar pesquisa",placeholder:"Encontrar endere\u00e7o ou lugar",searchIn:"Pesquisar em",all:"Todas",allPlaceholder:"Encontrar endere\u00e7o ou lugar",emptyValue:"Insira um termo de pesquisa.",untitledResult:"Sem t\u00edtulo",untitledSource:"Fonte sem t\u00edtulo",noResults:"Nenhum resultado",noResultsFound:"N\u00e3o houve nenhum resultado localizado para {value}.",showMoreResults:"Mostrar mais resultados",hideMoreResults:"Ocultar",
+searchResult:"Resultado de pesquisa",moreResultsHeader:"Mais resultados",esriLocatorName:"Esri World Geocoder",_localized:{}},"widgets/Search/nls/strings":{_widgetLabel:"Pesquisar",searchResult:"Resultado da pesquisa",showAllResults:"Mostrar resultados da pesquisa para ",showAll:"Mostrar resultados da pesquisa",more:"mais",untitled:"Sem t\u00edtulo",_localized:{}}});

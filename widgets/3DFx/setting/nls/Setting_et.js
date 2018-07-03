@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/3DFx/setting/nls/strings":{viz_settings:"Visualiseerimise seaded",viz_type:"Visualiseerimise t\u00fc\u00fcp",max_height:"S\u00fcmboli\u00a0max k\u00f5rgus\u00a0(meetrites)",max_width:"S\u00fcmboli\u00a0max laius\u00a0(meetrites)",interval:"Intervall (millisekundites)",show_percent:"Kuva v\u00e4\u00e4rtused protsendim\u00e4\u00e4rana k\u00f5ikidest v\u00e4\u00e4rtustest",show_jettrail_end_points:"Kuva l\u00f5pp-punktid",show_percentage_limited:"See on keelatud,\u00a0sest kirjete koguarv on suurem kui 400.",
+cycle_colors:"Muuda automaatselt v\u00e4rve",area_extrusion:"Ala \u00e4raj\u00e4tmine",bounce:"P\u00f5rge",fireball:"Tulekera",grid_surface:" Ruudustikuga pind",jet_trail:"Lennukij\u00e4lg",point_extrusion:"Punkti v\u00e4ljaulatus",pulse:"Impulss",layer_settings:"Kihi seaded",viz_layer:"Visualiseerimise kiht",display_field:"Kuvamise v\u00e4li",add_field:"Lisa visualiseerimise v\u00e4li",field:"V\u00e4li",label:"M\u00e4rgis",actions:"Toimingud",no_layers:" Valitud veebistseenis pole saadaval \u00fchtki kihti.",
+viz_not_supported:"Valitud kihi geomeetria t\u00fc\u00fcp ei toeta seda.",_localized:{}}});

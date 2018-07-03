@@ -1,0 +1,19 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'dijit/_editor/nls/commands':{"bold":"Kalın","copy":"Kopyala","cut":"Kes","delete":"Sil","indent":"Girinti","insertHorizontalRule":"Yatay Kural","insertOrderedList":"Numaralı Liste","insertUnorderedList":"Madde İşaretli Liste","italic":"İtalik","justifyCenter":"Ortaya Hizala","justifyFull":"Yasla","justifyLeft":"Sola Hizala","justifyRight":"Sağa Hizala","outdent":"Çıkıntı","paste":"Yapıştır","redo":"Yinele","removeFormat":"Biçimi Kaldır","selectAll":"Tümünü Seç","strikethrough":"Üstü Çizili","subscript":"Alt Simge","superscript":"Üst Simge","underline":"Altı Çizili","undo":"Geri Al","unlink":"Bağlantıyı Kaldır","createLink":"Bağlantı Oluştur","toggleDir":"Yönü Değiştir","insertImage":"Resim Ekle","insertTable":"Tablo Ekle/Düzenle","toggleTableBorder":"Tablo Kenarlığını Göster/Gizle","deleteTable":"Tabloyu Sil","tableProp":"Tablo Özelliği","htmlToggle":"HTML Kaynağı","foreColor":"Ön Plan Rengi","hiliteColor":"Arka Plan Rengi","plainFormatBlock":"Paragraf Stili","formatBlock":"Paragraf Stili","fontSize":"Yazı Tipi Boyutu","fontName":"Yazı Tipi Adı","tabIndent":"Sekme Girintisi","fullScreen":"Tam Ekranı Aç/Kapat","viewSource":"HTML Kaynağını Görüntüle","print":"Yazdır","newPage":"Yeni Sayfa","systemShortcut":"\"${0}\" işlemi yalnızca tarayıcınızda bir klavye kısayoluyla birlikte kullanılabilir. Şunu kullanın: ${1}.","ctrlKey":"ctrl+${0}","appleKey":"⌘${0}","_localized":{}}
+,
+'dijit/_editor/nls/FontChoice':{"fontSize":"Boyut","fontName":"Yazı Tipi","formatBlock":"Biçim","serif":"serif","sans-serif":"sans-serif","monospace":"tek aralıklı","cursive":"el yazısı","fantasy":"fantazi","noFormat":"Yok","p":"Paragraf","h1":"Başlık","h2":"Alt Başlık","h3":"Alt Alt Başlık","pre":"Önceden Biçimlendirilmiş","1":"xx-küçük","2":"x-küçük","3":"küçük","4":"orta","5":"büyük","6":"x-büyük","7":"xx-büyük","_localized":{}}
+,
+'dojox/editor/plugins/nls/Preview':{"preview":"Önizleme","_localized":{}}
+,
+'dojox/editor/plugins/nls/FindReplace':{"findLabel":"Bul:","findTooltip":"Bulunacak metni girin","replaceLabel":"Değiştir:","replaceTooltip":"Değiştirilecek metni girin","findReplace":"Bul ve Değiştir","matchCase":"Büyük/küçük harf eşleştir","matchCaseTooltip":"Büyük/küçük harf eşleştir","backwards":"Geri","backwardsTooltip":"Metni geriye doğru ara","replaceAllButton":"Tümünü Değiştir","replaceAllButtonTooltip":"Tüm metni değiştir","findButton":"Bul","findButtonTooltip":"Metni bul","replaceButton":"Değiştir","replaceButtonTooltip":"Metni değiştir","replaceDialogText":"${0} tekrar değiştirildi.","eofDialogText":"Son tekrar ${0}","eofDialogTextFind":"bulundu","eofDialogTextReplace":"değiştirildi","_localized":{}}
+,
+'dojox/editor/plugins/nls/PasteFromWord':{"pasteFromWord":"Word'den Kopyala","instructions":"İçeriği Word'den aşağıdaki metin kutusuna yapıştırın. Eklediğiniz içerikten memnunsanız, Yapıştır düğmesini tıklatın. Metin eklemeyi durdurmak için İptal düğmesini tıklatın.","_localized":{}}
+,
+'dojox/editor/plugins/nls/InsertAnchor':{"insertAnchor":"Tutturucu Ekle","title":"Tutturucu Özellikleri","anchor":"Ad:","text":"Açıklama:","set":"Ayarla","cancel":"İptal","_localized":{}}
+,
+'dojox/editor/plugins/nls/Blockquote':{"blockquote":"Öbek","_localized":{}}
+,
+'widgets/About/setting/nls/strings':{"instruction":"Bu araçta görüntülenecek içeriği oluşturun.","defaultContent":"Buraya metin, bağlantılar ve küçük grafikler ekleyin.","productVersion":"Ürün sürümü: ","kernelVersion":"Çekirdek sürümü: ","_localized":{}}
+});

@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"esri/widgets/Legend/nls/Legend":{points:"Pisteet",lines:"Viivat",polygons:"Alueet",creatingLegend:"Selitteen luominen",noLegend:"Ei selitett\u00e4",dotValue:"1 piste \x3d {value} {unit}",currentObservations:"Nykyiset havainnot",previousObservations:"Edelliset havainnot",high:"Suuri",low:"Alhainen",esriMetersPerSecond:"m/s",esriKilometersPerHour:"km/h",esriKnots:"solmua",esriFeetPerSecond:"ft/s",esriMilesPerHour:"mph",showField:"{field}",showNormField:"{field} jaettuna arvolla {normField}",
+showNormPct:"{field} kokonaissumman prosenttiosuutena",showRatio:"Arvon {field} suhde arvoon {normField}",showRatioPercent:"{field} arvon {normField} prosenttiosuutena",showRatioPercentTotal:"{field} arvon {field} ja {normField} prosenttiosuutena",_localized:{}},"widgets/Legend/nls/strings":{_widgetLabel:"Selite",_localized:{}}});

@@ -1,0 +1,19 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'dijit/_editor/nls/commands':{"bold":"Podebljaj","copy":"Kopiraj","cut":"Izreži","delete":"Izbriši","indent":"Uvuci","insertHorizontalRule":"Vodoravno ravnalo","insertOrderedList":"Numerirani popis","insertUnorderedList":"Popis s grafičkim oznakama","italic":"Kurziv","justifyCenter":"Centriraj","justifyFull":"Poravnaj","justifyLeft":"Poravnaj lijevo","justifyRight":"Poravnaj desno","outdent":"Izvuci","paste":"Zalijepi","redo":"Ponovno napravi","removeFormat":"Ukloni oblikovanje","selectAll":"Izaberi sve","strikethrough":"Precrtaj","subscript":"Indeks","superscript":"Superskript","underline":"Podcrtaj","undo":"Poništi","unlink":"Ukloni vezu","createLink":"Kreiraj vezu","toggleDir":"Prebaci smjer","insertImage":"Umetni sliku","insertTable":"Umetni/Uredi tablicu","toggleTableBorder":"Prebaci rub tablice","deleteTable":"Izbriši tablicu","tableProp":"Svojstvo tablice","htmlToggle":"HTML izvor","foreColor":"Boja prednjeg plana","hiliteColor":"Boja pozadine","plainFormatBlock":"Stil odlomka","formatBlock":"Stil odlomka","fontSize":"Veličina fonta","fontName":"Ime fonta","tabIndent":"Tabulator uvlačenja","fullScreen":"Prebaci na potpun ekran","viewSource":"Pogledaj HTML izvor","print":"Ispis","newPage":"Nova stranica","systemShortcut":"\"${0}\" akcija je dostupna jedino u vašem pregledniku upotrebom prečice tipkovnice. Koristite ${1}.","ctrlKey":"ctrl+${0}","appleKey":"⌘${0}","_localized":{}}
+,
+'dijit/_editor/nls/FontChoice':{"fontSize":"Veličina","fontName":"Font","formatBlock":"Oblikovanje","serif":"serif","sans-serif":"sans-serif","monospace":"jednaki razmak","cursive":"rukopisni","fantasy":"fantastika","noFormat":"Nijedan","p":"Odlomak","h1":"Naslov","h2":"Podnaslov","h3":"Pod-podnaslov","pre":"Prethodno formatirano","1":"vrlo vrlo malo","2":"vrlo malo","3":"malo","4":"srednje","5":"veliko","6":"vrlo veliko","7":"vrlo vrlo veliko","_localized":{}}
+,
+'dojox/editor/plugins/nls/Preview':{"preview":"Pregled","_localized":{}}
+,
+'dojox/editor/plugins/nls/FindReplace':{"findLabel":"Traži:","findTooltip":"Unesi tekst pretrage","replaceLabel":"Zamijeni s:","replaceTooltip":"Unesi tekst za zamjenu","findReplace":"Traži i zamijeni","matchCase":"Usporedi velika/mala slova","matchCaseTooltip":"Usporedi velika/mala slova","backwards":"Natrag","backwardsTooltip":"Pretraži tekst u prethodnim koracima","replaceAllButton":"Zamijeni sve","replaceAllButtonTooltip":"Zamijeni cijeli tekst","findButton":"Traži","findButtonTooltip":"Traži tekst","replaceButton":"Zamijeni","replaceButtonTooltip":"Zamijeni tekst","replaceDialogText":"Zamijenjeno ${0} pojavljivanja.","eofDialogText":"Zadnje pojavljivanje ${0}","eofDialogTextFind":"nađeno","eofDialogTextReplace":"zamijenjeno","_localized":{}}
+,
+'dojox/editor/plugins/nls/PasteFromWord':{"pasteFromWord":"Zalijepi iz Worda","instructions":"Zalijepite sadržaj iz Worda u donji tekstni okvir. Kad ste zadovoljni sa sadržajem za umetanje, pritisnite tipku Zalijepi.  Za prekid umetanja teksta, pritisnite tipku Opoziv.","_localized":{}}
+,
+'dojox/editor/plugins/nls/InsertAnchor':{"insertAnchor":"Umetni sidro","title":"Svojstva sidra","anchor":"Naziv:","text":"Opis:","set":"Postavi","cancel":"Opoziv","_localized":{}}
+,
+'dojox/editor/plugins/nls/Blockquote':{"blockquote":"Dugi citat","_localized":{}}
+,
+'widgets/About/setting/nls/strings':{"instruction":"Stvorite sadržaj koji se prikazuje u ovom widgetu.","defaultContent":"Ovdje dodajte tekst, poveznice i male grafičke elemente.","productVersion":"Verzija proizvoda: ","kernelVersion":"Verzija jezgre sustava: ","_localized":{}}
+});

@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"esri/widgets/Legend/nls/Legend":{points:"Points",lines:"Lines",polygons:"Polygons",creatingLegend:"Creating legend",noLegend:"No legend",dotValue:"1 Dot \x3d {value} {unit}",currentObservations:"Current observations",previousObservations:"Previous observations",high:"High",low:"Low",esriMetersPerSecond:"m/s",esriKilometersPerHour:"km/h",esriKnots:"knots",esriFeetPerSecond:"ft/sec",esriMilesPerHour:"mph",showField:"{field}",showNormField:"{field} divided by {normField}",showNormPct:"{field} as a percent of the total",
+showRatio:"Ratio of {field} to {normField}",showRatioPercent:"{field} as a percent of {normField}",showRatioPercentTotal:"{field} as a percent of {field} and {normField}",_localized:{}},"widgets/Legend/nls/strings":{_widgetLabel:"Legend",_localized:{}}});

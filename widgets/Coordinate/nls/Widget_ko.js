@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Coordinate/nls/strings":{_widgetLabel:"\uc88c\ud45c",hintMessage:"\uc88c\ud45c\ub97c \uac00\uc838\uc624\ub824\uba74 \ub9f5 \ud074\ub9ad",defaultLabel:"\uae30\ubcf8",realtimeLabel:"\uc88c\ud45c\ub97c \uac00\uc838\uc624\ub824\uba74 \ub9c8\uc6b0\uc2a4\ub97c \uc774\ub3d9\ud558\uc138\uc694.",computing:"\uacc4\uc0b0 \uc911...",latitudeLabel:"\uc704\ub3c4",longitudeLabel:"\uacbd\ub3c4",loading:"\ubd88\ub7ec\uc624\ub294 \uc911...",enableClick:"\ub9f5\uc744 \ud074\ub9ad\ud558\uc5ec \uc88c\ud45c \uac00\uc838\uc624\uae30\ub97c \ud65c\uc131\ud654\ud558\ub824\uba74 \ud074\ub9ad",
+disableClick:"\ub9f5\uc744 \ud074\ub9ad\ud558\uc5ec \uc88c\ud45c \uac00\uc838\uc624\uae30\ub97c \ube44\ud65c\uc131\ud654\ud558\ub824\uba74 \ud074\ub9ad",Default:"\uae30\ubcf8",Inches:"Inches",Foot:"Feet",Yards:"Yards",Miles:"Miles",Nautical_Miles:"\ud574\ub9ac",Millimeters:"Millimeters",Centimeters:"Centimeters",Meter:"Meters",Kilometers:"Kilometers",Decimeters:"Decimeters",Decimal_Degrees:"\ub3c4",Degree_Minutes_Seconds:"\ub3c4-\ubd84-\ucd08",MGRS:"MGRS",USNG:"USNG",EYE_ALT:"\uc2dc\uc57c \uace0\ub3c4",
+ELEV:"\uace0\ub3c4",_localized:{}}});

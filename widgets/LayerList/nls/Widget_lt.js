@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"esri/widgets/LayerList/nls/LayerList":{noItemsToDisplay:"\u0160iuo metu n\u0117ra rodytin\u0173 element\u0173.",layerInvisibleAtScale:"Nematoma naudojant dabartin\u012f mastel\u012f",layerError:"\u012ekeliant \u0161\u012f sluoksn\u012f \u012fvyko klaida",untitledLayer:"Sluoksnis be pavadinimo",_localized:{}},"widgets/LayerList/nls/strings":{_widgetLabel:"Sluoksniai",fullExtentTip:"Pereiti \u012f vis\u0105 apr\u0117pt\u012f",ground:"Pavir\u0161ius",_localized:{}}});

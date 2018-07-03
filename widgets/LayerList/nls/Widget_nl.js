@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"esri/widgets/LayerList/nls/LayerList":{noItemsToDisplay:"Er zijn momenteel geen items om weer te geven.",layerInvisibleAtScale:"Onzichtbaar op de huidige schaal",layerError:"Er is een fout opgetreden bij het laden van dit item",untitledLayer:"Laag zonder naam",_localized:{}},"widgets/LayerList/nls/strings":{_widgetLabel:"Lijst met lagen",fullExtentTip:"Ga naar volledige extent",ground:"Grond",_localized:{}}});
