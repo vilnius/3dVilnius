@@ -3,7 +3,7 @@
 require({cache:{
 'url:widgets/Splash/setting/AlignSelector.html':"<div class=\"align-selector clearFix\">\r\n  <div class=\"titles\">${nls.contentAlign}</div>\r\n  <div class=\"aligns jimu-float-leading\">\r\n    <div class=\"align-box-container\">\r\n      <div class=\"align-box top\" data-dojo-attach-point=\"top\" title=\"${nls.alignTop}\"></div>${nls.alignTop}\r\n    </div>\r\n    <div class=\"align-box-container\">\r\n      <div class=\"align-box middle\" data-dojo-attach-point=\"middle\" title=\"${nls.alignMiddle}\"></div>${nls.alignMiddle}\r\n    </div>\r\n  </div>\r\n</div>"}});
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.

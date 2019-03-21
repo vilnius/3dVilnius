@@ -1,4 +1,4 @@
 // All material copyright ESRI, All Rights Reserved, unless otherwise specified.
 // See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
 //>>built
-define({"esri/widgets/LayerList/nls/LayerList":{noItemsToDisplay:"N\u00e4ytett\u00e4vi\u00e4 kohteita ei ole.",layerInvisibleAtScale:"Ei ole n\u00e4kyviss\u00e4 nykyisess\u00e4 mittakaavassa",layerError:"Virhe karttatason lataamisessa",untitledLayer:"Nime\u00e4m\u00e4t\u00f6n karttataso",_localized:{}},"widgets/LayerList/nls/strings":{_widgetLabel:"Karttatasot",fullExtentTip:"Siirry t\u00e4yteen laajuuteen",ground:"Maanpinta",_localized:{}}});
+define({"esri/widgets/LayerList/nls/LayerList":{widgetLabel:"Karttatasot",noItemsToDisplay:"N\u00e4ytett\u00e4vi\u00e4 kohteita ei ole.",layerInvisibleAtScale:"Ei ole n\u00e4kyviss\u00e4 nykyisess\u00e4 mittakaavassa",layerError:"Virhe karttatason lataamisessa",untitledLayer:"Nime\u00e4m\u00e4t\u00f6n karttataso",_localized:{}},"widgets/LayerList/nls/strings":{_widgetLabel:"Karttatasot",fullExtentTip:"Siirry t\u00e4yteen laajuuteen",ground:"Maanpinta",_localized:{}}});

@@ -49,8 +49,8 @@
     "name": "DartController",
     "description": "Widget controller"
   }],
-  "version": "2.6",
-  "wabVersion": "2.6",
+  "version": "2.12",
+  "wabVersion": "2.12",
   "author": "@SpatialAgent",
   "description": "",
   "copyright": "",

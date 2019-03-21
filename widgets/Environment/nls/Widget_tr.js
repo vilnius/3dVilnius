@@ -1,4 +1,0 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define({"widgets/Environment/nls/strings":{_widgetLabel:"\u00c7evre",dragSunSliderText:"G\u00fcn\u00fcn saatini de\u011fi\u015ftirmek i\u00e7in kayd\u0131r\u0131c\u0131y\u0131 s\u00fcr\u00fckleyin.",directShadow:"Do\u011frudan g\u00f6lge (g\u00fcn\u0131\u015f\u0131\u011f\u0131 vurdu\u011funda)",diffuseShadow:"Da\u011f\u0131n\u0131k g\u00f6lgeler (ortama ba\u011fl\u0131 okl\u00fczyon)",shadowing:"G\u00f6lgeleme",_localized:{}}});

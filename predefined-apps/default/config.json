@@ -11,7 +11,7 @@
       "red",
       "yellow"
     ],
-    "version": "2.6"
+    "version": "2.12"
   },
   "portalUrl": "",
   "appId": "",
@@ -25,12 +25,7 @@
     "url": "/proxy.js"
   },
   "geometryService": "http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer",
-  "links": [
-    {
-      "label": "ArcGIS Online",
-      "url": "//www.arcgis.com"
-    }
-  ],
+  "links": [],
   "widgetOnScreen": {
     "widgets": [
       {
@@ -43,7 +38,7 @@
           "paddingRight": 0,
           "relativeTo": "browser"
         },
-        "version": "2.6"
+        "version": "2.12"
       },
       {
         "uri": "widgets/Search/Widget",
@@ -52,7 +47,7 @@
           "top": 10,
           "relativeTo": "map"
         },
-        "version": "2.6"
+        "version": "2.12"
       },
       {
         "uri": "widgets/ZoomSlider/Widget",
@@ -60,7 +55,7 @@
           "left": 10,
           "top": 10
         },
-        "version": "2.6"
+        "version": "2.12"
       },
       {
         "uri": "widgets/Home/Widget",
@@ -68,7 +63,7 @@
           "left": 10,
           "top": 85
         },
-        "version": "2.6"
+        "version": "2.12"
       },
       {
         "uri": "widgets/MyLocation/Widget",
@@ -76,7 +71,7 @@
           "left": 10,
           "top": 123
         },
-        "version": "2.6"
+        "version": "2.12"
       },
       {
         "uri": "widgets/Navigate/Widget",
@@ -84,7 +79,7 @@
           "left": 10,
           "top": 161
         },
-        "version": "2.6"
+        "version": "2.12"
       },
       {
         "uri": "widgets/Compass/Widget",
@@ -92,7 +87,7 @@
           "right": 10,
           "top": 10
         },
-        "version": "2.6"
+        "version": "2.12"
       },
       {
         "uri": "widgets/FullScreen/Widget",
@@ -100,7 +95,7 @@
           "right": 10,
           "top": 52
         },
-        "version": "2.6"
+        "version": "2.12"
       },
       {
         "uri": "widgets/Coordinate/Widget",
@@ -108,7 +103,7 @@
           "left": 0,
           "bottom": 16
         },
-        "version": "2.6"
+        "version": "2.12"
       },
       {
         "uri": "widgets/Splash/Widget",
@@ -116,7 +111,7 @@
         "position": {
           "relativeTo": "browser"
         },
-        "version": "2.6"
+        "version": "2.12"
       }
     ]
   },
@@ -145,12 +140,12 @@
     },
     "widgets": [
       {
-        "uri": "widgets/Environment/Widget",
-        "version": "2.6"
+        "uri": "widgets/Daylight/Widget",
+        "version": "2.12"
       },
       {
         "uri": "widgets/Slides/Widget",
-        "version": "2.6"
+        "version": "2.12"
       }
     ]
   },
@@ -166,7 +161,7 @@
       "height": 29
     }
   },
-  "wabVersion": "2.6",
+  "wabVersion": "2.12",
   "_buildInfo": {
     "widgetManifestsMerged": true
   }

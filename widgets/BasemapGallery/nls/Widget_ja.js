@@ -1,4 +1,4 @@
 // All material copyright ESRI, All Rights Reserved, unless otherwise specified.
 // See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
 //>>built
-define({"esri/widgets/BasemapGallery/nls/BasemapGallery":{noBasemaps:"No basemaps available",_localized:{}},"widgets/BasemapGallery/nls/strings":{_widgetLabel:"\u30d9\u30fc\u30b9\u30de\u30c3\u30d7 \u30ae\u30e3\u30e9\u30ea\u30fc",_localized:{}}});
+define({"esri/widgets/BasemapGallery/nls/BasemapGallery":{widgetLabel:"\u30d9\u30fc\u30b9\u30de\u30c3\u30d7 \u30ae\u30e3\u30e9\u30ea\u30fc",noBasemaps:"\u4f7f\u7528\u3067\u304d\u308b\u30d9\u30fc\u30b9\u30de\u30c3\u30d7\u304c\u3042\u308a\u307e\u305b\u3093",_localized:{}},"widgets/BasemapGallery/nls/strings":{_widgetLabel:"\u30d9\u30fc\u30b9\u30de\u30c3\u30d7 \u30ae\u30e3\u30e9\u30ea\u30fc",_localized:{}}});

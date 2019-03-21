@@ -11,11 +11,13 @@
     "Home",
     "ZoomSlider",
     "Navigate",
-    "Environment",
+    "Daylight",
     "LayerList",
     "Legend",
     "MyLocation",
-    "3DFx"
+    "3DFx",
+    "Measurement3D",
+    "Share"
   ],
   "_buildInfo": {
     "manifestsMerged": true

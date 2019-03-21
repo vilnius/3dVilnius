@@ -1,4 +1,4 @@
 // All material copyright ESRI, All Rights Reserved, unless otherwise specified.
 // See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
 //>>built
-define({"esri/widgets/LayerList/nls/LayerList":{noItemsToDisplay:"Trenutno nema stavki za prikaz.",layerInvisibleAtScale:"Nevidljivo pri trenutnoj razmeri",layerError:"Do\u0161lo je do gre\u0161ke prilikom u\u010ditavanja ovog sloja",untitledLayer:"Sloj bez naslova",_localized:{}},"widgets/LayerList/nls/strings":{_widgetLabel:"Lista slojeva",fullExtentTip:"Idi na potpuni obuhvat",ground:"Tlo",_localized:{}}});
+define({"esri/widgets/LayerList/nls/LayerList":{widgetLabel:"Lista slojeva",noItemsToDisplay:"Trenutno nema stavki za prikaz.",layerInvisibleAtScale:"Nevidljivo pri trenutnoj razmeri",layerError:"Do\u0161lo je do gre\u0161ke prilikom u\u010ditavanja ovog sloja",untitledLayer:"Sloj bez naslova",_localized:{}},"widgets/LayerList/nls/strings":{_widgetLabel:"Lista slojeva",fullExtentTip:"Idi na potpuni obuhvat",ground:"Tlo",_localized:{}}});

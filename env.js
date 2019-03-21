@@ -1,7 +1,7 @@
 // All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://atviras.vplanas.lt/portal/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
 ///////////////////////////////////////////////////////////////////////////
-// Copyright ? 2014 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@ var
 
   //This version number will be appended to URL to avoid cache.
   //The reason we do not use wabVersion is to avoid force user to change wabVersion when they are customizing app.
-  deployVersion = '2.6';
+  deployVersion = '2.12';
 
 // console.time('before map');
 
@@ -92,30 +92,36 @@ var
 (function(global){
   //init API URL
   var queryObject = getQueryObject();
-  var apiVersion = '4.5';
+  var apiVersion = '4.11';
   ////////uncomment the following line when downloading the app
 
-  apiUrl = 'https://atviras.vplanas.lt/portal/jsapi/jsapi4';
+  apiUrl = 'https://js.arcgis.com/4.11';
 
   //////////////////////////////////////////////////////////////
   allCookies = getAllCookies();
   window.appInfo = {isRunInPortal: !isXT};
+
+  if (queryObject.apiurl3d) {
+    if(!checkApiUrl(queryObject.apiurl3d)){
+      console.error('?apiurl must point to an ULR that is in the app or in esri.com/arcgis.com domain.');
+      return;
+    }
+    apiUrl = queryObject.apiurl3d;
+  }
   if (!apiUrl) {
-    if (queryObject.apiurl3d) {
-      apiUrl = queryObject.apiurl3d;
-    } else if (isXT) {
-      apiUrl = 'https://js.arcgis.com/' + apiVersion;
+    if (isXT) {
+      apiUrl = 'https://jsdev.arcgis.com/' + apiVersion;
     } else {
       var portalUrl = getPortalUrlFromLocation();
       if (portalUrl.indexOf('arcgis.com') > -1) {
-        // if(portalUrl.indexOf('devext.arcgis.com') > -1){
-        //   apiUrl = '//js.arcgis.com/' + apiVersion;
-        // }else if(portalUrl.indexOf('qa.arcgis.com') > -1){
-        //   apiUrl = '//jsqa.arcgis.com/' + apiVersion;
-        // }else{
-        //   apiUrl = '//js.arcgis.com/' + apiVersion;
-        // }
-        apiUrl = 'https://js.arcgis.com/' + apiVersion;
+        if(portalUrl.indexOf('devext.arcgis.com') > -1){
+          apiUrl = '//jsdev.arcgis.com/' + apiVersion;
+        }else if(portalUrl.indexOf('qa.arcgis.com') > -1){
+          apiUrl = '//jsqa.arcgis.com/' + apiVersion;
+        }else{
+          apiUrl = '//js.arcgis.com/' + apiVersion;
+        }
+        // apiUrl = 'https://js.arcgis.com/' + apiVersion;
       } else {
         apiUrl = portalUrl + 'jsapi/jsapi4/';
       }
@@ -141,6 +147,14 @@ var
       }
     }
     return cookies;
+  }
+
+  function checkApiUrl(url){
+    if(/^\/\//.test(url) || /^https?:\/\//.test(url)){
+      return /(?:[\w\-\_]+\.)+(?:esri|arcgis)\.com/.test(url); //api url must be in esri.com or arcgis.com
+    }else{
+      return true;
+    }
   }
 
   function getPortalUrlFromLocation(){

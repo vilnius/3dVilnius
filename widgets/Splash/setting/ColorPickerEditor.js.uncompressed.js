@@ -3,7 +3,7 @@
 require({cache:{
 'url:widgets/Splash/setting/ColorPickerEditor.html':"<div class=\"colorPickerEditor\">\r\n  <div class=\"colorPicker\" data-dojo-attach-point=\"colorPicker\"></div>\r\n  <span class=\"trans\">${nls.transparency}</span>\r\n  <div class=\"sliderbar\" data-dojo-attach-point=\"sliderBar\"></div>\r\n  <input type=\"text\" data-dojo-type=\"dijit/form/NumberSpinner\" value=\"0\"\r\n         data-dojo-attach-point=\"spinner\" data-dojo-props=\"smallDelta:10,intermediateChanges:true,constraints: {min:0,max:100}\">\r\n  <span >%</span>\r\n</div>\r\n\r\n"}});
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.

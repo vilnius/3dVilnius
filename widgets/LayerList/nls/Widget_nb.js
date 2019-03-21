@@ -1,4 +1,4 @@
 // All material copyright ESRI, All Rights Reserved, unless otherwise specified.
 // See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
 //>>built
-define({"esri/widgets/LayerList/nls/LayerList":{noItemsToDisplay:"Det er for \u00f8yeblikket ingen elementer \u00e5 vise.",layerInvisibleAtScale:"Usynlig med gjeldende m\u00e5lestokk",layerError:"Det oppstod en feil under lasting av dette laget",untitledLayer:"Lag uten tittel",_localized:{}},"widgets/LayerList/nls/strings":{_widgetLabel:"Kartlagliste",fullExtentTip:"G\u00e5 til full utstrekning",ground:"Bakken",_localized:{}}});
+define({"esri/widgets/LayerList/nls/LayerList":{widgetLabel:"Kartlagliste",noItemsToDisplay:"Det er for \u00f8yeblikket ingen elementer \u00e5 vise.",layerInvisibleAtScale:"Usynlig med gjeldende m\u00e5lestokk",layerError:"Det oppstod en feil under lasting av dette laget",untitledLayer:"Lag uten tittel",_localized:{}},"widgets/LayerList/nls/strings":{_widgetLabel:"Kartlagliste",fullExtentTip:"G\u00e5 til full utstrekning",ground:"Bakken",_localized:{}}});

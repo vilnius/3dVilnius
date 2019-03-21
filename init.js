@@ -1,7 +1,7 @@
 // All material copyright ESRI, All Rights Reserved, unless otherwise specified.
 // See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
 ///////////////////////////////////////////////////////////////////////////
-// Copyright ? 2014 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -84,6 +84,10 @@ var ie = (function() {
 
     setLocale();
 
+    if (window.isRTL) {
+      dojoConfig.has['dojo-bidi'] = true;
+    }
+
     resources = resources.concat([
       window.apiUrl + 'dojo/resources/dojo.css',
       window.apiUrl + 'dijit/themes/claro/claro.css',
@@ -92,7 +96,10 @@ var ie = (function() {
       window.apiUrl + 'esri/css/main.css',
       window.apiUrl + 'dojox/layout/resources/ResizeHandle.css',
       window.path + 'jimu.js/css/jimu-theme.css',
-      window.path + 'libs/caja-html-sanitizer-minified.js'
+      window.path + 'libs/caja-html-sanitizer-minified.js',
+      //because we have jimu/dijit/GridLayout dijit, so we import this css here
+      window.path + 'libs/goldenlayout/goldenlayout-base.css',
+      window.path + 'libs/goldenlayout/goldenlayout-light-theme.css'
     ]);
 
     if (window.apiUrl.substr(window.apiUrl.length - 'arcgis-js-api/'.length,
@@ -117,7 +124,35 @@ var ie = (function() {
         location: window.apiUrl + "esri"
       }, {
         name: "moment",
-        location: window.apiUrl + "moment"
+        location: window.apiUrl + "node_modules/moment",
+        main: "moment"
+      }, {
+        name: "@dojo",
+        location: window.apiUrl + "node_modules/@dojo"
+      }, {
+        name: "tslib",
+        location: window.apiUrl + "node_modules/tslib",
+        main: "tslib"
+      }, {
+        name: "cldrjs",
+        location: window.apiUrl + "node_modules/cldrjs",
+        main: "dist/cldr"
+      }, {
+        name: "globalize",
+        location: window.apiUrl + "node_modules/globalize",
+        main: "dist/globalize"
+      }, {
+        name: "maquette",
+        location: window.apiUrl + "node_modules/maquette",
+        main: "dist/maquette.umd"
+      }, {
+        name: "maquette-jsx",
+        location: window.apiUrl + "node_modules/maquette-jsx",
+        main: "dist/maquette-jsx.umd"
+      }, {
+        name: "maquette-css-transitions",
+        location: window.apiUrl + "node_modules/maquette-css-transitions",
+        main: "dist/maquette-css-transitions.umd"
       }, {
         name: "widgets",
         location: "widgets"

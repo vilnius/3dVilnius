@@ -1,4 +1,4 @@
 // All material copyright ESRI, All Rights Reserved, unless otherwise specified.
 // See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
 //>>built
-define({"esri/widgets/LayerList/nls/LayerList":{noItemsToDisplay:"\u015eu anda g\u00f6r\u00fcnt\u00fclenecek \u00f6\u011fe yok.",layerInvisibleAtScale:"Ge\u00e7erli \u00f6l\u00e7ekte g\u00f6r\u00fcnmez",layerError:"Bu katman y\u00fcklenirken bir hata olu\u015ftu.",untitledLayer:"Ba\u015fl\u0131ks\u0131z katman",_localized:{}},"widgets/LayerList/nls/strings":{_widgetLabel:"Katman Listesi",fullExtentTip:"Tam yay\u0131l\u0131ma git",ground:"Zemin",_localized:{}}});
+define({"esri/widgets/LayerList/nls/LayerList":{widgetLabel:"Katman Listesi",noItemsToDisplay:"\u015eu anda g\u00f6r\u00fcnt\u00fclenecek \u00f6\u011fe yok.",layerInvisibleAtScale:"Ge\u00e7erli \u00f6l\u00e7ekte g\u00f6r\u00fcnmez",layerError:"Bu katman y\u00fcklenirken bir hata olu\u015ftu.",untitledLayer:"Ba\u015fl\u0131ks\u0131z katman",_localized:{}},"widgets/LayerList/nls/strings":{_widgetLabel:"Katman Listesi",fullExtentTip:"Tam yay\u0131l\u0131ma git",ground:"Zemin",_localized:{}}});

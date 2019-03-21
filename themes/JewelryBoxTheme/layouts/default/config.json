@@ -10,7 +10,7 @@
         "paddingRight": 0,
         "relativeTo": "browser"
       },
-      "version": "2.6"
+      "version": "2.12"
     }, {
       "uri": "widgets/Search/Widget",
       "position": {
@@ -18,63 +18,63 @@
         "top": 10,
         "relativeTo": "map"
       },
-      "version": "2.6"
+      "version": "2.12"
     }, {
       "uri": "widgets/ZoomSlider/Widget",
       "position": {
         "left": 10,
         "top": 10
       },
-      "version": "2.6"
+      "version": "2.12"
     }, {
       "uri": "widgets/Home/Widget",
       "position": {
         "left": 10,
         "top": 85
       },
-      "version": "2.6"
+      "version": "2.12"
     }, {
       "uri": "widgets/MyLocation/Widget",
       "position": {
         "left": 10,
         "top": 123
       },
-      "version": "2.6"
+      "version": "2.12"
     }, {
       "uri": "widgets/Navigate/Widget",
       "position": {
         "left": 10,
         "top": 161
       },
-      "version": "2.6"
+      "version": "2.12"
     }, {
       "uri": "widgets/Compass/Widget",
       "position": {
         "right": 10,
         "top": 10
       },
-      "version": "2.6"
+      "version": "2.12"
     }, {
       "uri": "widgets/FullScreen/Widget",
       "position": {
         "right": 10,
         "top": 52
       },
-      "version": "2.6"
+      "version": "2.12"
     }, {
       "uri": "widgets/Coordinate/Widget",
       "position": {
         "left": 0,
         "bottom": 16
       },
-      "version": "2.6"
+      "version": "2.12"
     }, {
       "uri": "widgets/Splash/Widget",
       "visible": false,
       "position": {
         "relativeTo": "browser"
       },
-      "version": "2.6"
+      "version": "2.12"
     }],
 
     "groups": [{

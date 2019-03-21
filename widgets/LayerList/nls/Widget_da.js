@@ -1,4 +1,4 @@
 // All material copyright ESRI, All Rights Reserved, unless otherwise specified.
 // See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
 //>>built
-define({"esri/widgets/LayerList/nls/LayerList":{noItemsToDisplay:"Der er ikke nogen elementer at vise p\u00e5 nuv\u00e6rende tidspunkt.",layerInvisibleAtScale:"Usynlig ved det aktuelle m\u00e5lestoksforhold",layerError:"Der opstod en fejl under indl\u00e6sning af dette lag",untitledLayer:"Lag uden titel",_localized:{}},"widgets/LayerList/nls/strings":{_widgetLabel:"Lagliste",fullExtentTip:"G\u00e5 til den fulde udstr\u00e6kning",ground:"Jorden",_localized:{}}});
+define({"esri/widgets/LayerList/nls/LayerList":{widgetLabel:"Lagliste",noItemsToDisplay:"Der er ikke nogen elementer at vise p\u00e5 nuv\u00e6rende tidspunkt.",layerInvisibleAtScale:"Usynlig ved det aktuelle m\u00e5lestoksforhold",layerError:"Der opstod en fejl under indl\u00e6sning af dette lag",untitledLayer:"Lag uden titel",_localized:{}},"widgets/LayerList/nls/strings":{_widgetLabel:"Lagliste",fullExtentTip:"G\u00e5 til den fulde udstr\u00e6kning",ground:"Jorden",_localized:{}}});
