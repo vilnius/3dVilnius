@@ -1,0 +1,19 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'dijit/_editor/nls/commands':{"bold":"Félkövér","copy":"Másolás","cut":"Kivágás","delete":"Törlés","indent":"Behúzás","insertHorizontalRule":"Vízszintes vonalzó","insertOrderedList":"Számozott lista","insertUnorderedList":"Felsorolásjeles lista","italic":"Dőlt","justifyCenter":"Középre igazítás","justifyFull":"Sorkizárás","justifyLeft":"Balra igazítás","justifyRight":"Jobbra igazítás","outdent":"Negatív behúzás","paste":"Beillesztés","redo":"Újra","removeFormat":"Formázás eltávolítása","selectAll":"Összes kijelölése","strikethrough":"Áthúzott","subscript":"Alsó index","superscript":"Felső index","underline":"Aláhúzott","undo":"Visszavonás","unlink":"Hivatkozás eltávolítása","createLink":"Hivatkozás létrehozása","toggleDir":"Irány váltókapcsoló","insertImage":"Kép beszúrása","insertTable":"Táblázat beszúrása/szerkesztése","toggleTableBorder":"Táblázatszegély ki-/bekapcsolása","deleteTable":"Táblázat törlése","tableProp":"Táblázat tulajdonságai","htmlToggle":"HTML forrás","foreColor":"Előtérszín","hiliteColor":"Háttérszín","plainFormatBlock":"Bekezdés stílusa","formatBlock":"Bekezdés stílusa","fontSize":"Betűméret","fontName":"Betűtípus","tabIndent":"Tab behúzás","fullScreen":"Váltás teljes képernyőre","viewSource":"HTML forrás megjelenítése","print":"Nyomtatás","newPage":"Új oldal","systemShortcut":"A(z) \"${0}\" művelet a böngészőben csak billentyűparancs használatával érhető el. Használja a következőt: ${1}.","ctrlKey":"ctrl+${0}","appleKey":"⌘${0}","_localized":{}}
+,
+'dijit/_editor/nls/FontChoice':{"fontSize":"Méret","fontName":"Betűtípus","formatBlock":"Formátum","serif":"talpas","sans-serif":"talpatlan","monospace":"rögzített szélességű","cursive":"kurzív","fantasy":"fantázia","noFormat":"Nincs","p":"Bekezdés","h1":"Címsor","h2":"Alcím","h3":"Al-alcím","pre":"Előformázott","1":"xx-kicsi","2":"x-kicsi","3":"kicsi","4":"közepes","5":"nagy","6":"x-nagy","7":"xx-nagy","_localized":{}}
+,
+'dojox/editor/plugins/nls/Preview':{"preview":"Előzetes","_localized":{}}
+,
+'dojox/editor/plugins/nls/FindReplace':{"findLabel":"Keresés:","findTooltip":"Adja meg a keresett szöveget","replaceLabel":"Csere:","replaceTooltip":"Adja meg a cseréhez az új szöveget","findReplace":"Keresés és csere","matchCase":"Kis-nagybetűk egyeznek","matchCaseTooltip":"Kis-nagybetűk egyeznek","backwards":"Visszafelé","backwardsTooltip":"Szöveg keresése visszafelé","replaceAllButton":"Mindent lecserél","replaceAllButtonTooltip":"Minden szöveg cseréje","findButton":"Keresés","findButtonTooltip":"Szöveg keresése","replaceButton":"Csere","replaceButtonTooltip":"Szöveg cseréje","replaceDialogText":"${0} előfordulás cseréje megtörtént.","eofDialogText":"Legutóbbi előfordulás: ${0}","eofDialogTextFind":"találat","eofDialogTextReplace":"cserélve","_localized":{}}
+,
+'dojox/editor/plugins/nls/PasteFromWord':{"pasteFromWord":"Beillesztés Word alkalmazásból","instructions":"Illessze be a Word alkalmazás tartalmát az alábbi szövegmezőbe. Ha elégedett a beszúrandó tartalommal, akkor nyomja meg a beillesztés gombot. Szöveg beszúrásának megszakításához nyomja meg a mégse gombot.","_localized":{}}
+,
+'dojox/editor/plugins/nls/InsertAnchor':{"insertAnchor":"Horgony beszúrása","title":"Horgony tulajdonságai","anchor":"Név:","text":"Leírás:","set":"Beállítás","cancel":"Mégse","_localized":{}}
+,
+'dojox/editor/plugins/nls/Blockquote':{"blockquote":"Idézet","_localized":{}}
+,
+'widgets/About/setting/nls/strings':{"instruction":"Hozza létre a widgetben megjelenő tartalmat.","defaultContent":"Itt adhatja hozzá a szövegeket, linkeket és kis méretű grafikákat.","productVersion":"Termékverzió: ","kernelVersion":"Kernelverzió: ","_localized":{}}
+});

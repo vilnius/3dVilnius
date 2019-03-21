@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'widgets/Measurement3D/setting/nls/strings':{"defaultAreaUnit":"Oletuspinta-alayksikkö","defaultLengthUnit":"Oletuspituusyksikkö","metric":"Metrijärjestelmä","imperial":"Mailijärjestelmä","squareKilometers":"Neliökilometriä","squareMeters":"Neliömetriä","squareMiles":"Neliömailia","squareInches":"Neliötuumaa","squareFeet":"Neliöjalkaa","squareYards":"Neliöjaardia","squareUSFeet":"Neliöjalkaa (Yhdysvallat)","acres":"Eekkeriä","ares":"Aaria","hectares":"Hehtaaria","inches":"Tuumaa","feet":"Jalkaa","yards":"Jaardia","miles":"Mailia","nauticalMiles":"Meripeninkulmaa","feetUS":"Jalkaa (Yhdysvallat)","meters":"Metriä","kilometers":"Kilometriä","showArea":"Alue","showDistance":"Etäisyys","showLocation":"Sijainti","showSlice":"Viipalointi","showtools":"Näytä mittaustyökalut:","allHidedTips":"Vähintään yksi työkalu on valittava.","_localized":{}}
+});

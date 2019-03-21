@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'widgets/Measurement3D/setting/nls/strings':{"defaultAreaUnit":"Одиниця площі за замовчуванням","defaultLengthUnit":"Одиниця довжини за замовчуванням","metric":"Метричний","imperial":"Британська система","squareKilometers":"Кв. кілометри","squareMeters":"Кв. метри","squareMiles":"Кв. милі","squareInches":"Кв. дюйми","squareFeet":"Кв. фути","squareYards":"Кв. ярди","squareUSFeet":"Кв. фути (США)","acres":"Акри","ares":"Ари","hectares":"Гектари","inches":"Дюйми","feet":"Фути","yards":"Ярди","miles":"Милі","nauticalMiles":"Морські милі","feetUS":"Фути (США)","meters":"Метри","kilometers":"Кілометри","showArea":"Площа","showDistance":"Відстань","showLocation":"Місце розташування","showSlice":"Зріз","showtools":"Показати вимірювальні інструменти:","allHidedTips":"Повинен бути вибраний щонайменше один інструмент.","_localized":{}}
+});

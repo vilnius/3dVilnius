@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Measurement3D/setting/nls/strings":{defaultAreaUnit:"Standardfl\u00e4cheneinheit",defaultLengthUnit:"Standardl\u00e4ngeneinheit",metric:"Metrisch",imperial:"Britisch",squareKilometers:"Quadratkilometer",squareMeters:"Quadratmeter",squareMiles:"Quadratmeilen",squareInches:"Quadratinch",squareFeet:"Quadratfu\u00df",squareYards:"Quadratyards",squareUSFeet:"Quadratfu\u00df (US)",acres:"Acres",ares:"Ar",hectares:"Hektar",inches:"Zoll",feet:"Fu\u00df",yards:"Yards",miles:"Meilen",nauticalMiles:"Seemeilen",
+feetUS:"Fu\u00df (US)",meters:"Meter",kilometers:"Kilometer",showArea:"Fl\u00e4che",showDistance:"Entfernung",showLocation:"Position",showSlice:"Ausschneiden",showtools:"Messwerkzeuge anzeigen:",allHidedTips:"Es sollte mindestens ein Werkzeug ausgew\u00e4hlt werden.",_localized:{}}});

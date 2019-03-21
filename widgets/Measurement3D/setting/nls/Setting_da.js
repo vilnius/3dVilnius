@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Measurement3D/setting/nls/strings":{defaultAreaUnit:"Standardenhed for omr\u00e5de",defaultLengthUnit:"Standardenhed for l\u00e6ngde",metric:"Metrisk",imperial:"Britiske",squareKilometers:"Kvadratkilometer",squareMeters:"Kvadratmeter",squareMiles:"Kvadrat-miles",squareInches:"Kvadrattommer",squareFeet:"Kvadratfod",squareYards:"Kvadrat-yards",squareUSFeet:"Kv.fod (USA)",acres:"Acres",ares:"Acres",hectares:"Hektarer",inches:"Tommer",feet:"Fod",yards:"Yards",miles:"Miles",nauticalMiles:"S\u00f8mil",
+feetUS:"Fod (USA)",meters:"Meter",kilometers:"Kilometer",showArea:"Omr\u00e5de",showDistance:"Afstand",showLocation:"Position",showSlice:"Udsnit",showtools:"Vis m\u00e5lev\u00e6rkt\u00f8jer:",allHidedTips:"Mindst \u00e9t v\u00e6rkt\u00f8j skal v\u00e6re valgt.",_localized:{}}});

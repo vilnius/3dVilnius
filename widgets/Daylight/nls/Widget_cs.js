@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Daylight/nls/strings":{_widgetLabel:"Denn\u00ed sv\u011btlo",dragSunSliderText:"T\u00e1hnut\u00edm za posuvn\u00edk m\u016f\u017eete m\u011bnit \u010das.",directShadow:"P\u0159\u00edm\u00fd st\u00edn (vrh\u00e1n slune\u010dn\u00edm sv\u011btlem)",diffuseShadow:"Rozpt\u00fdlen\u00e9 st\u00edny (vrh\u00e1ny okoln\u00edm sv\u011btlem)",shadowing:"St\u00ednov\u00e1n\u00ed",_localized:{}}});

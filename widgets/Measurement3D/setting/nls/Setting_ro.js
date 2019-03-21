@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Measurement3D/setting/nls/strings":{defaultAreaUnit:"Unitate de suprafa\u021b\u0103 implicit\u0103",defaultLengthUnit:"Unitate de lungime implicit\u0103",metric:"Metric",imperial:"Englez",squareKilometers:"Kilometri p\u0103tra\u021bi",squareMeters:"Metri p\u0103tra\u021bi",squareMiles:"Mile p\u0103trate",squareInches:"Inci p\u0103tra\u021bi",squareFeet:"Picioare p\u0103trate",squareYards:"Yarzi p\u0103tra\u021bi",squareUSFeet:"Picioare p\u0103trate (SUA)",acres:"Acri",ares:"Ari",
+hectares:"Hectare",inches:"Inci",feet:"Ft",yards:"Yarzi",miles:"Mile",nauticalMiles:"Mile marine",feetUS:"Picioare (SUA)",meters:"Metri",kilometers:"Kilometri",showArea:"Suprafa\u0163\u0103",showDistance:"Distan\u0163\u0103",showLocation:"Loca\u0163ie",showSlice:"Segmentare",showtools:"Afi\u015fare instrumente de m\u0103sur\u0103:",allHidedTips:"Trebuie selectat cel pu\u0163in un instrument.",_localized:{}}});

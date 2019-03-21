@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Measurement3D/setting/nls/strings":{defaultAreaUnit:"Standaard oppervlakte-eenheid",defaultLengthUnit:"Standaard lengte-eenheid",metric:"Metrisch",imperial:"Imperiaal",squareKilometers:"Vierkante kilometers",squareMeters:"Vierkante meters",squareMiles:"Vierkante mile",squareInches:"Vierkante inch",squareFeet:"Vierkante voet",squareYards:"Vierkante yard",squareUSFeet:"Viekante voet (US)",acres:"Acres",ares:"Are",hectares:"Hectare",inches:"Inch",feet:"Voet",yards:"Yard",miles:"Mijl",
+nauticalMiles:"Zeemijl",feetUS:"Voet (US)",meters:"Meter",kilometers:"Kilometer",showArea:"Gebied",showDistance:"Afstand",showLocation:"Locatie",showSlice:"Doorsnede maken",showtools:"Toon meetgereedschappen:",allHidedTips:"Er moet minimaal \u00e9\u00e9n gereedschap worden geselecteerd.",_localized:{}}});

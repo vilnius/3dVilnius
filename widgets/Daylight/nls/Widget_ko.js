@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Daylight/nls/strings":{_widgetLabel:"\uc77c\uad11",dragSunSliderText:"\uc2dc\uac04\uc744 \ubcc0\uacbd\ud558\ub824\uba74 \uc2ac\ub77c\uc774\ub354\ub97c \ub4dc\ub798\uadf8\ud569\ub2c8\ub2e4.",directShadow:"\uc9c1\uc811 \uadf8\ub9bc\uc790(\ud0dc\uc591\uad11)",diffuseShadow:"\uc0b0\ub780 \uadf8\ub9bc\uc790(ambient occlusion)",shadowing:"\uadf8\ub9bc\uc790 \ucc98\ub9ac",_localized:{}}});

@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'widgets/Measurement3D/setting/nls/strings':{"defaultAreaUnit":"Pindala vaikeühik","defaultLengthUnit":"Pikkuse vaikeühik","metric":"Meetriline","imperial":"Briti","squareKilometers":"Ruutkilomeetrites","squareMeters":"Ruutmeetrites","squareMiles":"Ruutmiilides","squareInches":"Ruuttollides","squareFeet":"Ruutjalgades","squareYards":"Ruutjardides","squareUSFeet":"Ruutjalga (USA)","acres":"aakrit","ares":"Aari","hectares":"hektarit","inches":"Tolli","feet":"Jalga","yards":"Jardi","miles":"miili","nauticalMiles":"Meremiili","feetUS":"Jalga (USA)","meters":"meetrit","kilometers":"kilomeetrit","showArea":"Kihtdiagramm","showDistance":"Vahemaa","showLocation":"Asukoht","showSlice":"Viiluta","showtools":"Kuva mõõtmise tööriistad:","allHidedTips":"Valida tuleb vähemalt üks tööriist.","_localized":{}}
+});

@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Measurement3D/setting/nls/strings":{defaultAreaUnit:"Zadana jedinica povr\u0161ine",defaultLengthUnit:"Zadana jedinica duljine",metric:"Metri\u010dki",imperial:"Imperijalne",squareKilometers:"Kvadratni kilometri",squareMeters:"Kvadratni metri",squareMiles:"Kvadratne milje",squareInches:"Kvadratni in\u010di",squareFeet:"Kvadratne stope",squareYards:"Kvadratni jardi",squareUSFeet:"Kvadratne stope (SAD)",acres:"Rali",ares:"Ari",hectares:"Hektari",inches:"In\u010di",feet:"Stope",yards:"Jardi",
+miles:"Milje",nauticalMiles:"Nauti\u010dke milje",feetUS:"Stope (SAD)",meters:"Metri",kilometers:"Kilometri",showArea:"Poligon",showDistance:"Udaljenost",showLocation:"Lokacija",showSlice:"Isje\u010dak",showtools:"Prika\u017ei alate za mjerenje:",allHidedTips:"Treba odabrati barem jedan alat.",_localized:{}}});

@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Splash/nls/strings":{_widgetLabel:"Presentaci\u00f3",welcomeMessage:"Us donem la benvinguda a l'aplicaci\u00f3 web de l'ArcGIS.",licenceAgree:"Accepto",licenceTerm:"Condicions de l'aplicaci\u00f3 web de l'ArcGIS",labelContinue:"Continua",errorString:"* Heu d'acceptar la llic\u00e8ncia per continuar.",notShowAgain:"No tornis a mostrar aquesta pantalla de presentaci\u00f3.",ok:"D'acord",cancel:"Cancel\u00b7la",_localized:{}}});

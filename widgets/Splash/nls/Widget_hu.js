@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Splash/nls/strings":{_widgetLabel:"\u00dcdv\u00f6zl\u0151ablak",welcomeMessage:"\u00dcdv\u00f6z\u00f6lj\u00fck az ArcGIS Web alkalmaz\u00e1sban!",licenceAgree:"Elfogadom az",licenceTerm:"ArcGIS Web alkalmaz\u00e1s felt\u00e9teleit",labelContinue:"Folytat\u00e1s",errorString:"* A folytat\u00e1shoz el kell fogadnia a licencet.",notShowAgain:"T\u00f6bb\u00e9 ne jelenjen meg ez az \u00fcdv\u00f6zl\u0151ablak.",ok:"OK",cancel:"M\u00e9gse",_localized:{}}});

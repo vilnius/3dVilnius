@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'widgets/Measurement3D/setting/nls/strings':{"defaultAreaUnit":"Единицы площади по умолчанию","defaultLengthUnit":"Единицы длины по умолчанию","metric":"Метрические","imperial":"Английские","squareKilometers":"Кв. километры","squareMeters":"Кв. метры","squareMiles":"Кв. мили","squareInches":"Кв. дюймы","squareFeet":"Кв. футы","squareYards":"Кв. ярды","squareUSFeet":"Кв. футы (США)","acres":"Акры","ares":"Ары","hectares":"Гектары","inches":"Дюймы","feet":"Футы","yards":"Ярды","miles":"Мили","nauticalMiles":"Морские мили","feetUS":"Футы (США)","meters":"Метры","kilometers":"Километры","showArea":"Площадь","showDistance":"Расстояние","showLocation":"Местоположение","showSlice":"Разрез","showtools":"Показать инструменты измерений:","allHidedTips":"Необходимо выбрать по крайней мере один инструмент.","_localized":{}}
+});

@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Measurement3D/setting/nls/strings":{defaultAreaUnit:"Varsay\u0131lan alan birimi",defaultLengthUnit:"Varsay\u0131lan uzunluk birimi",metric:"Metrik",imperial:"\u0130ngiliz",squareKilometers:"Kilometre Kare",squareMeters:"Metre Kare",squareMiles:"Mil Kare",squareInches:"\u0130n\u00e7 Kare",squareFeet:"Fit Kare",squareYards:"Yarda Kare",squareUSFeet:"Fit Kare (ABD)",acres:"Akre",ares:"Ar",hectares:"Hektar",inches:"\u0130n\u00e7",feet:"Fit",yards:"Yarda",miles:"Mil",nauticalMiles:"Deniz Mili",
+feetUS:"Fit (ABD)",meters:"Metre",kilometers:"Kilometre",showArea:"Alan",showDistance:"Mesafe",showLocation:"Konum",showSlice:"Dilimle",showtools:"\u00d6l\u00e7\u00fcm ara\u00e7lar\u0131n\u0131 g\u00f6ster:",allHidedTips:"En az bir ara\u00e7 se\u00e7ilmelidir.",_localized:{}}});

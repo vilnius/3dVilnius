@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'widgets/Measurement3D/setting/nls/strings':{"defaultAreaUnit":"Varsayılan alan birimi","defaultLengthUnit":"Varsayılan uzunluk birimi","metric":"Metrik","imperial":"İngiliz","squareKilometers":"Kilometre Kare","squareMeters":"Metre Kare","squareMiles":"Mil Kare","squareInches":"İnç Kare","squareFeet":"Fit Kare","squareYards":"Yarda Kare","squareUSFeet":"Fit Kare (ABD)","acres":"Akre","ares":"Ar","hectares":"Hektar","inches":"İnç","feet":"Fit","yards":"Yarda","miles":"Mil","nauticalMiles":"Deniz Mili","feetUS":"Fit (ABD)","meters":"Metre","kilometers":"Kilometre","showArea":"Alan","showDistance":"Mesafe","showLocation":"Konum","showSlice":"Dilimle","showtools":"Ölçüm araçlarını göster:","allHidedTips":"En az bir araç seçilmelidir.","_localized":{}}
+});

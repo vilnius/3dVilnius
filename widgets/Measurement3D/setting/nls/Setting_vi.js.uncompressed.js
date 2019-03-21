@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'widgets/Measurement3D/setting/nls/strings':{"defaultAreaUnit":"Đơn vị diện tích mặc định","defaultLengthUnit":"Đơn vị độ dài mặc định","metric":"Hệ mét","imperial":"Hệ đo lường Anh","squareKilometers":"Kilômét vuông","squareMeters":"Mét vuông","squareMiles":"Dặm vuông","squareInches":"Inch Vuông","squareFeet":"Feet vuông","squareYards":"Thước vuông","squareUSFeet":"Feet vuông (Hoa Kỳ)","acres":"Acre","ares":"Are","hectares":"Hecta","inches":"Inch","feet":"Bộ","yards":"Thước","miles":"Dặm","nauticalMiles":"Hải lý","feetUS":"Feet (Hoa Kỳ)","meters":"Mét","kilometers":"Kilômét","showArea":"Khu vực","showDistance":"Khoảng cách","showLocation":"Vị trí","showSlice":"Slice","showtools":"Hiện công cụ đo lường:","allHidedTips":"Phải chọn ít nhất một công cụ.","_localized":{}}
+});

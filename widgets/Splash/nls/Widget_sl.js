@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Splash/nls/strings":{_widgetLabel:"Pozdravni zaslon",welcomeMessage:"Dobrodo\u0161li v spletno aplikacijo ArcGIS!",licenceAgree:"Sogla\u0161am",licenceTerm:"s pogoji uporabe spletne aplikacije ArcGIS",labelContinue:"Nadaljuj",errorString:"* Za nadaljevanje morate sogla\u0161ati z licenco.",notShowAgain:"Tega pozdravnega zaslona ne ka\u017ei ve\u010d.",ok:"V redu",cancel:"Prekli\u010di",_localized:{}}});

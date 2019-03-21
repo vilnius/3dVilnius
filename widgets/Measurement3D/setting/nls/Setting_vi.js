@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Measurement3D/setting/nls/strings":{defaultAreaUnit:"\u0110\u01a1n v\u1ecb di\u1ec7n t\u00edch m\u1eb7c \u0111\u1ecbnh",defaultLengthUnit:"\u0110\u01a1n v\u1ecb \u0111\u1ed9 d\u00e0i m\u1eb7c \u0111\u1ecbnh",metric:"H\u1ec7 m\u00e9t",imperial:"H\u1ec7 \u0111o l\u01b0\u1eddng Anh",squareKilometers:"Kil\u00f4m\u00e9t vu\u00f4ng",squareMeters:"M\u00e9t vu\u00f4ng",squareMiles:"D\u1eb7m vu\u00f4ng",squareInches:"Inch Vu\u00f4ng",squareFeet:"Feet vu\u00f4ng",squareYards:"Th\u01b0\u1edbc vu\u00f4ng",
+squareUSFeet:"Feet vu\u00f4ng (Hoa K\u1ef3)",acres:"Acre",ares:"Are",hectares:"Hecta",inches:"Inch",feet:"B\u1ed9",yards:"Th\u01b0\u1edbc",miles:"D\u1eb7m",nauticalMiles:"H\u1ea3i l\u00fd",feetUS:"Feet (Hoa K\u1ef3)",meters:"M\u00e9t",kilometers:"Kil\u00f4m\u00e9t",showArea:"Khu v\u1ef1c",showDistance:"Kho\u1ea3ng c\u00e1ch",showLocation:"V\u1ecb tr\u00ed",showSlice:"Slice",showtools:"Hi\u1ec7n c\u00f4ng c\u1ee5 \u0111o l\u01b0\u1eddng:",allHidedTips:"Ph\u1ea3i ch\u1ecdn \u00edt nh\u1ea5t m\u1ed9t c\u00f4ng c\u1ee5.",
+_localized:{}}});

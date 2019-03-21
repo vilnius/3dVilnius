@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Daylight/nls/strings":{_widgetLabel:"\u00c1nh s\u00e1ng ban ng\u00e0y",dragSunSliderText:"K\u00e9o thanh tr\u01b0\u1ee3t \u0111\u1ec3 thay \u0111\u1ed5i th\u1eddi gian trong ng\u00e0y.",directShadow:"T\u1ea1o b\u00f3ng tr\u1ef1c ti\u1ebfp (truy\u1ec1n theo \u00e1nh m\u1eb7t tr\u1eddi)",diffuseShadow:"B\u00f3ng khu\u1ebfch t\u00e1n (b\u1ecbt k\u00edn xung quanh)",shadowing:"T\u1ea1o b\u00f3ng",_localized:{}}});

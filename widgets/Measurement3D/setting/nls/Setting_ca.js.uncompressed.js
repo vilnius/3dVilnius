@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'widgets/Measurement3D/setting/nls/strings':{"defaultAreaUnit":"Unitat d'àrea per defecte","defaultLengthUnit":"Unitat de longitud per defecte","metric":"Sistema mètric","imperial":"Sistema imperial","squareKilometers":"Quilòmetres quadrats","squareMeters":"Metres quadrats","squareMiles":"Milles quadrades","squareInches":"Polzades quadrades","squareFeet":"Peus quadrats","squareYards":"Iardes quadrades","squareUSFeet":"Peus quadrats (EUA)","acres":"Acres","ares":"Àrees","hectares":"Hectàrees","inches":"Polzades","feet":"Peus","yards":"Iardes","miles":"Milles","nauticalMiles":"Milles nàutiques","feetUS":"Peus (EUA)","meters":"Metres","kilometers":"Quilòmetres","showArea":"Àrea","showDistance":"Distància","showLocation":"Ubicació","showSlice":"Divideix en sectors","showtools":"Mostra eines de mesura:","allHidedTips":"S'ha de seleccionar almenys una eina.","_localized":{}}
+});

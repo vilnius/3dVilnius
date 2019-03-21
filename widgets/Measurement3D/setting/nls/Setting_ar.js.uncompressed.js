@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'widgets/Measurement3D/setting/nls/strings':{"defaultAreaUnit":"وحدة المنطقة الافتراضية","defaultLengthUnit":"وحدة الطول الافتراضية","metric":"متري","imperial":"الامبراطورية","squareKilometers":"كيلومترات مكعبة","squareMeters":"أمتار مكعبة","squareMiles":"أميال مكعبة","squareInches":"بوصة مكعب","squareFeet":"قدم مكعب","squareYards":"ياردات مكعبة","squareUSFeet":"قدم مربع (الولايات المتحدة)","acres":"فدان","ares":"آرس","hectares":"هكتار","inches":"بوصة","feet":"قدم","yards":"ياردة","miles":"أميال","nauticalMiles":"أميال محايدة","feetUS":"قدم (الولايات المتحدة)","meters":"أمتار","kilometers":"كيلومتر","showArea":"المنطقة","showDistance":"المسافة","showLocation":"الموقع","showSlice":"شريحة","showtools":"عرض أدوات القياس:","allHidedTips":"يجب تحديد أداة واحدة على الأقل.","_localized":{}}
+});

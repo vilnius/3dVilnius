@@ -1,0 +1,19 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'dijit/_editor/nls/commands':{"bold":"Krepko","copy":"Prekopiraj","cut":"Izreži","delete":"Izbriši","indent":"Zamik","insertHorizontalRule":"Vodoravno ravnilo","insertOrderedList":"Oštevilčen seznam","insertUnorderedList":"Naštevni seznam","italic":"Ležeče","justifyCenter":"Poravnaj na sredino","justifyFull":"Poravnaj obojestransko","justifyLeft":"Poravnaj levo","justifyRight":"Poravnaj desno","outdent":"Primakni","paste":"Prilepi","redo":"Znova uveljavi","removeFormat":"Odstrani oblikovanje","selectAll":"Izberi vse","strikethrough":"Prečrtano","subscript":"Podpisano","superscript":"Nadpisano","underline":"Podčrtano","undo":"Razveljavi","unlink":"Odstrani povezavo","createLink":"Ustvari povezavo","toggleDir":"Preklopi smer","insertImage":"Vstavi sliko","insertTable":"Vstavi/uredi tabelo","toggleTableBorder":"Preklopi na obrobo tabele","deleteTable":"Izbriši tabelo","tableProp":"Lastnost tabele","htmlToggle":"Izvorna koda HTML","foreColor":"Barva ospredja","hiliteColor":"Barva ozadja","plainFormatBlock":"Slog odstavka","formatBlock":"Slog odstavka","fontSize":"Velikost pisave","fontName":"Ime pisave","tabIndent":"Zamik tabulatorja","fullScreen":"Preklopi na celozaslonski način","viewSource":"Prikaži izvorno kodo HTML","print":"Natisni","newPage":"Nova stran","systemShortcut":"Dejanje \"${0}\" lahko v vašem brskalniku uporabite samo z bližnjico na tipkovnici. Uporabite ${1}.","ctrlKey":"ctrl+${0}","appleKey":"⌘${0}","_localized":{}}
+,
+'dijit/_editor/nls/FontChoice':{"fontSize":"Velikost","fontName":"Pisava","formatBlock":"Oblika","serif":"serif","sans-serif":"sans-serif","monospace":"monospace","cursive":"cursive","fantasy":"fantasy","noFormat":"Brez","p":"Odstavek","h1":"Naslovni slog","h2":"Podnaslovni slog","h3":"Pod-podnaslovni slog","pre":"Vnaprej oblikovan","1":"xx-majhno","2":"x-majhno","3":"majhno","4":"srednje","5":"veliko","6":"x-veliko","7":"xx-veliko","_localized":{}}
+,
+'dojox/editor/plugins/nls/Preview':{"preview":"Predogled ","_localized":{}}
+,
+'dojox/editor/plugins/nls/FindReplace':{"findLabel":"Najdi:","findTooltip":"Vnesite besedilo za iskanje","replaceLabel":"Zamenjaj z:","replaceTooltip":"Vnesite besedilo za zamenjavo","findReplace":"Najdi in zamenjaj","matchCase":"Razlikuj velike in male črke","matchCaseTooltip":"Razlikuj velike in male črke","backwards":"Nazaj","backwardsTooltip":"Vzvratno iskanje besedila","replaceAllButton":"Zamenjaj vse","replaceAllButtonTooltip":"Zamenjaj celotno besedilo","findButton":"Najdi","findButtonTooltip":"Najdi besedilo","replaceButton":"Zamenjaj","replaceButtonTooltip":"Zamenjaj besedilo","replaceDialogText":"Zamenjanih ${0} pojavitev.","eofDialogText":"Zadnja pojavitev ${0}","eofDialogTextFind":"najdeno","eofDialogTextReplace":"zamenjano","_localized":{}}
+,
+'dojox/editor/plugins/nls/PasteFromWord':{"pasteFromWord":"Prilepi iz programa Word","instructions":"Vsebino iz programa Word prilepite v spodnje besedilno polje. Ko ste zadovoljni z vstavljeno vsebino, pritisnite gumb Vstavi. Če želite prenehati z vstavljanjem vsebine, pritisnite gumb Prekliči.","_localized":{}}
+,
+'dojox/editor/plugins/nls/InsertAnchor':{"insertAnchor":"Vstavi sidro","title":"Lastnosti sidra","anchor":"Ime:","text":"Opis:","set":"Nastavi","cancel":"Prekliči","_localized":{}}
+,
+'dojox/editor/plugins/nls/Blockquote':{"blockquote":"Blokovno besedilo","_localized":{}}
+,
+'widgets/About/setting/nls/strings':{"instruction":"Ustvari vsebino, ki se prikaže v tem pripomočku","defaultContent":"Tukaj dodajte besedilo, povezave in majhne grafike.","productVersion":"Različica produkta: ","kernelVersion":"Različica jedra: ","_localized":{}}
+});

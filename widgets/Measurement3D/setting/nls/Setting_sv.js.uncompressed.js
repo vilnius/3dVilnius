@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'widgets/Measurement3D/setting/nls/strings':{"defaultAreaUnit":"Standardenhet för yta","defaultLengthUnit":"Standardenhet för längd","metric":"Metriska","imperial":"Imperial","squareKilometers":"Kvadratkilometer","squareMeters":"Kvadratmeter","squareMiles":"Engelska kvadratmil","squareInches":"Kvadrattum","squareFeet":"Kvadratfot","squareYards":"Kvadratyard","squareUSFeet":"Kvadratfot (USA)","acres":"Tunnland","ares":"Ar","hectares":"Hektar","inches":"Tum","feet":"Fot","yards":"Yard","miles":"Mile","nauticalMiles":"Nautiska mil","feetUS":"Fot (USA)","meters":"Meter","kilometers":"Kilometer","showArea":"Område","showDistance":"Avstånd","showLocation":"Plats","showSlice":"Sektor","showtools":"Visa mätverktyg:","allHidedTips":"Minst ett verktyg måste väljas.","_localized":{}}
+});
