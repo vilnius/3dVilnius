@@ -25,12 +25,12 @@
         </tbody>
       </table>
     </div>
-    <div class="display-units edit-module camera-units" data-dojo-attach-point="displayUnits">
+    <div class="display-units edit-module" data-dojo-attach-point="displayUnits">
       <table cellspacing="0">
         <tbody>
           <tr>
             <td class="display">
-              <span title="${nls.units}">${nls.units}</span>
+              <span>${nls.units}</span>
             </td>
             <td class="units">
               <select data-dojo-attach-point="outputUnit" data-dojo-props='style:{width:"462px"}' data-dojo-type="dijit/form/Select">
@@ -54,18 +54,6 @@
                 <option value="USNG">${nls.USNG}</option>
               </select>
             </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="display-units edit-module camera-units">
-      <table cellspacing="0">
-        <tbody>
-          <tr>
-            <div data-dojo-attach-point="elevationUnitsNode" class="camera-units"></div>
-          </tr>
-          <tr>
-            <div data-dojo-attach-point="eyeAltUnitsNode" class="camera-units"></div>
           </tr>
         </tbody>
       </table>

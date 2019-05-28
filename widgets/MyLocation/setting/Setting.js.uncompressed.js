@@ -8,10 +8,10 @@ define(["dojo/text!./Setting.html",
 },
 'url:widgets/MyLocation/setting/Setting.html':"<div style=\"width:100%;\">\r\n  <table class=\"setting-table input-table\" cellspacing=\"0\">\r\n    <tbody>\r\n    <tr>\r\n      <td class=\"first\">\r\n        <div class=\"cb\" data-dojo-type=\"jimu/dijit/CheckBox\" data-dojo-attach-point=\"highlightLocation\"></div>\r\n        <div class=\"cb-label\">${nls.highlightLocation}</div>\r\n      </td>\r\n      <!--<td class=\"second\"></td>-->\r\n      <td class=\"third\">\r\n        <div class=\"help-icon\"></div>\r\n      </td>\r\n    </tr>\r\n    <tr>\r\n      <td class=\"first\">\r\n        <div class=\"cb\" data-dojo-type=\"jimu/dijit/CheckBox\" data-dojo-attach-point=\"useTracking\"></div>\r\n        <div class=\"cb-label\">${nls.useTracking}</div>\r\n      </td>\r\n      <!--<td class=\"second\"></td>-->\r\n      <td class=\"third\">\r\n        <div class=\"help-icon\"></div>\r\n      </td>\r\n    </tr>\r\n    <tr>\r\n      <td class=\"first\">\r\n        <span class=\"inputs-label\">${nls.timeout}</span>\r\n        <div class=\"config-group\">\r\n          <input type=\"text\" data-dojo-type=\"dijit/form/NumberTextBox\" required=\"true\" placeHolder=\"15000\"\r\n                 data-dojo-attach-point=\"timeout\" data-dojo-props='style:{width:\"100px\"}, constraints:{min:10}'/>\r\n          <span style=\"margin: 0 10px\">(ms)</span>\r\n        </div>\r\n      </td>\r\n      <!--<td class=\"second\"></td>-->\r\n      <td class=\"third\">\r\n        <div class=\"help-icon\"></div>\r\n      </td>\r\n    </tr>\r\n    <tr>\r\n      <td class=\"first\">\r\n        <span class=\"inputs-label\">${nls.zoomScale}</span>\r\n        <div class=\"config-group\">\r\n          <span>1: </span>\r\n          <input type=\"text\" data-dojo-type=\"dijit/form/NumberTextBox\" required=\"true\" placeHolder=\"50000\"\r\n                 data-dojo-attach-point=\"scale\" data-dojo-props='style:{width:\"150px\"},\r\n                   constraints:{min:1,pattern:\"##############0.################\"}'/>\r\n        </div>\r\n      </td>\r\n      <!--<td class=\"second\"></td>-->\r\n      <td class=\"third\">\r\n        <div class=\"help-icon\"></div>\r\n      </td>\r\n    </tr>\r\n    </tbody>\r\n  </table>\r\n</div>\r\n",
 'url:widgets/MyLocation/setting/css/style.css':".jimu-widget-mylocation-setting{margin:0; padding:0; font-size:15px;}.jimu-widget-mylocation-setting .setting-table > thead > tr > th,.jimu-widget-mylocation-setting .setting-table > tbody > tr > td{height:40px; line-height:40px; vertical-align:middle;}.jimu-widget-mylocation-setting .input-table > tbody > tr > .first{width:auto; text-align: left; padding-right:15px; position: relative; display: flex;}.jimu-widget-mylocation-setting .input-table > tbody > tr > .first .cb,.cb-label{vertical-align: middle; line-height: 20px; height: 20px; display: inline-block; padding-left: 5px;}.jimu-widget-mylocation-setting .input-table > tbody > tr > .first .inputs-label{min-width: 150px; padding-right: 20px; display: flex;}.jimu-widget-mylocation-setting .input-table > tbody > tr > .first .config-group{display: flex; align-items: center; min-width: 200px;}.jimu-widget-mylocation-setting .input-table > tbody > tr > .second{width:200px;}.jimu-widget-mylocation-setting .input-table > tbody > tr > .third{width:35px;}",
-'*now':function(r){r(['dojo/i18n!*preload*widgets/MyLocation/setting/nls/Setting*["ar","bs","ca","cs","da","de","en","el","es","et","fi","fr","he","hi","hr","hu","id","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sl","sr","sv","th","tr","zh-cn","uk","vi","zh-hk","zh-tw","ROOT"]']);}
+'*now':function(r){r(['dojo/i18n!*preload*widgets/MyLocation/setting/nls/Setting*["ar","bs","cs","da","de","en","el","es","et","fi","fr","he","hi","hr","id","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sl","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]']);}
 }});
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © Esri. All Rights Reserved.
+// Copyright © 2014 - 2018 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -78,11 +78,10 @@ define([
       },
 
       getConfig: function() {
-        if (!this.isValid()) {
+        if (!this.timeout.value || !this.scale.value) {
           new Message({
             message: this.nls.warning
           });
-          return false;
         }
         this.config.locateButton.geolocationOptions.timeout = parseInt(this.timeout.value, 10);
         //if (!this.config.locateButton.highlightLocation) {
@@ -92,14 +91,7 @@ define([
 
         this.config.locateButton.scale = parseFloat(this.scale.value);
         return this.config;
-      },
-
-      isValid: function () {
-        if (!this.scale.isValid() || !this.timeout.isValid()) {
-          return false;
-        }
-
-        return true;
       }
+
     });
   });

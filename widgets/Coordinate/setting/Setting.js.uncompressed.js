@@ -3,7 +3,7 @@
 require({cache:{
 'widgets/Coordinate/setting/Edit':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © Esri. All Rights Reserved.
+// Copyright © 2014 - 2018 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ define(
     'dojo/_base/array',
     'dijit/_WidgetsInTemplateMixin',
     'jimu/BaseWidgetSetting',
-    './CameraUnits',
     'jimu/dijit/CheckBox',
     'dojo/text!./Edit.html',
     "jimu/SpatialReference/srUtils",
@@ -38,7 +37,6 @@ define(
     array,
     _WidgetsInTemplateMixin,
     BaseWidgetSetting,
-    CameraUnits,
     CheckBox,
     template,
     utils
@@ -164,18 +162,6 @@ define(
 
         this.wkid.set('missingMessage', this.nls.warning);
         this.transformationWkid.set('missingMessage', this.nls.tfWarning);
-
-        this.elevationUnits = new CameraUnits({
-          title: this.nls.elevationUnit,
-          nls: this.nls
-        }, this.elevationUnitsNode);
-        this.elevationUnits.startup();
-
-        this.eyeAltUnits = new CameraUnits({
-          title: this.nls.eyeAltUnit,
-          nls: this.nls
-        }, this.eyeAltUnitsNode);
-        this.eyeAltUnits.startup();
       },
 
       setConfig: function(config) {
@@ -203,13 +189,6 @@ define(
           if (config.transformForward) {
             this.transformForward.setValue(config.transformForward);
           }
-
-          if (config.elevationUnit) {
-            this.elevationUnits.setConfig(config.elevationUnit);
-          }
-          if (config.eyeAltUnit) {
-            this.eyeAltUnits.setConfig(config.eyeAltUnit);
-          }
         }), lang.hitch(this, function(err) {
           console.error(err);
         }));
@@ -222,9 +201,7 @@ define(
           outputUnit: this.outputUnit.get('value'),
           transformationWkid: parseInt(this.transformationWkid.get('value'), 10),
           transformationLabel: this.transformationLabel.innerHTML,
-          transformForward: this.transformForward.getValue(),
-          elevationUnit: this.elevationUnits.getConfig(),
-          eyeAltUnit: this.eyeAltUnits.getConfig()
+          transformForward: this.transformForward.getValue()
         };
         cs.outputUnit = cs.outputUnit || utils.getCSUnit(cs.wkid);
         var _options = {
@@ -361,104 +338,7 @@ define(
     });
   });
 },
-'widgets/Coordinate/setting/CameraUnits':function(){
-///////////////////////////////////////////////////////////////////////////
-// Copyright © Esri. All Rights Reserved.
-//
-// Licensed under the Apache License Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-///////////////////////////////////////////////////////////////////////////
-define(
-  ['dojo/_base/declare',
-    //'dojo/_base/lang',
-    'dojo/_base/html',
-    'dijit/_WidgetBase',
-    'dijit/_TemplatedMixin',
-    'dijit/_WidgetsInTemplateMixin',
-    'dojo/text!./CameraUnits.html',
-    //"jimu/SpatialReference/srUtils",
-    'dijit/form/Select'
-  ],
-  function (
-    declare,
-    //lang,
-    html,
-    _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
-    template
-    //utils
-  ) {
-    return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
-      templateString: template,
-
-      postCreate: function () {
-        this.inherited(arguments);
-
-        this.titleNode.innerHTML = this.title;
-        html.setAttr(this.titleNode, "title", this.title);
-
-        html.setAttr(this.fieldset, "id", this.id);
-
-        html.setAttr(this.metric, "name", this.id);
-        html.setAttr(this.metric, "id", this.id + "-metric");
-        html.setAttr(this.metricLabel, "for", this.id + "-metric");
-
-        html.setAttr(this.english, "name", this.id);
-        html.setAttr(this.english, "id", this.id + "-english");
-        html.setAttr(this.englishLabel, "for", this.id + "-english");
-      },
-
-      setConfig: function (unit) {
-        if (!unit) {
-          unit = "metric";
-        }
-
-        this._selectItem(unit);
-      },
-
-      getConfig: function () {
-        var unit = "";
-        if (this.metric.get("checked")) {
-          unit = "metric";
-        } else if (this.english.get("checked")) {
-          unit = "english";
-        }
-
-        return unit;
-      },
-
-      _selectItem: function (name) {
-        if (this[name] && this[name].setChecked) {
-          this[name].setChecked(true);
-        }
-      }
-    });
-  });
-},
 'jimu/SpatialReference/srUtils':function(){
-///////////////////////////////////////////////////////////////////////////
-// Copyright © Esri. All Rights Reserved.
-//
-// Licensed under the Apache License Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-///////////////////////////////////////////////////////////////////////////
 define([
   'dojo/_base/declare',
   'dojo/_base/lang',
@@ -727,14 +607,13 @@ define(["dojo/text!./Setting.html",
 "dojo/text!./css/style.css",
 "dojo/i18n!./nls/strings"], function(){});
 },
-'url:widgets/Coordinate/setting/CameraUnits.html':"<div class=\"unit-type\">\r\n  <td class=\"display\">\r\n    <div data-dojo-attach-point=\"titleNode\" class=\"unit-label\"></div>\r\n  </td>\r\n  <td class=\"units\">\r\n    <fieldset id=\"unit-type\" data-dojo-attach-point=\"fieldset\">\r\n      <div class=\"unit-item\" data-dojo-attach-point=\"metricNode\">\r\n        <input data-dojo-type=\"dijit/form/RadioButton\" name=\"\" id=\"\" data-dojo-attach-point=\"metric\" checked=\"checked\" />\r\n        <label data-dojo-attach-point=\"metricLabel\" for=\"\" title=${nls.metric}>${nls.metric}</label>\r\n      </div>\r\n      <div class=\"unit-item\" data-dojo-attach-point=\"englishNode\">\r\n        <input data-dojo-type=\"dijit/form/RadioButton\" name=\"\" id=\"\" data-dojo-attach-point=\"english\" />\r\n        <label data-dojo-attach-point=\"englishLabel\" for=\"\" title=${nls.english}>${nls.english}</label>\r\n      </div>\r\n    </fieldset>\r\n  </td>\r\n</div>",
-'url:widgets/Coordinate/setting/Edit.html':"  <div style=\"width:100%\">\r\n    <div class=\"output-wkid edit-module\" data-dojo-attach-point=\"outputDiv\">\r\n      <table cellspacing=\"0\">\r\n        <tbody>\r\n          <tr>\r\n            <td>\r\n              <div class=\"wkid-header\">\r\n                <span>${nls.output}</span>\r\n                <a href=\"https://developers.arcgis.com/javascript/jshelp/ref_coordsystems.html\" target=\"blank\">WKID</a>\r\n              </div>\r\n            </td>\r\n          </tr>\r\n          <tr>\r\n            <td>\r\n              <input type=\"text\" data-dojo-type=\"dijit/form/ValidationTextBox\" required=\"true\"\r\n            placeHolder=\"WKID\" data-dojo-attach-event=\"onChange:onWkidChange\"\r\n            data-dojo-attach-point=\"wkid\" data-dojo-props='style:{width:\"100%\"}' />\r\n            </td>\r\n          </tr>\r\n          <tr>\r\n            <td>\r\n              <span class=\"wkid-label\" data-dojo-attach-point=\"wkidLabel\">${nls.cName}</span>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div class=\"display-units edit-module camera-units\" data-dojo-attach-point=\"displayUnits\">\r\n      <table cellspacing=\"0\">\r\n        <tbody>\r\n          <tr>\r\n            <td class=\"display\">\r\n              <span title=\"${nls.units}\">${nls.units}</span>\r\n            </td>\r\n            <td class=\"units\">\r\n              <select data-dojo-attach-point=\"outputUnit\" data-dojo-props='style:{width:\"462px\"}' data-dojo-type=\"dijit/form/Select\">\r\n                <option value=\"\">${nls.Default}</option>\r\n                <option type=\"separator\"></option>\r\n                <option value=\"INCHES\">${nls.Inches}</option>\r\n                <option value=\"FOOT\">${nls.Foot}</option>\r\n                <option value=\"YARDS\">${nls.Yards}</option>\r\n                <option value=\"MILES\">${nls.Miles}</option>\r\n                <option value=\"NAUTICAL_MILES\">${nls.Nautical_Miles}</option>\r\n                <option value=\"MILLIMETERS\">${nls.Millimeters}</option>\r\n                <option value=\"CENTIMETERS\">${nls.Centimeters}</option>\r\n                <option value=\"METER\">${nls.Meter}</option>\r\n                <option value=\"KILOMETERS\">${nls.Kilometers}</option>\r\n                <option value=\"DECIMETERS\">${nls.Decimeters}</option>\r\n                <option type=\"separator\"></option>\r\n                <option value=\"DECIMAL_DEGREES\">${nls.Decimal_Degrees}</option>\r\n                <option value=\"DEGREE_MINUTE_SECONDS\">${nls.Degree_Minutes_Seconds}</option>\r\n                <option type=\"separator\"></option>\r\n                <option value=\"MGRS\">${nls.MGRS}</option>\r\n                <option value=\"USNG\">${nls.USNG}</option>\r\n              </select>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div class=\"display-units edit-module camera-units\">\r\n      <table cellspacing=\"0\">\r\n        <tbody>\r\n          <tr>\r\n            <div data-dojo-attach-point=\"elevationUnitsNode\" class=\"camera-units\"></div>\r\n          </tr>\r\n          <tr>\r\n            <div data-dojo-attach-point=\"eyeAltUnitsNode\" class=\"camera-units\"></div>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div data-dojo-attach-point=\"enhanceVersionDiv\">\r\n      <div class=\"datum-wkid edit-module\" data-dojo-attach-point=\"transformDiv\">\r\n        <table cellspacing=\"0\">\r\n          <tbody>\r\n            <tr>\r\n              <td>\r\n                <div class=\"wkid-header\">\r\n                  <span>${nls.datum}</span>\r\n                  <a href=\"http://resources.arcgis.com/en/help/arcgis-rest-api/index.html#//02r3000000r8000000\" target=\"blank\">TFWKID</a>\r\n                </div>\r\n              </td>\r\n            </tr>\r\n            <tr>\r\n              <td>\r\n                <input type=\"text\" data-dojo-type=\"dijit/form/ValidationTextBox\" required=\"true\" placeHolder=\"${nls.tWKIDPlaceHolder}\"\r\n              data-dojo-attach-point=\"transformationWkid\" data-dojo-attach-event=\"onChange:ontfWkidChange\" data-dojo-props='style:{width:\"100%\"}' />\r\n              </td>\r\n            </tr>\r\n            <tr>\r\n              <td>\r\n                <span class=\"wkid-label\" data-dojo-attach-point=\"transformationLabel\">${nls.tName}</span>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <div class=\"check\" data-dojo-attach-point=\"transformForward\"></div>\r\n      </div>\r\n    </div>\r\n    <div class=\"older-version\" data-dojo-attach-point=\"olderVersionDiv\">${nls.olderVersion}</div>\r\n  </div>",
-'url:widgets/Coordinate/setting/Setting.html':"<div class=\"jimu-widget-coordinate-setting\">\r\n  <div class=\"settings-section\" data-dojo-attach-point=\"searchesSection\">\r\n    <p>${nls.state}</p>\r\n    <div class=\"add-output-coordinate\" data-dojo-attach-event=\"onclick: onAddClick\">\r\n      <span class=\"add-output-coordinate-icon\"></span>\r\n      <span class=\"add-output-coordinate-label\">${nls.add}</span>\r\n    </div>\r\n    <div class=\"coordinate-table\" data-dojo-attach-point=\"tableCoordinate\"></div>\r\n    <div data-dojo-attach-point=\"displayNumber\" class=\"display-number\">\r\n      <div>\r\n        <span class=\"spinner-label ops-label\">${nls.spinnerLabel}</span>\r\n        <input type=\"text\" data-dojo-type=\"dijit/form/NumberSpinner\" value=\"3\" data-dojo-attach-point=\"latLonDecimalPlaces\" data-dojo-props=\"constraints: {min:0}\">\r\n        <span class=\"demical-place\">${nls.decimalPlace}</span>\r\n      </div>\r\n      <div class=\"decimal-row\">\r\n        <span class=\"decimal-label ops-label\">${nls.eyeDecimalLabel}</span>\r\n        <input type=\"text\" data-dojo-type=\"dijit/form/NumberSpinner\" value=\"3\" data-dojo-attach-point=\"eyeDecimalPlaces\" data-dojo-props=\"constraints: {min:0}\">\r\n        <span class=\"demical-place\">${nls.decimalPlace}</span>\r\n      </div>\r\n      <div class=\"separator\">\r\n        <div class=\"check\" data-dojo-attach-point=\"separator\"></div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"displayOrder clearFix\">\r\n      <span class=\"jimu-float-leading displayOrderTips\">${nls.displayOrderLonLatTips}</span>\r\n      <span class=\"order\">\r\n        <div class=\"jimu-float-leading order-btn\">\r\n          <input data-dojo-type=\"dijit/form/RadioButton\" data-dojo-attach-point=\"lonLat\" id=\"lonLat\"/>\r\n          <label for=\"lonLat\">${nls.lonLatTips}</label>\r\n        </div>\r\n        <div class=\"jimu-float-leading order-btn\">\r\n          <input data-dojo-type=\"dijit/form/RadioButton\" data-dojo-attach-point=\"latLon\" id=\"latLon\"/>\r\n          <label for=\"latLon\">${nls.latLonTips}</label>\r\n        </div>\r\n      </span>\r\n    </div>\r\n  </div>\r\n</div>",
-'url:widgets/Coordinate/setting/css/style.css':".jimu-widget-coordinate-setting .clearFix {*overflow: hidden; *zoom: 1;}.jimu-widget-coordinate-setting .clearFix:after {display: table; content: \"\"; width: 0; clear: both;}.jimu-widget-coordinate-setting{margin:0; padding:0; font-size: 14px; padding-top: 20px; color: #596679;}.jimu-widget-coordinate-setting .dijitSelect{height: 30px; width: 100%;}.jimu-widget-coordinate-setting .dijitArrowButtonContainer{width: 17px;}.jimu-widget-coordinate-setting .zoom-scale-table{margin-top:12px;}.jimu-widget-coordinate-setting .settings-section p{font-size: 14px; margin-bottom: 20px;}.jimu-widget-coordinate-setting .add-output-coordinate{margin-bottom: 7px; cursor: pointer; display: inline-block;}.jimu-widget-coordinate-setting .add-output-coordinate-icon{background-image: url(images/add_icon.png); background-repeat: no-repeat; background-position: center; width: 14px; height: 14px; display: inline-block; vertical-align: middle;}.jimu-widget-coordinate-setting .add-output-coordinate-label{font-size: 14px; color: #518dca; margin-left: 10px; display: inline-block; height: 100%; text-decoration: underline;}.jimu-widget-coordinate-setting .wkid, .jimu-widget-coordinate-setting .transformationWkid,.jimu-widget-coordinate-setting .actions{width: 120px;}.jimu-widget-coordinate-setting .coordinate-table{height: 186px;}.jimu-widget-coordinate-setting .display-number,.jimu-widget-coordinate-setting .separator{margin-top: 10px;}.jimu-widget-coordinate-setting .display-number .decimal-row{margin-top: 8px;}.jimu-widget-coordinate-setting .display-number .ops-label{min-width: 150px; display: inline-block;}.jimu-widget-coordinate-setting .display-number .dijitNumberTextBox {width: 70px;}.jimu-coordinate-edit{width: 100%; font-size: 16px; color: #596679;}.jimu-coordinate-edit table{width: calc(100% - 2px) !important;}.jimu-coordinate-edit .wkid-header{margin: 0 0 10px;}.jimu-coordinate-edit .check{margin-top: 10px;}.jimu-coordinate-edit .label{font-size: 14px;}.jimu-coordinate-edit .wkid-label{font-size: 14px; font-style: italic; color: #a0acbf; width: 100%; display: inline-block; margin-top: 5px;}.jimu-coordinate-edit .edit-module{margin-bottom: 10px;}.jimu-coordinate-edit .edit-module:last-child{margin-bottom: 0;}.jimu-coordinate-edit .display-units .display{width: 20%; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}.jimu-coordinate-edit .older-version{font-size: 14px; font-style: italic; color: #e84b4b;}.jimu-widget-coordinate-setting{width:100%; height:100%;}.jimu-widget-coordinate-setting .displayOrder{margin-top: 16px;}.jimu-widget-coordinate-setting .displayOrder .displayOrderTips{margin-right: 10px;}.jimu-rtl .jimu-widget-coordinate-setting .displayOrder .displayOrderTips{margin-left: 10px; margin-right: auto;}.jimu-widget-coordinate-setting .displayOrder .order-btn{margin: 0 10px 0 10px;}.jimu-coordinate-edit .camera-units{}.jimu-coordinate-edit .camera-units .unit-type{margin: 10px 0;}.jimu-coordinate-edit .camera-units .unit-label{width: 20%; display: inline-block;}.jimu-coordinate-edit .camera-units .unit-type fieldset{display: inline-block;}.jimu-coordinate-edit .camera-units .unit-item{display: inline-block; margin-right: 10px;}.jimu-rtl .jimu-coordinate-edit .camera-units .unit-item{margin-right: auto; margin-left: 10px;}",
-'*now':function(r){r(['dojo/i18n!*preload*widgets/Coordinate/setting/nls/Setting*["ar","bs","ca","cs","da","de","en","el","es","et","fi","fr","he","hi","hr","hu","id","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sl","sr","sv","th","tr","zh-cn","uk","vi","zh-hk","zh-tw","ROOT"]']);}
+'url:widgets/Coordinate/setting/Edit.html':"  <div style=\"width:100%\">\r\n    <div class=\"output-wkid edit-module\" data-dojo-attach-point=\"outputDiv\">\r\n      <table cellspacing=\"0\">\r\n        <tbody>\r\n          <tr>\r\n            <td>\r\n              <div class=\"wkid-header\">\r\n                <span>${nls.output}</span>\r\n                <a href=\"https://developers.arcgis.com/javascript/jshelp/ref_coordsystems.html\" target=\"blank\">WKID</a>\r\n              </div>\r\n            </td>\r\n          </tr>\r\n          <tr>\r\n            <td>\r\n              <input type=\"text\" data-dojo-type=\"dijit/form/ValidationTextBox\" required=\"true\"\r\n            placeHolder=\"WKID\" data-dojo-attach-event=\"onChange:onWkidChange\"\r\n            data-dojo-attach-point=\"wkid\" data-dojo-props='style:{width:\"100%\"}' />\r\n            </td>\r\n          </tr>\r\n          <tr>\r\n            <td>\r\n              <span class=\"wkid-label\" data-dojo-attach-point=\"wkidLabel\">${nls.cName}</span>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div class=\"display-units edit-module\" data-dojo-attach-point=\"displayUnits\">\r\n      <table cellspacing=\"0\">\r\n        <tbody>\r\n          <tr>\r\n            <td class=\"display\">\r\n              <span>${nls.units}</span>\r\n            </td>\r\n            <td class=\"units\">\r\n              <select data-dojo-attach-point=\"outputUnit\" data-dojo-props='style:{width:\"462px\"}' data-dojo-type=\"dijit/form/Select\">\r\n                <option value=\"\">${nls.Default}</option>\r\n                <option type=\"separator\"></option>\r\n                <option value=\"INCHES\">${nls.Inches}</option>\r\n                <option value=\"FOOT\">${nls.Foot}</option>\r\n                <option value=\"YARDS\">${nls.Yards}</option>\r\n                <option value=\"MILES\">${nls.Miles}</option>\r\n                <option value=\"NAUTICAL_MILES\">${nls.Nautical_Miles}</option>\r\n                <option value=\"MILLIMETERS\">${nls.Millimeters}</option>\r\n                <option value=\"CENTIMETERS\">${nls.Centimeters}</option>\r\n                <option value=\"METER\">${nls.Meter}</option>\r\n                <option value=\"KILOMETERS\">${nls.Kilometers}</option>\r\n                <option value=\"DECIMETERS\">${nls.Decimeters}</option>\r\n                <option type=\"separator\"></option>\r\n                <option value=\"DECIMAL_DEGREES\">${nls.Decimal_Degrees}</option>\r\n                <option value=\"DEGREE_MINUTE_SECONDS\">${nls.Degree_Minutes_Seconds}</option>\r\n                <option type=\"separator\"></option>\r\n                <option value=\"MGRS\">${nls.MGRS}</option>\r\n                <option value=\"USNG\">${nls.USNG}</option>\r\n              </select>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div data-dojo-attach-point=\"enhanceVersionDiv\">\r\n      <div class=\"datum-wkid edit-module\" data-dojo-attach-point=\"transformDiv\">\r\n        <table cellspacing=\"0\">\r\n          <tbody>\r\n            <tr>\r\n              <td>\r\n                <div class=\"wkid-header\">\r\n                  <span>${nls.datum}</span>\r\n                  <a href=\"http://resources.arcgis.com/en/help/arcgis-rest-api/index.html#//02r3000000r8000000\" target=\"blank\">TFWKID</a>\r\n                </div>\r\n              </td>\r\n            </tr>\r\n            <tr>\r\n              <td>\r\n                <input type=\"text\" data-dojo-type=\"dijit/form/ValidationTextBox\" required=\"true\" placeHolder=\"${nls.tWKIDPlaceHolder}\"\r\n              data-dojo-attach-point=\"transformationWkid\" data-dojo-attach-event=\"onChange:ontfWkidChange\" data-dojo-props='style:{width:\"100%\"}' />\r\n              </td>\r\n            </tr>\r\n            <tr>\r\n              <td>\r\n                <span class=\"wkid-label\" data-dojo-attach-point=\"transformationLabel\">${nls.tName}</span>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <div class=\"check\" data-dojo-attach-point=\"transformForward\"></div>\r\n      </div>\r\n    </div>\r\n    <div class=\"older-version\" data-dojo-attach-point=\"olderVersionDiv\">${nls.olderVersion}</div>\r\n  </div>",
+'url:widgets/Coordinate/setting/Setting.html':"<div class=\"jimu-widget-coordinate-setting\">\r\n  <div class=\"settings-section\" data-dojo-attach-point=\"searchesSection\">\r\n    <p>${nls.state}</p>\r\n    <div class=\"add-output-coordinate\" data-dojo-attach-event=\"onclick: onAddClick\">\r\n      <span class=\"add-output-coordinate-icon\"></span>\r\n      <span class=\"add-output-coordinate-label\">${nls.add}</span>\r\n    </div>\r\n    <div class=\"coordinate-table\" data-dojo-attach-point=\"tableCoordinate\"></div>\r\n    <div data-dojo-attach-point=\"displayNumber\" class=\"display-number\">\r\n      <div>\r\n        <span class=\"spinner-label ops-label\">${nls.spinnerLabel}</span>\r\n        <input type=\"text\" data-dojo-type=\"dijit/form/NumberSpinner\" value=\"3\" data-dojo-attach-point=\"latLonDecimalPlaces\" data-dojo-props=\"constraints: {min:0}\">\r\n        <span class=\"demical-place\">${nls.decimalPlace}</span>\r\n      </div>\r\n      <div class=\"decimal-row\">\r\n        <span class=\"decimal-label ops-label\">${nls.eyeDecimalLabel}</span>\r\n        <input type=\"text\" data-dojo-type=\"dijit/form/NumberSpinner\" value=\"3\" data-dojo-attach-point=\"eyeDecimalPlaces\" data-dojo-props=\"constraints: {min:0}\">\r\n        <span class=\"demical-place\">${nls.decimalPlace}</span>\r\n      </div>\r\n      <div class=\"separator\">\r\n        <div class=\"check\" data-dojo-attach-point=\"separator\"></div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"displayOrder\">\r\n      <span class=\"jimu-float-leading displayOrderTips\">${nls.displayOrderLonLatTips}</span>\r\n      <span class=\"order\">\r\n        <div class=\"jimu-float-leading order-btn\">\r\n          <div data-dojo-type=\"jimu/dijit/RadioBtn\" data-dojo-attach-point=\"lonLat\" data-dojo-props=\"group:'displayOrderLonLat'\"></div>\r\n          <label>${nls.lonLatTips}</label>\r\n        </div>\r\n        <div class=\"jimu-float-leading order-btn\">\r\n          <div data-dojo-type=\"jimu/dijit/RadioBtn\" data-dojo-attach-point=\"latLon\" data-dojo-props=\"group:'displayOrderLonLat'\"></div>\r\n          <label>${nls.latLonTips}</label>\r\n        </div>\r\n      </span>\r\n    </div>\r\n  </div>\r\n</div>\r\n",
+'url:widgets/Coordinate/setting/css/style.css':".jimu-widget-coordinate-setting{margin:0; padding:0; font-size: 14px; padding-top: 20px; color: #596679;}.jimu-widget-coordinate-setting .dijitSelect{height: 30px; width: 100%;}.jimu-widget-coordinate-setting .dijitArrowButtonContainer{width: 17px;}.jimu-widget-coordinate-setting .zoom-scale-table{margin-top:12px;}.jimu-widget-coordinate-setting .settings-section p{font-size: 14px; margin-bottom: 20px;}.jimu-widget-coordinate-setting .add-output-coordinate{margin-bottom: 7px; cursor: pointer; display: inline-block;}.jimu-widget-coordinate-setting .add-output-coordinate-icon{background-image: url(images/add_icon.png); background-repeat: no-repeat; background-position: center; width: 14px; height: 14px; display: inline-block; vertical-align: middle;}.jimu-widget-coordinate-setting .add-output-coordinate-label{font-size: 14px; color: #518dca; margin-left: 10px; display: inline-block; height: 100%; text-decoration: underline;}.jimu-widget-coordinate-setting .wkid, .jimu-widget-coordinate-setting .transformationWkid,.jimu-widget-coordinate-setting .actions{width: 120px;}.jimu-widget-coordinate-setting .coordinate-table{height: 186px;}.jimu-widget-coordinate-setting .display-number,.jimu-widget-coordinate-setting .separator{margin-top: 10px;}.jimu-widget-coordinate-setting .display-number .decimal-row{margin-top: 8px;}.jimu-widget-coordinate-setting .display-number .ops-label{min-width: 150px; display: inline-block;}.jimu-widget-coordinate-setting .display-number .dijitNumberTextBox {width: 70px;}.jimu-coordinate-edit{width: 100%; font-size: 16px; color: #596679;}.jimu-coordinate-edit table{width: 100%;}.jimu-coordinate-edit .wkid-header{margin: 0 0 10px;}.jimu-coordinate-edit .check{margin-top: 10px;}.jimu-coordinate-edit .label{font-size: 14px;}.jimu-coordinate-edit .wkid-label{font-size: 14px; font-style: italic; color: #a0acbf; width: 100%; display: inline-block; margin-top: 5px;}.jimu-coordinate-edit .edit-module{margin-bottom: 10px;}.jimu-coordinate-edit .edit-module:last-child{margin-bottom: 0;}.jimu-coordinate-edit .display-units .display{width: 20%;}.jimu-coordinate-edit .older-version{font-size: 14px; font-style: italic; color: #e84b4b;}.jimu-widget-coordinate-setting{width:100%; height:100%;}.jimu-widget-coordinate-setting .displayOrder{margin-top: 16px;}.jimu-widget-coordinate-setting .displayOrder .displayOrderTips{margin-right: 10px;}.jimu-rtl .jimu-widget-coordinate-setting .displayOrder .displayOrderTips{margin-left: 10px; margin-right: auto;}.jimu-widget-coordinate-setting .displayOrder .jimu-radio {border: 1px solid #ccc; vertical-align: top;}.jimu-widget-coordinate-setting .displayOrder .jimu-radio-checked .jimu-radio-inner {width: 6px; height: 6px; margin: 4px; border-radius: 50%; background-color: #24B5CC;}.jimu-widget-coordinate-setting .displayOrder .order-btn{margin: 0 10px 0 10px;}",
+'*now':function(r){r(['dojo/i18n!*preload*widgets/Coordinate/setting/nls/Setting*["ar","bs","cs","da","de","en","el","es","et","fi","fr","he","hi","hr","id","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sl","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]']);}
 }});
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © Esri. All Rights Reserved.
+// Copyright © 2014 - 2018 Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -770,10 +649,10 @@ define([
     'jimu/portalUtils',
     './Edit',
     "jimu/SpatialReference/srUtils",
-    'jimu/dijit/RadioBtn',
     'dojo/NodeList-dom',
     'dijit/form/NumberSpinner',
-    'dijit/form/NumberTextBox'
+    'dijit/form/NumberTextBox',
+    'jimu/dijit/RadioBtn'
   ],
   function(
     declare,
@@ -879,18 +758,6 @@ define([
           editable: false,
           hidden: true
         }, {
-          name: 'elevationUnit',
-          title: 'elevationUnit',
-          type: 'text',
-          editable: false,
-          hidden: true
-        }, {
-          name: 'eyeAltUnit',
-          title: 'eyeAltUnit',
-          type: 'text',
-          editable: false,
-          hidden: true
-        }, {
           name: 'actions',
           title: this.nls.actions,
           type: 'actions',
@@ -931,8 +798,6 @@ define([
                 wkid: utils.standardizeWkid(wkid),
                 label: config.spatialReferences[i].label,
                 outputUnit: config.spatialReferences[i].outputUnit,
-                elevationUnit: config.spatialReferences[i].elevationUnit,
-                eyeAltUnit: config.spatialReferences[i].eyeAltUnit,
                 transformationWkid: config.spatialReferences[i].transformationWkid,
                 transformationLabel: config.spatialReferences[i].transformationLabel,
                 transformForward: config.spatialReferences[i].transformForward,
@@ -1148,11 +1013,17 @@ define([
           this.config.displayOrderLonLat = false;
         })));
         if (this.config.displayOrderLonLat) {
-          this.lonLat.set('checked', true);
+          this._selectRadioBtnItem("lonLat");
           this.config.displayOrderLonLat = true;
         } else {
-          this.latLon.set('checked', true);
+          this._selectRadioBtnItem("latLon");
           this.config.displayOrderLonLat = false;
+        }
+      },
+      _selectRadioBtnItem: function(name) {
+        var _radio = this[name];
+        if (_radio && _radio.check) {
+          _radio.check(true);
         }
       }
     });
