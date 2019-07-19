@@ -1,7 +1,7 @@
 // All material copyright ESRI, All Rights Reserved, unless otherwise specified.
 // See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,9 +23,10 @@ define([
   'dojo/when',
   'dojo/promise/all',
   'jimu/portalUtils',
-  // 'esri/lang',
+  'esri/lang',
   'esri/request'
-], function(lang, array, Deferred, when, all, portalUtils, /*esriLang,*/ esriRequest) {
+], function(lang, array, Deferred, when, all, portalUtils, esriLang, esriRequest) {
+  //jshint unused:false
   var mo = {
     map: null,
     layerInfosObj: null,
@@ -111,7 +112,7 @@ define([
                 name: geocode.name || this._getGeocodeName(geocode.url),
                 url: geocode.url,
                 singleLineFieldName: geocode.singleLineFieldName,
-                placeholder: geocode.placeholder ||
+                placeholder: geocode.placeholder || window.jimuNls.common.findAddressOrPlace ||
                   geocode.name || this._getGeocodeName(geocode.url),
                 maxResults: 6,
                 searchInCurrentMapExtent: false,
@@ -126,50 +127,64 @@ define([
       }));
   };
 
-  mo._getQueryTypeGeocoder = function(/*item*/) {
-    return null;
-    // var layer = this.map.getLayer(item.id);
-    // var url = null;
-    // var _layerInfo = null;
-    // var _layerId = null;
+  mo._getQueryTypeGeocoder = function(item) {
+    //var layer = this.map.getLayer(item.id);
+    var layer = this.map.findLayerById(item.id);
+    var url = null;
+    //var _layerInfo = null;
+    var _layerId = null;
 
-    // if (esriLang.isDefined(item.subLayer)) {
-    //   _layerId = item.id + "_" + item.subLayer;
-    // } else {
-    //   _layerId = item.id;
-    // }
+    /*
+    if (esriLang.isDefined(item.subLayer)) {
+      _layerId = item.id + "_" + item.subLayer;
+    } else {
+      _layerId = item.id;
+    }
+    */
+    _layerId = item.id;
 
-    // var isInMap = this.layerInfosObj.traversal(function(layerInfo) {
-    //   if (layerInfo.id === _layerId) {
-    //     _layerInfo = layerInfo;
-    //     return true;
-    //   }
+    /*
+    var isInMap = this.layerInfosObj.traversal(function(layerInfo) {
+      if (layerInfo.id === _layerId) {
+        _layerInfo = layerInfo;
+        return true;
+      }
 
-    //   return false;
-    // });
+      return false;
+    });
+    */
 
-    // if (layer && isInMap && _layerInfo) {
-    //   if (esriLang.isDefined(item.subLayer)) {
-    //     url = _layerInfo.url || (layer.url + "/" + item.subLayer);
-    //   } else {
-    //     url = _layerInfo.url || layer.url;
-    //   }
+    var subLayer = null;
+    if(layer && layer.allSublayers) {
+      subLayer = layer.allSublayers.find(function(layer) {
+        return layer.id === item.subLayer;
+      });
+    }
 
-    //   return {
-    //     name: _layerInfo.title,
-    //     layerId: _layerId,
-    //     url: url,
-    //     placeholder: item.hintText,
-    //     searchFields: [item.field.name],
-    //     displayField: item.field.name,
-    //     exactMatch: item.field.exactMatch || false,
-    //     maxResults: 6,
-    //     searchInCurrentMapExtent: false,
-    //     type: "query"
-    //   };
-    // } else {
-    //   return null;
-    // }
+    if (layer) {
+      if(layer.type === "scene") {
+        url = layer.url + "/layers/" + layer.layerId;
+      } else if (subLayer/*esriLang.isDefined(item.subLayer)*/) {
+        url = subLayer.url || (layer.url + "/" + item.subLayer);
+      } else {
+        url = layer.url + "/" + layer.layerId;
+      }
+
+      return {
+        name: layer.title,
+        layerId: _layerId,
+        url: url,
+        placeholder: item.hintText || window.jimuNls.common.findAddressOrPlace,
+        searchFields: [item.field.name],
+        displayField: item.field.name,
+        exactMatch: item.field.exactMatch || false,
+        maxResults: 6,
+        searchInCurrentMapExtent: false,
+        type: "query"
+      };
+    } else {
+      return null;
+    }
   };
 
   mo._isEsriLocator = function(url) {

@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define("dojo/_base/declare dojo/_base/lang dojo/_base/array dojo/query dojo/dom-class dojo/on dijit/_WidgetBase".split(" "),function(d,e,f,g,c,h,k){return d([k],{baseClass:"jimu-button-group",CSS:{ACTIVE:"jimu-state-active"},buttons:[],activeButton:null,postCreate:function(){this.inherited(arguments);this._initUI()},buttonClicked:function(a){this.activeButton===a?(c.remove(a,this.CSS.ACTIVE),this.activeButton=null):(g("button",this.domNode).removeClass(this.CSS.ACTIVE),c.add(a,this.CSS.ACTIVE),this.activeButton=
+a);this.onChange(this.activeButton)},getActiveButton:function(){return this.activeButton},getActiveButtonValue:function(){var a=this.getActiveButton();return a&&a.getAttribute("data-value")},_initUI:function(){f.forEach(this.buttons,function(a){this._createButton(a)},this)},_createButton:function(a){var b=document.createElement("button");b.type="button";b.title=a.label;b.setAttribute("data-value",a.value);a.icon&&b.appendChild(a.icon);b.appendChild(document.createTextNode(a.content||a.value));this.domNode.appendChild(b);
+this.own(h(b,"click",e.hitch(this,function(a){this.buttonClicked(a.target)})))},onChange:function(){}})});

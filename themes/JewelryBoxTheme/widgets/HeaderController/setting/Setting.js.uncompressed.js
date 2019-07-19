@@ -8,10 +8,10 @@ define(["dojo/text!./Setting.html",
 },
 'url:themes/JewelryBoxTheme/widgets/HeaderController/setting/Setting.html':"<div style=\"width:100%;height:100%;\">\r\n  <div class=\"main-label\">${nls.groupSetLabel}</div>\r\n  <div data-dojo-attach-point=\"tableInfo\"></div>\r\n  <div data-dojo-attach-point=\"noGroupTip\" class=\"tip-message\">${nls.noGroup}</div>\r\n</div>",
 'url:themes/JewelryBoxTheme/widgets/HeaderController/setting/css/style.css':".jimu-widget-headercontroller-setting{margin:0; padding:0; font-size:15px;}.jimu-widget-headercontroller-setting .group{width: 120px;}.jimu-widget-headercontroller-setting .main-label{font-size:16px; margin-bottom: 20px;}.jimu-widget-headercontroller-setting .tip-message{position: absolute; left: 50%; top: 50%; margin-left: -100px;}",
-'*now':function(r){r(['dojo/i18n!*preload*themes/JewelryBoxTheme/widgets/HeaderController/setting/nls/Setting*["ar","bs","cs","da","de","en","el","es","et","fi","fr","he","hi","hr","id","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sl","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]']);}
+'*now':function(r){r(['dojo/i18n!*preload*themes/JewelryBoxTheme/widgets/HeaderController/setting/nls/Setting*["ar","bs","ca","cs","da","de","en","el","es","et","fi","fr","he","hi","hr","hu","id","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sl","sr","sv","th","tr","zh-cn","uk","vi","zh-hk","zh-tw","ROOT"]']);}
 }});
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.

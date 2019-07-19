@@ -1,9 +1,9 @@
 // All material copyright ESRI, All Rights Reserved, unless otherwise specified.
 // See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
 require({cache:{
-'url:widgets/Coordinate/setting/Edit.html':"  <div style=\"width:100%\">\r\n    <div class=\"output-wkid edit-module\" data-dojo-attach-point=\"outputDiv\">\r\n      <table cellspacing=\"0\">\r\n        <tbody>\r\n          <tr>\r\n            <td>\r\n              <div class=\"wkid-header\">\r\n                <span>${nls.output}</span>\r\n                <a href=\"https://developers.arcgis.com/javascript/jshelp/ref_coordsystems.html\" target=\"blank\">WKID</a>\r\n              </div>\r\n            </td>\r\n          </tr>\r\n          <tr>\r\n            <td>\r\n              <input type=\"text\" data-dojo-type=\"dijit/form/ValidationTextBox\" required=\"true\"\r\n            placeHolder=\"WKID\" data-dojo-attach-event=\"onChange:onWkidChange\"\r\n            data-dojo-attach-point=\"wkid\" data-dojo-props='style:{width:\"100%\"}' />\r\n            </td>\r\n          </tr>\r\n          <tr>\r\n            <td>\r\n              <span class=\"wkid-label\" data-dojo-attach-point=\"wkidLabel\">${nls.cName}</span>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div class=\"display-units edit-module\" data-dojo-attach-point=\"displayUnits\">\r\n      <table cellspacing=\"0\">\r\n        <tbody>\r\n          <tr>\r\n            <td class=\"display\">\r\n              <span>${nls.units}</span>\r\n            </td>\r\n            <td class=\"units\">\r\n              <select data-dojo-attach-point=\"outputUnit\" data-dojo-props='style:{width:\"462px\"}' data-dojo-type=\"dijit/form/Select\">\r\n                <option value=\"\">${nls.Default}</option>\r\n                <option type=\"separator\"></option>\r\n                <option value=\"INCHES\">${nls.Inches}</option>\r\n                <option value=\"FOOT\">${nls.Foot}</option>\r\n                <option value=\"YARDS\">${nls.Yards}</option>\r\n                <option value=\"MILES\">${nls.Miles}</option>\r\n                <option value=\"NAUTICAL_MILES\">${nls.Nautical_Miles}</option>\r\n                <option value=\"MILLIMETERS\">${nls.Millimeters}</option>\r\n                <option value=\"CENTIMETERS\">${nls.Centimeters}</option>\r\n                <option value=\"METER\">${nls.Meter}</option>\r\n                <option value=\"KILOMETERS\">${nls.Kilometers}</option>\r\n                <option value=\"DECIMETERS\">${nls.Decimeters}</option>\r\n                <option type=\"separator\"></option>\r\n                <option value=\"DECIMAL_DEGREES\">${nls.Decimal_Degrees}</option>\r\n                <option value=\"DEGREE_MINUTE_SECONDS\">${nls.Degree_Minutes_Seconds}</option>\r\n                <option type=\"separator\"></option>\r\n                <option value=\"MGRS\">${nls.MGRS}</option>\r\n                <option value=\"USNG\">${nls.USNG}</option>\r\n              </select>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div data-dojo-attach-point=\"enhanceVersionDiv\">\r\n      <div class=\"datum-wkid edit-module\" data-dojo-attach-point=\"transformDiv\">\r\n        <table cellspacing=\"0\">\r\n          <tbody>\r\n            <tr>\r\n              <td>\r\n                <div class=\"wkid-header\">\r\n                  <span>${nls.datum}</span>\r\n                  <a href=\"http://resources.arcgis.com/en/help/arcgis-rest-api/index.html#//02r3000000r8000000\" target=\"blank\">TFWKID</a>\r\n                </div>\r\n              </td>\r\n            </tr>\r\n            <tr>\r\n              <td>\r\n                <input type=\"text\" data-dojo-type=\"dijit/form/ValidationTextBox\" required=\"true\" placeHolder=\"${nls.tWKIDPlaceHolder}\"\r\n              data-dojo-attach-point=\"transformationWkid\" data-dojo-attach-event=\"onChange:ontfWkidChange\" data-dojo-props='style:{width:\"100%\"}' />\r\n              </td>\r\n            </tr>\r\n            <tr>\r\n              <td>\r\n                <span class=\"wkid-label\" data-dojo-attach-point=\"transformationLabel\">${nls.tName}</span>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <div class=\"check\" data-dojo-attach-point=\"transformForward\"></div>\r\n      </div>\r\n    </div>\r\n    <div class=\"older-version\" data-dojo-attach-point=\"olderVersionDiv\">${nls.olderVersion}</div>\r\n  </div>"}});
+'url:widgets/Coordinate/setting/Edit.html':"  <div style=\"width:100%\">\r\n    <div class=\"output-wkid edit-module\" data-dojo-attach-point=\"outputDiv\">\r\n      <table cellspacing=\"0\">\r\n        <tbody>\r\n          <tr>\r\n            <td>\r\n              <div class=\"wkid-header\">\r\n                <span>${nls.output}</span>\r\n                <a href=\"https://developers.arcgis.com/javascript/jshelp/ref_coordsystems.html\" target=\"blank\">WKID</a>\r\n              </div>\r\n            </td>\r\n          </tr>\r\n          <tr>\r\n            <td>\r\n              <input type=\"text\" data-dojo-type=\"dijit/form/ValidationTextBox\" required=\"true\"\r\n            placeHolder=\"WKID\" data-dojo-attach-event=\"onChange:onWkidChange\"\r\n            data-dojo-attach-point=\"wkid\" data-dojo-props='style:{width:\"100%\"}' />\r\n            </td>\r\n          </tr>\r\n          <tr>\r\n            <td>\r\n              <span class=\"wkid-label\" data-dojo-attach-point=\"wkidLabel\">${nls.cName}</span>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div class=\"display-units edit-module camera-units\" data-dojo-attach-point=\"displayUnits\">\r\n      <table cellspacing=\"0\">\r\n        <tbody>\r\n          <tr>\r\n            <td class=\"display\">\r\n              <span title=\"${nls.units}\">${nls.units}</span>\r\n            </td>\r\n            <td class=\"units\">\r\n              <select data-dojo-attach-point=\"outputUnit\" data-dojo-props='style:{width:\"462px\"}' data-dojo-type=\"dijit/form/Select\">\r\n                <option value=\"\">${nls.Default}</option>\r\n                <option type=\"separator\"></option>\r\n                <option value=\"INCHES\">${nls.Inches}</option>\r\n                <option value=\"FOOT\">${nls.Foot}</option>\r\n                <option value=\"YARDS\">${nls.Yards}</option>\r\n                <option value=\"MILES\">${nls.Miles}</option>\r\n                <option value=\"NAUTICAL_MILES\">${nls.Nautical_Miles}</option>\r\n                <option value=\"MILLIMETERS\">${nls.Millimeters}</option>\r\n                <option value=\"CENTIMETERS\">${nls.Centimeters}</option>\r\n                <option value=\"METER\">${nls.Meter}</option>\r\n                <option value=\"KILOMETERS\">${nls.Kilometers}</option>\r\n                <option value=\"DECIMETERS\">${nls.Decimeters}</option>\r\n                <option type=\"separator\"></option>\r\n                <option value=\"DECIMAL_DEGREES\">${nls.Decimal_Degrees}</option>\r\n                <option value=\"DEGREE_MINUTE_SECONDS\">${nls.Degree_Minutes_Seconds}</option>\r\n                <option type=\"separator\"></option>\r\n                <option value=\"MGRS\">${nls.MGRS}</option>\r\n                <option value=\"USNG\">${nls.USNG}</option>\r\n              </select>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div class=\"display-units edit-module camera-units\">\r\n      <table cellspacing=\"0\">\r\n        <tbody>\r\n          <tr>\r\n            <div data-dojo-attach-point=\"elevationUnitsNode\" class=\"camera-units\"></div>\r\n          </tr>\r\n          <tr>\r\n            <div data-dojo-attach-point=\"eyeAltUnitsNode\" class=\"camera-units\"></div>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div data-dojo-attach-point=\"enhanceVersionDiv\">\r\n      <div class=\"datum-wkid edit-module\" data-dojo-attach-point=\"transformDiv\">\r\n        <table cellspacing=\"0\">\r\n          <tbody>\r\n            <tr>\r\n              <td>\r\n                <div class=\"wkid-header\">\r\n                  <span>${nls.datum}</span>\r\n                  <a href=\"http://resources.arcgis.com/en/help/arcgis-rest-api/index.html#//02r3000000r8000000\" target=\"blank\">TFWKID</a>\r\n                </div>\r\n              </td>\r\n            </tr>\r\n            <tr>\r\n              <td>\r\n                <input type=\"text\" data-dojo-type=\"dijit/form/ValidationTextBox\" required=\"true\" placeHolder=\"${nls.tWKIDPlaceHolder}\"\r\n              data-dojo-attach-point=\"transformationWkid\" data-dojo-attach-event=\"onChange:ontfWkidChange\" data-dojo-props='style:{width:\"100%\"}' />\r\n              </td>\r\n            </tr>\r\n            <tr>\r\n              <td>\r\n                <span class=\"wkid-label\" data-dojo-attach-point=\"transformationLabel\">${nls.tName}</span>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <div class=\"check\" data-dojo-attach-point=\"transformForward\"></div>\r\n      </div>\r\n    </div>\r\n    <div class=\"older-version\" data-dojo-attach-point=\"olderVersionDiv\">${nls.olderVersion}</div>\r\n  </div>"}});
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ define(
     'dojo/_base/array',
     'dijit/_WidgetsInTemplateMixin',
     'jimu/BaseWidgetSetting',
+    './CameraUnits',
     'jimu/dijit/CheckBox',
     'dojo/text!./Edit.html',
     "jimu/SpatialReference/srUtils",
@@ -37,6 +38,7 @@ define(
     array,
     _WidgetsInTemplateMixin,
     BaseWidgetSetting,
+    CameraUnits,
     CheckBox,
     template,
     utils
@@ -162,6 +164,18 @@ define(
 
         this.wkid.set('missingMessage', this.nls.warning);
         this.transformationWkid.set('missingMessage', this.nls.tfWarning);
+
+        this.elevationUnits = new CameraUnits({
+          title: this.nls.elevationUnit,
+          nls: this.nls
+        }, this.elevationUnitsNode);
+        this.elevationUnits.startup();
+
+        this.eyeAltUnits = new CameraUnits({
+          title: this.nls.eyeAltUnit,
+          nls: this.nls
+        }, this.eyeAltUnitsNode);
+        this.eyeAltUnits.startup();
       },
 
       setConfig: function(config) {
@@ -189,6 +203,13 @@ define(
           if (config.transformForward) {
             this.transformForward.setValue(config.transformForward);
           }
+
+          if (config.elevationUnit) {
+            this.elevationUnits.setConfig(config.elevationUnit);
+          }
+          if (config.eyeAltUnit) {
+            this.eyeAltUnits.setConfig(config.eyeAltUnit);
+          }
         }), lang.hitch(this, function(err) {
           console.error(err);
         }));
@@ -201,7 +222,9 @@ define(
           outputUnit: this.outputUnit.get('value'),
           transformationWkid: parseInt(this.transformationWkid.get('value'), 10),
           transformationLabel: this.transformationLabel.innerHTML,
-          transformForward: this.transformForward.getValue()
+          transformForward: this.transformForward.getValue(),
+          elevationUnit: this.elevationUnits.getConfig(),
+          eyeAltUnit: this.eyeAltUnits.getConfig()
         };
         cs.outputUnit = cs.outputUnit || utils.getCSUnit(cs.wkid);
         var _options = {

@@ -3,7 +3,7 @@
 require({cache:{
 'url:widgets/Search/setting/QuerySourceSetting.html':"<div>\r\n  <div class=\"source-url-section\">\r\n    <table class=\"source-table\">\r\n      <tr>\r\n        <td class=\"first\">\r\n          <span class=\"source-label\">${nls.layerSource}</span>\r\n        </td>\r\n        <td class=\"second\">\r\n          <div data-dojo-attach-point=\"sourceUrl\" data-dojo-type=\"dijit/form/ValidationTextBox\" data-dojo-props=\"required:true,trim:true,disabled:true,style:{width:'100%'}\"></div>\r\n        </td>\r\n        <td class=\"third\">\r\n          <span class=\"jimu-btn\" title=\"${nls.set}\" data-dojo-attach-event=\"click:_onSetSourceClick\">${nls.set}</span>\r\n        </td>\r\n      </tr>\r\n      <tr data-dojo-attach-point=\"messageTr\">\r\n        <td class=\"first\"></td>\r\n        <td class=\"second\" colspan=\"2\">\r\n          <span data-dojo-attach-point=\"messageNode\" class=\"tip error-message\"></span>\r\n        </td>\r\n      </tr>\r\n    </table>\r\n  </div>\r\n  <div class=\"source-details-section\">\r\n    <table class=\"source-table\">\r\n      <tr>\r\n        <td class=\"first\">\r\n          <span class=\"source-label\">${nls.name}</span>\r\n        </td>\r\n        <td class=\"second\">\r\n          <div data-dojo-attach-point=\"sourceName\" data-dojo-type=\"dijit/form/ValidationTextBox\" data-dojo-attach-event=\"Blur:_onSourceNameBlur\" data-dojo-props=\"trim:true,required:true,style:{width:'100%'}\"></div>\r\n        </td>\r\n      </tr>\r\n      <tr>\r\n        <td class=\"first\">\r\n          <span class=\"source-label\">${nls.placeholder}</span>\r\n        </td>\r\n        <td class=\"second\">\r\n          <div data-dojo-attach-point=\"placeholder\" data-dojo-type=\"dijit/form/ValidationTextBox\" data-dojo-attach-event=\"Blur:_onPlaceholderBlur\" data-dojo-props=\"trim:true,style:{width:'100%'}\"></div>\r\n        </td>\r\n      </tr>\r\n      <tr>\r\n        <td class=\"first\">\r\n          <span class=\"source-label\">${nls.searchFields}</span>\r\n        </td>\r\n        <td class=\"second\">\r\n          <div class=\"search-fields\">\r\n            <!-- <span class=\"fields jimu-float-leading\" data-dojo-attach-point=\"fieldsNode\"></span> -->\r\n            <div data-dojo-attach-point=\"searchFields\" data-dojo-type=\"dijit/form/ValidationTextBox\" data-dojo-props=\"required:true,trim:true,disabled:true,style:{width:'95%'}\"></div>\r\n            <div class=\"search-fields-selector jimu-float-trailing\" data-dojo-attach-point=\"fieldsSelectorNode\" data-dojo-attach-event=\"click:_onFieldsSelectorClick\"></div>\r\n          </div>\r\n        </td>\r\n      </tr>\r\n      <tr>\r\n        <td class=\"first\">\r\n          <span class=\"source-label\">${nls.displayField}</span>\r\n        </td>\r\n        <td class=\"second\">\r\n          <div data-dojo-attach-point=\"displayField\" data-dojo-type=\"dijit/form/Select\" data-dojo-props='style:{width:\"100%\"}'></div>\r\n        </td>\r\n      </tr>\r\n      <tr>\r\n        <td class=\"first\">\r\n          <span class=\"source-label\">${nls.maxSuggestions}</span>\r\n        </td>\r\n        <td class=\"second\">\r\n          <div class=\"source-tips\" title=\"${nls.searchLayerTips}\" data-dojo-attach-point=\"tipsNode\">\r\n            <em>${nls.searchLayerTips}</em>\r\n          </div>\r\n          <div data-dojo-attach-point=\"maxSuggestions\" data-dojo-type=\"dijit/form/NumberTextBox\" data-dojo-props=\"constraints:{min:1,places:0},style:{width:'100%'},value:6\"></div>\r\n        </td>\r\n      </tr>\r\n      <tr>\r\n        <td class=\"first\">\r\n          <span class=\"source-label\">${nls.maxResults}</span>\r\n        </td>\r\n        <td class=\"second\">\r\n          <div data-dojo-attach-point=\"maxResults\" data-dojo-type=\"dijit/form/NumberTextBox\" data-dojo-props=\"constraints:{min:1,places:0},style:{width:'100%'}\"></div>\r\n        </td>\r\n      </tr>\r\n      <tr data-dojo-attach-point=\"zoomScaleTr\">\r\n        <td class=\"first\">\r\n          <span class=\"source-label\">${nls.zoomScale}</span>\r\n        </td>\r\n        <td class=\"second\">\r\n          <span class=\"jimu-float-leading\" style=\"line-height:30px;\">1: </span>\r\n          <div class=\"jimu-float-trailing\" data-dojo-attach-point=\"zoomScale\" data-dojo-type=\"dijit/form/NumberTextBox\" data-dojo-props=\"constraints:{min:1},style:{width:'96%'},value:50000\"></div>\r\n        </td>\r\n      </tr>\r\n    </table>\r\n    <table class=\"source-table\">\r\n      <tbody>\r\n        <tr>\r\n          <td class=\"first\">\r\n            <div data-dojo-attach-point=\"exactMatch\"></div>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td class=\"first\">\r\n            <div data-dojo-attach-point=\"searchInCurrentMapExtent\"></div>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <div data-dojo-attach-point=\"shelter\" data-dojo-type=\"jimu/dijit/LoadingShelter\" data-dojo-props=\"hidden:true\"></div>\r\n</div>"}});
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,6 +38,7 @@ define([
   'jimu/utils',
   'jimu/dijit/Popup',
   'jimu/dijit/CheckBox',
+  './LayerChooserForSearch',
   'jimu/dijit/LoadingShelter',
   'dijit/form/ValidationTextBox',
   'dojo/NodeList-data'
@@ -45,7 +46,7 @@ define([
 function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
   template, lang, array, on, query, Deferred, Evented,
   _FeaturelayerSourcePopup, portalUrlUtils, esriRequest, esriLang,
-  jimuUtils, Popup, CheckBox) {
+  jimuUtils, Popup, CheckBox, LayerChooserForSearch) {
   return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Evented], {
     baseClass: 'jimu-widget-search-query-source-setting',
     templateString: template,
@@ -382,11 +383,43 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
       this._openServiceChooser();
     },
 
+    /*
+    _replace3DLayerChooser: function(featurePopup) {
+      var featurelayerChooserWithButtons3d = new FeaturelayerChooserWithButtons3d({
+        map: this.map
+      });
+      var flcContainerNode = query(".dijit-container.map-dijit-container", featurePopup.domNode)[0];
+      if(flcContainerNode) {
+        flcContainerNode.removeChild(flcContainerNode.firstChild);
+        featurelayerChooserWithButtons3d.placeAt(flcContainerNode);
+      }
+
+      //featurePopup.fls.flcMap = featurelayerChooserWithButtons3d;
+
+      featurePopup.fls.own(on(featurelayerChooserWithButtons3d, 'ok', lang.hitch(this, function(items){
+        if(items && items.length > 0){
+          featurePopup.fls.emit('ok', items);
+        }
+      })));
+
+      featurePopup.fls.own(on(featurelayerChooserWithButtons3d, 'cancel', lang.hitch(this, function(){
+        featurePopup.fls.emit('cancel');
+      })));
+
+    },
+    */
+
     _openServiceChooser: function() {
+
+      var layerChooserForSearch = new LayerChooserForSearch({
+        map: this.map,
+        mustSupportQuery: true
+      });
+
       var args = {
         titleLabel: this.nls.setLayerSource,
-
         dijitArgs: {
+          layerChooserFromMap: layerChooserForSearch,
           multiple: false,
           createMapResponse: this.map.webMapResponse,
           portalUrl: this.appConfig.portalUrl,
@@ -397,6 +430,9 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
       };
 
       var featurePopup = new _FeaturelayerSourcePopup(args);
+
+      //this._replace3DLayerChooser(featurePopup);
+
       on.once(featurePopup, 'ok', lang.hitch(this, function(item) {
         featurePopup.close();
         this.setDefinition(item.definition || {});

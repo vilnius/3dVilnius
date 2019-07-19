@@ -1,7 +1,7 @@
 // All material copyright ESRI, All Rights Reserved, unless otherwise specified.
 // See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -124,7 +124,8 @@ var ie = (function() {
         location: window.apiUrl + "esri"
       }, {
         name: "moment",
-        location: window.apiUrl + "moment"
+        location: window.apiUrl + "node_modules/moment",
+        main: "moment"
       }, {
         name: "@dojo",
         location: window.apiUrl + "node_modules/@dojo"

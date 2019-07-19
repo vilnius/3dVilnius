@@ -3,7 +3,7 @@
 require({cache:{
 'widgets/Splash/setting/ColorPickerEditor':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -118,7 +118,7 @@ define([
 },
 'widgets/Splash/setting/BackgroundSelector':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -275,9 +275,8 @@ define([
         }
       },
       _selectItem: function(name) {
-        var _radio = this[name];//registry.byNode(query('.jimu-radio', this[name])[0]);
-        if (_radio && _radio.check) {
-          _radio.check(true);
+        if(this[name] && this[name].setChecked){
+          this[name].setChecked(true);
         }
       },
       _clickColorFillBtn: function() {
@@ -306,7 +305,7 @@ define([
 },
 'widgets/Splash/setting/SizeSelector':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -440,7 +439,7 @@ define([
 },
 'widgets/Splash/setting/AlignSelector':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1342,6 +1341,7 @@ define([
 				// is separate from the iframe's document.
 				if(this.document && this.document.body){
 					domStyle.set(this.document.body, "color", domStyle.get(this.iframe, "color"));
+					domStyle.set(this.document.body, "background-color", domStyle.get(this.iframe, "background-color"));
 				}
 			}catch(e){ /* Squelch any errors caused by focus change if hidden during a state change */
 			}
@@ -1624,7 +1624,8 @@ define([
 			var disabled = this.get("disabled");
 			if(this.button){
 				try{
-					enabled = !disabled && e.queryCommandEnabled(c);
+					var implFunc = e._implCommand(c);
+					enabled = !disabled && (this[implFunc] ? this[implFunc](c) : e.queryCommandEnabled(c));
 					if(this.enabled !== enabled){
 						this.enabled = enabled;
 						this.button.set('disabled', !enabled);
@@ -3619,6 +3620,15 @@ define([
 
 			return command;
 		},
+		_implCommand: function(/*String*/ cmd){
+			// summary:
+			//		Used as the function name where we might
+			//		find an override for advice on support
+			//		for this command by the target browser.
+			// tags:
+			//		private
+			return  "_" + this._normalizeCommand(cmd) + "EnabledImpl";
+		},
 
 		_qcaCache: {},
 		queryCommandAvailable: function(/*String*/ command){
@@ -3778,7 +3788,7 @@ define([
 			//Check to see if we have any over-rides for commands, they will be functions on this
 			//widget of the form _commandEnabledImpl.  If we don't, fall through to the basic native
 			//command of the browser.
-			var implFunc = "_" + command + "EnabledImpl";
+			var implFunc = this._implCommand(command);
 
 			if(this[implFunc]){
 				return  this[implFunc](command);
@@ -6431,6 +6441,7 @@ define([
 			// summary:
 			//		Over-ridable function that connects tag specific events.
 			this.editor.onLoadDeferred.then(lang.hitch(this, function(){
+				this.own(on(this.editor.editNode, "mouseup", lang.hitch(this, "_onMouseUp")));
 				this.own(on(this.editor.editNode, "dblclick", lang.hitch(this, "_onDblClick")));
 			}));
 		},
@@ -6464,6 +6475,16 @@ define([
 				args.urlInput = args.urlInput.replace(/"/g, "&quot;");
 			}
 			return args;
+		},
+
+		_createlinkEnabledImpl: function() {
+			// summary:
+			//		This function implements the test for if the create link
+			//		command should be enabled or not. This plugin supports
+			//		link creation even without selected text.
+			// tags:
+			//		protected
+			return true;
 		},
 
 		setValue: function(args){
@@ -6641,6 +6662,34 @@ define([
 							}
 						});
 					}, 10);
+				}
+			}
+		},
+
+		_onMouseUp: function(){
+			// summary:
+			//		Function to define a behavior on mouse up on the element
+			//		type this dialog edits to move the cursor just outside
+			//		anchor tags when clicking on their edges.
+			// tags:
+			//		protected.
+			if(has('ff')){
+				var a = this.editor.selection.getAncestorElement(this.tag);
+				if(a){
+					var selection = rangeapi.getSelection(this.editor.window);
+					var range = selection.getRangeAt(0);
+					if(range.collapsed && a.childNodes.length){
+						var test = range.cloneRange();
+						test.selectNodeContents(a.childNodes[a.childNodes.length - 1]);
+						test.setStart(a.childNodes[0], 0);
+						if(range.compareBoundaryPoints(test.START_TO_START, test) !== 1){
+							// cursor is before or at the test start
+							range.setStartBefore(a);
+						}else if(range.compareBoundaryPoints(test.END_TO_START, test) !== -1){
+							// cursor is before or at the test end
+							range.setStartAfter(a);
+						}
+					}
 				}
 			}
 		}
@@ -6865,6 +6914,12 @@ define([
 		//		Boolean flag used to indicate if iframe tags should be stripped from the document.
 		//		Defaults to true.
 		stripIFrames: true,
+
+		// stripEventHandlers: [public] Boolean
+		//		Boolean flag used to indicate if event handler attributes like onload should be
+		//		stripped from the document.
+		//		Defaults to true.
+		stripEventHandlers: true,
 
 		// readOnly: [const] Boolean
 		//		Boolean flag used to indicate if the source view should be readonly or not.
@@ -7298,6 +7353,22 @@ define([
 			return html;
 		},
 
+		_stripEventHandlers: function (html) {
+			if(html){
+				// Find all tags that contain an event handler attribute (an on* attribute).
+				var matches = html.match(/<[a-z]+?\b(.*?on.*?(['"]).*?\2.*?)+>/gim);
+				if(matches){
+					for(var i = 0, l = matches.length; i < l; i++){
+						// For each tag, remove only the event handler attributes.
+						var match = matches[i];
+						var replacement = match.replace(/\s+on[a-z]*\s*=\s*(['"])(.*?)\1/igm, "");
+						html = html.replace(match, replacement);
+					}
+				}
+			}
+			return html;
+		},
+
 		_filter: function(html){
 			// summary:
 			//		Internal function to perform some filtering on the HTML.
@@ -7314,6 +7385,9 @@ define([
 				}
 				if(this.stripIFrames){
 					html = this._stripIFrames(html);
+				}
+				if(this.stripEventHandlers){
+					html = this._stripEventHandlers(html);
 				}
 			}
 			return html;
@@ -7364,7 +7438,8 @@ define([
 			readOnly: ("readOnly" in args) ? args.readOnly : false,
 			stripComments: ("stripComments" in args) ? args.stripComments : true,
 			stripScripts: ("stripScripts" in args) ? args.stripScripts : true,
-			stripIFrames: ("stripIFrames" in args) ? args.stripIFrames : true
+			stripIFrames: ("stripIFrames" in args) ? args.stripIFrames : true,
+			stripEventHandlers: ("stripEventHandlers" in args) ? args.stripEventHandlers : true
 		});
 	};
 
@@ -7380,6 +7455,7 @@ define([
 	"dojo/dom-construct", // domConstruct.place
 	"dojo/i18n", // i18n.getLocalization
 	"dojo/_base/lang", // lang.delegate lang.hitch lang.isString
+	"dojo/string",
 	"dojo/store/Memory", // MemoryStore
 	"../../registry", // registry.getUniqueId
 	"../../_Widget",
@@ -7389,7 +7465,7 @@ define([
 	"../_Plugin",
 	"../range",
 	"dojo/i18n!../nls/FontChoice"
-], function(require, array, declare, domConstruct, i18n, lang, MemoryStore,
+], function(require, array, declare, domConstruct, i18n, lang, stringUtil, MemoryStore,
 	registry, _Widget, _TemplatedMixin, _WidgetsInTemplateMixin, FilteringSelect, _Plugin, rangeapi){
 
 	// module:
@@ -7555,12 +7631,34 @@ define([
 			}
 		},
 
+		_normalizeFontName: function (value) {
+			// summary:
+			//		Function used to choose one font name when the value is a list of font names
+			//		like "Verdana, Arial, Helvetica, sans-serif"
+			var allowedValues = this.values;
+			if (!value || !allowedValues) {
+				return value;
+			}
+			var fontNames = value.split(',');
+			if (fontNames.length > 1) {
+				for (var i = 0, l = fontNames.length; i < l; i++) {
+					var fontName = stringUtil.trim(fontNames[i]);
+					var pos = array.indexOf(allowedValues, fontName);
+					if (pos > -1) {
+						return fontName;
+					}
+				}
+			}
+			return value;
+		},
+
 		_setValueAttr: function(value, priorityChange){
 			// summary:
 			//		Over-ride for the default action of setting the
 			//		widget value, maps the input to known values
 
 			priorityChange = priorityChange !== false;
+			value = this._normalizeFontName(value);
 			if(this.generic){
 				var map = {
 					"Arial": "sans-serif",
@@ -7914,7 +8012,9 @@ define([
 				if(quoted){
 					value = quoted[1];
 				}
-
+				if (_c === "fontSize" && !value) {
+					value = 3;  // default to "small" since Editor starts out with 16px font which is considered "small".
+				}
 				if(_c === "formatBlock"){
 					if(!value || value == "p"){
 						// Some browsers (WebKit) doesn't actually get the tag info right.
@@ -13468,6 +13568,21 @@ define(["dojo/_base/lang", "dojo/_base/array", "dojo/_base/window", "dojo/_base/
 
 },
 'jimu/dijit/EditorChooseImage':function(){
+///////////////////////////////////////////////////////////////////////////
+// Copyright © Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
 define([
   "dojo",
   "dijit",
@@ -13570,12 +13685,14 @@ define([
       }
     },
 
-    insertTempImage: function(fileData) {
+    insertTempImage: function(fileData, fileProperty) {
+      //add alt property for screen readers.
+      var imgAlt = (fileProperty && fileProperty.fileName) ? 'alt="' + fileProperty.fileName + '"' : '';
       // summary:
       //    inserting a "busy" image to show something is hapening
       //    during upload and download of the image.
       this.currentImageId = "img_" + (new Date().getTime());
-      var iTxt = '<img id="' + this.currentImageId + '" src="' + fileData + '" />';
+      var iTxt = '<img id="' + this.currentImageId + '" src="' + fileData + '" ' + imgAlt + '/>';
       this.editor.execCommand('inserthtml', iTxt);
     },
 
@@ -13610,7 +13727,7 @@ define([
 },
 'jimu/dijit/EditorTextColor':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13779,7 +13896,7 @@ define([
 },
 'jimu/dijit/EditorBackgroundColor':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13946,15 +14063,15 @@ define(["dojo/text!./Setting.html",
 "dojo/i18n!./nls/strings"], function(){});
 },
 'url:widgets/Splash/setting/ColorPickerEditor.html':"<div class=\"colorPickerEditor\">\r\n  <div class=\"colorPicker\" data-dojo-attach-point=\"colorPicker\"></div>\r\n  <span class=\"trans\">${nls.transparency}</span>\r\n  <div class=\"sliderbar\" data-dojo-attach-point=\"sliderBar\"></div>\r\n  <input type=\"text\" data-dojo-type=\"dijit/form/NumberSpinner\" value=\"0\"\r\n         data-dojo-attach-point=\"spinner\" data-dojo-props=\"smallDelta:10,intermediateChanges:true,constraints: {min:0,max:100}\">\r\n  <span >%</span>\r\n</div>\r\n\r\n",
-'url:widgets/Splash/setting/BackgroundSelector.html':"<div>\r\n  <div class=\"titles\">${nls.background}</div>\r\n\r\n  <div class=\"unit-item\">\r\n    <div data-dojo-type=\"jimu/dijit/RadioBtn\" data-dojo-attach-point=\"colorFillBtn\" data-dojo-props=\"group:'background'\"></div>\r\n    <label class=\"\">${nls.colorFill}</label>\r\n  </div>\r\n  <div class=\"hide indent\" data-dojo-attach-point=\"colorFillOptions\">\r\n    <div class=\"colorPicker\" data-dojo-attach-point=\"backgroundColorPickerEditor\"></div>\r\n  </div>\r\n\r\n  <div class=\"unit-item\">\r\n    <div data-dojo-type=\"jimu/dijit/RadioBtn\" data-dojo-attach-point=\"imageFillBtn\" data-dojo-props=\"group:'background'\"></div>\r\n    <label class=\"\">${nls.imageFill}</label>\r\n  </div>\r\n  <div class=\"hide indent\" data-dojo-attach-point=\"imageFillOptions\">\r\n    <div class=\"clearFix\">\r\n      <div class=\"jimu-float-leading\">\r\n        <div class=\"image-chooser-base\" data-dojo-attach-point=\"imageChooser\"></div>\r\n      </div>\r\n      <div class=\"file-name jimu-float-leading\" data-dojo-attach-point=\"fileName\">${nls.noFileChosen}</div>\r\n    </div>\r\n\r\n    <div class=\"hide clearFix types\" data-dojo-attach-point=\"fillsType\">\r\n      <div class=\"unit-item fillstype jimu-float-leading\" data-dojo-attach-point=\"sizeFill\">\r\n        <div data-dojo-type=\"jimu/dijit/RadioBtn\" data-dojo-attach-point=\"fill\" data-dojo-props=\"group:'fillStyle'\"></div>\r\n        <label class=\"\">${nls.sizeFill}</label>\r\n      </div>\r\n      <div class=\"unit-item fillstype jimu-float-leading hide\" data-dojo-attach-point=\"sizeFit\">\r\n        <div data-dojo-type=\"jimu/dijit/RadioBtn\" data-dojo-attach-point=\"fit\" data-dojo-props=\"group:'fillStyle'\"></div>\r\n        <label class=\"\">${nls.sizeFit}</label>\r\n      </div>\r\n      <div class=\"unit-item fillstype jimu-float-leading\" data-dojo-attach-point=\"sizeStretch\">\r\n        <div data-dojo-type=\"jimu/dijit/RadioBtn\" data-dojo-attach-point=\"stretch\" data-dojo-props=\"group:'fillStyle'\"></div>\r\n        <label class=\"\">${nls.sizeStretch}</label>\r\n      </div>\r\n      <div class=\"unit-item fillstype jimu-float-leading hide\" data-dojo-attach-point=\"sizeCenter\">\r\n        <div data-dojo-type=\"jimu/dijit/RadioBtn\" data-dojo-attach-point=\"center\" data-dojo-props=\"group:'fillStyle'\"></div>\r\n        <label class=\"\">${nls.sizeCenter}</label>\r\n      </div>\r\n      <div class=\"unit-item fillstype jimu-float-leading\" data-dojo-attach-point=\"sizeTile\">\r\n        <div data-dojo-type=\"jimu/dijit/RadioBtn\" data-dojo-attach-point=\"tile\" data-dojo-props=\"group:'fillStyle'\"></div>\r\n        <label class=\"\">${nls.sizeTile}</label>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>",
+'url:widgets/Splash/setting/BackgroundSelector.html':"<div>\r\n  <div class=\"titles\">${nls.background}</div>\r\n\r\n  <fieldset id=\"bg-type\">\r\n    <div class=\"unit-item\">\r\n      <input data-dojo-type=\"dijit/form/RadioButton\" data-dojo-attach-point=\"colorFillBtn\" id=\"colorFillBtn\" name=\"bg-type\" />\r\n      <label for=\"colorFillBtn\">${nls.colorFill}</label>\r\n    </div>\r\n    <div class=\"hide indent\" data-dojo-attach-point=\"colorFillOptions\">\r\n      <div class=\"colorPicker\" data-dojo-attach-point=\"backgroundColorPickerEditor\"></div>\r\n    </div>\r\n\r\n    <div class=\"unit-item\">\r\n      <input data-dojo-type=\"dijit/form/RadioButton\" data-dojo-attach-point=\"imageFillBtn\" id=\"imageFillBtn\" name=\"bg-type\" />\r\n      <label for=\"imageFillBtn\">${nls.imageFill}</label>\r\n    </div>\r\n  </fieldset>\r\n\r\n  <div class=\"hide indent\" data-dojo-attach-point=\"imageFillOptions\">\r\n    <div class=\"clearFix\">\r\n      <div class=\"jimu-float-leading\">\r\n        <div class=\"image-chooser-base\" data-dojo-attach-point=\"imageChooser\"></div>\r\n      </div>\r\n      <div class=\"file-name jimu-float-leading\" data-dojo-attach-point=\"fileName\">${nls.noFileChosen}</div>\r\n    </div>\r\n\r\n    <div class=\"hide clearFix types\" data-dojo-attach-point=\"fillsType\">\r\n      <fieldset id=\"img-type\">\r\n        <div class=\"unit-item fillstype jimu-float-leading\" data-dojo-attach-point=\"sizeFill\">\r\n          <input data-dojo-type=\"dijit/form/RadioButton\" data-dojo-attach-point=\"fill\" id=\"fill\" name=\"img-type\" />\r\n          <label for=\"fill\">${nls.sizeFill}</label>\r\n        </div>\r\n        <div class=\"unit-item fillstype jimu-float-leading hide\" data-dojo-attach-point=\"sizeFit\">\r\n          <input data-dojo-type=\"dijit/form/RadioButton\" data-dojo-attach-point=\"fit\" id=\"fit\" name=\"img-type\" />\r\n          <label for=\"fit\">${nls.sizeFit}</label>\r\n        </div>\r\n        <div class=\"unit-item fillstype jimu-float-leading\" data-dojo-attach-point=\"sizeStretch\">\r\n          <input data-dojo-type=\"dijit/form/RadioButton\" data-dojo-attach-point=\"stretch\" id=\"stretch\" name=\"img-type\" />\r\n          <label for=\"stretch\">${nls.sizeStretch}</label>\r\n        </div>\r\n        <div class=\"unit-item fillstype jimu-float-leading hide\" data-dojo-attach-point=\"sizeCenter\">\r\n          <input data-dojo-type=\"dijit/form/RadioButton\" data-dojo-attach-point=\"center\" id=\"center\" name=\"img-type\" />\r\n          <label for=\"center\">${nls.sizeCenter}</label>\r\n        </div>\r\n        <div class=\"unit-item fillstype jimu-float-leading\" data-dojo-attach-point=\"sizeTile\">\r\n          <input data-dojo-type=\"dijit/form/RadioButton\" data-dojo-attach-point=\"tile\" id=\"tile\" name=\"img-type\" />\r\n          <label for=\"tile\">${nls.sizeTile}</label>\r\n        </div>\r\n      </fieldset>\r\n    </div>\r\n  </div>\r\n</div>",
 'url:widgets/Splash/setting/SizeSelector.html':"<div class=\"size-selector clearFix\">\r\n  <div class=\"titles\">${nls.size}</div>\r\n  <div class=\"sizes jimu-float-leading\">\r\n    <div class=\"size-box-container\">\r\n      <div class=\"size-box percent25\" data-dojo-attach-point=\"percent25\"></div>\r\n      25%\r\n    </div>\r\n    <div class=\"size-box-container\">\r\n      <div class=\"size-box percent50\" data-dojo-attach-point=\"percent50\"></div>\r\n      50%\r\n    </div>\r\n    <div class=\"size-box-container\">\r\n      <div class=\"size-box percent75\" data-dojo-attach-point=\"percent75\"></div>\r\n      75%\r\n    </div>\r\n    <div class=\"size-box-container\">\r\n      <div class=\"size-box percent100\" data-dojo-attach-point=\"percent100\"></div>\r\n      100%\r\n    </div>\r\n    <div class=\"size-box-container\">\r\n      <div class=\"size-box custom\" data-dojo-attach-point=\"custom\"></div>\r\n      ${nls.custom}\r\n    </div>\r\n  </div>\r\n  <div data-dojo-attach-point=\"wh\" class=\"wh jimu-float-leading hide\">\r\n    <div class=\"wh-item\">\r\n      <div class=\"lable\">${nls.width}</div>\r\n      <div class=\"inputs\">\r\n        <input type=\"text\" class=\"text-box\" data-dojo-type=\"dijit/form/NumberTextBox\" data-dojo-attach-point=\"width\">\r\n        <span class=\"unit\">px</span>\r\n      </div>\r\n    </div>\r\n    <div class=\"wh-item\">\r\n      <div class=\"lable\">${nls.height}</div>\r\n      <div class=\"inputs\">\r\n        <input type=\"text\" class=\"text-box\" data-dojo-type=\"dijit/form/NumberTextBox\" data-dojo-attach-point=\"height\">\r\n        <span class=\"unit\">px</span>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n",
 'url:widgets/Splash/setting/AlignSelector.html':"<div class=\"align-selector clearFix\">\r\n  <div class=\"titles\">${nls.contentAlign}</div>\r\n  <div class=\"aligns jimu-float-leading\">\r\n    <div class=\"align-box-container\">\r\n      <div class=\"align-box top\" data-dojo-attach-point=\"top\" title=\"${nls.alignTop}\"></div>${nls.alignTop}\r\n    </div>\r\n    <div class=\"align-box-container\">\r\n      <div class=\"align-box middle\" data-dojo-attach-point=\"middle\" title=\"${nls.alignMiddle}\"></div>${nls.alignMiddle}\r\n    </div>\r\n  </div>\r\n</div>",
-'url:widgets/Splash/setting/Setting.html':"<div style=\"width:100%;height: 100%;\">\r\n  <div class=\"instruction\" data-dojo-attach-point=\"instructionNode\">\r\n    <span class=\"instruction-inner\">${nls.instruction}</span>\r\n  </div>\r\n  <!-- tabs -->\r\n  <div class=\"tabs\" data-dojo-attach-point=\"tabsContainer\">\r\n    <div class=\"content-tab\" data-dojo-attach-point=\"contentTab\">\r\n      <div class=\"tab-description\">${nls.contentDescription}</div>\r\n      <div class=\"editor-container\" data-dojo-attach-point=\"editorContainer\">\r\n        <div data-dojo-attach-point=\"editor\"></div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"appearance-tab\" data-dojo-attach-point=\"appearanceTab\">\r\n      <div class=\"tab-description\">${nls.appearanceDescription}</div>\r\n      <div>\r\n        <div data-dojo-attach-point=\"sizeSelector\"></div>\r\n      </div>\r\n      <div>\r\n        <div data-dojo-attach-point=\"alignSelector\"></div>\r\n      </div>\r\n      <div>\r\n        <div data-dojo-attach-point=\"backgroundSelector\"></div>\r\n      </div>\r\n      <div>\r\n        <div class=\"titles\">${nls.buttonColor}</div>\r\n        <div class=\"colorPicker\" data-dojo-attach-point=\"buttonColorPickerEditor\"></div>\r\n      </div>\r\n      <div>\r\n        <div class=\"titles\">${nls.buttonText}</div>\r\n        <input class=\"jimu-input buttonText\" type=\"text\" value=\"${nls.ok}\" data-dojo-attach-point=\"buttonText\" data-dojo-attach-event=\"blur:_onButtonTextBlur\">\r\n      </div>\r\n      <div>\r\n        <div class=\"titles\">${nls.confirmLabelColor}</div>\r\n        <div class=\"colorPicker\" data-dojo-attach-point=\"confirmColorPickerEditor\"></div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"options-tab\" data-dojo-attach-point=\"optionsTab\">\r\n      <div class=\"tab-description\">${nls.optionsDescription}</div>\r\n      <div class=\"splash-footer\" data-dojo-attach-point=\"splashFooterNode\">\r\n        <div class=\"require-list\">\r\n          <div class=\"require-item\" data-dojo-attach-point=\"noRequireConfirmSplash\">\r\n            <div data-dojo-type=\"jimu/dijit/RadioBtn\" data-dojo-props=\"group:'requireItem'\"></div>\r\n            <label class=\"jimu-leading-margin025\">${nls.noRequireConfirm}</label>\r\n          </div>\r\n          <div data-dojo-attach-point=\"showOption\"></div>\r\n          <div class=\"require-item\" data-dojo-attach-point=\"requireConfirmSplash\">\r\n            <div data-dojo-type=\"jimu/dijit/RadioBtn\" data-dojo-props=\"group:'requireItem'\"></div>\r\n            <label class=\"jimu-leading-margin025\">${nls.requireConfirm}</label>\r\n          </div>\r\n          <div class=\"confirm-container\" data-dojo-attach-point=\"confirmContainer\">\r\n            <div class=\"confirm-text\">\r\n              <span class=\"spinner-label jimu-ellipsis\" title=\"${nls.confirmLabel}\">${nls.confirmLabel}</span>\r\n              <input class=\"jimu-input jimu-float-trailing\" type=\"text\" value=\"${nls.defaultConfirmText}\" data-dojo-attach-point=\"confirmText\" data-dojo-attach-event=\"blur:_onConfirmTextBlur\">\r\n            </div>\r\n            <div data-dojo-attach-point=\"confirmOption\"></div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>",
+'url:widgets/Splash/setting/Setting.html':"<div style=\"width:100%;height: 100%;\">\r\n  <div class=\"instruction\" data-dojo-attach-point=\"instructionNode\">\r\n    <span class=\"instruction-inner\">${nls.instruction}</span>\r\n  </div>\r\n  <!-- tabs -->\r\n  <div class=\"tabs\" data-dojo-attach-point=\"tabsContainer\">\r\n    <div class=\"content-tab\" data-dojo-attach-point=\"contentTab\">\r\n      <div class=\"tab-description\">${nls.contentDescription}</div>\r\n      <div class=\"editor-container\" data-dojo-attach-point=\"editorContainer\">\r\n        <div data-dojo-attach-point=\"editor\"></div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"appearance-tab\" data-dojo-attach-point=\"appearanceTab\">\r\n      <div class=\"tab-description\">${nls.appearanceDescription}</div>\r\n      <div>\r\n        <div data-dojo-attach-point=\"sizeSelector\"></div>\r\n      </div>\r\n      <div>\r\n        <div data-dojo-attach-point=\"alignSelector\"></div>\r\n      </div>\r\n      <div>\r\n        <div data-dojo-attach-point=\"backgroundSelector\"></div>\r\n      </div>\r\n      <div>\r\n        <div class=\"titles\">${nls.buttonColor}</div>\r\n        <div class=\"colorPicker\" data-dojo-attach-point=\"buttonColorPickerEditor\"></div>\r\n      </div>\r\n      <div>\r\n        <div class=\"titles\">${nls.buttonText}</div>\r\n        <input class=\"jimu-input buttonText\" type=\"text\" value=\"${nls.ok}\" data-dojo-attach-point=\"buttonText\" data-dojo-attach-event=\"blur:_onButtonTextBlur\">\r\n      </div>\r\n      <div>\r\n        <div class=\"titles\">${nls.confirmLabelColor}</div>\r\n        <div class=\"colorPicker\" data-dojo-attach-point=\"confirmColorPickerEditor\"></div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"options-tab\" data-dojo-attach-point=\"optionsTab\">\r\n      <div class=\"tab-description\">${nls.optionsDescription}</div>\r\n      <div class=\"splash-footer\" data-dojo-attach-point=\"splashFooterNode\">\r\n        <div class=\"require-list\">\r\n          <fieldset id=\"require-type\">\r\n            <div class=\"require-item\" data-dojo-attach-point=\"noRequireConfirmSplash\">\r\n              <input data-dojo-type=\"dijit/form/RadioButton\" name=\"require-type\" id=\"noRequireRadio\" data-dojo-attach-point=\"noRequireRadio\"/>\r\n              <label for=\"noRequireRadio\" class=\"jimu-leading-margin025\">${nls.noRequireConfirm}</label>\r\n            </div>\r\n            <div data-dojo-attach-point=\"showOption\"></div>\r\n            <div class=\"require-item\" data-dojo-attach-point=\"requireConfirmSplash\">\r\n              <input data-dojo-type=\"dijit/form/RadioButton\" name=\"require-type\" id=\"requireConfirmRadio\" data-dojo-attach-point=\"requireConfirmRadio\"/>\r\n              <label for=\"requireConfirmRadio\" class=\"jimu-leading-margin025\">${nls.requireConfirm}</label>\r\n            </div>\r\n          </fieldset>\r\n          <div class=\"confirm-container\" data-dojo-attach-point=\"confirmContainer\">\r\n            <div class=\"confirm-text\">\r\n              <span class=\"spinner-label jimu-ellipsis\" title=\"${nls.confirmLabel}\">${nls.confirmLabel}</span>\r\n              <input class=\"jimu-input jimu-float-trailing\" type=\"text\" value=\"${nls.defaultConfirmText}\" data-dojo-attach-point=\"confirmText\" data-dojo-attach-event=\"blur:_onConfirmTextBlur\">\r\n            </div>\r\n            <div data-dojo-attach-point=\"confirmOption\"></div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>",
 'url:widgets/Splash/setting/css/style.css':".jimu-widget-splash-setting{margin:0; padding:0; font-size:14px; position: absolute; overflow-y: hidden; top: 0; bottom: 0; left: 0; right: 0; letter-spacing: 0.38px;}.jimu-widget-splash-setting .instruction {margin-bottom: 10px;}.jimu-widget-splash-setting .tabs {font-family: \"Avenir Light\"; color: #000000; height: 100%;}.jimu-widget-splash-setting .tabs .tab-description {margin: 10px 0;}.jimu-widget-splash-setting .tabs .jimu-radio-checked .jimu-radio-inner {width: 6px; height: 6px; margin: 4px; border-radius: 50%; background-color: #24B5CC;}.jimu-widget-splash-setting .tabs .jimu-radio{border: 1px solid #ccc; vertical-align: top;}.jimu-widget-splash-setting .jimu-tab>.control>.tab{background-color: #fff; border-top: 0; border-left: 0; border-right: 0; border-bottom: 1px solid #dedede; color:#898989; font-family: \"Avenir Medium\"; font-size: 14px;}.jimu-widget-splash-setting .jimu-tab>.control>.tab.jimu-state-selected {border-bottom: 3px solid #24b5cc; font-family: \"Avenir Heavy\"; color: #000000;}.jimu-widget-splash-setting .tabs .titles {font-weight: bold; font-family: \"Avenir Medium\"; font-size: 14px; margin: 20px 0 10px 0;}.jimu-widget-splash-setting .tabs .hide{display: none;}.jimu-widget-splash-setting .tabs .indent{margin-left: 20px; margin-top: 10px;}.jimu-widget-splash-setting .tabs .unit-item{margin: 15px 5px 5px 5px; line-height: 18px; height: 18px; vertical-align: middle;}.jimu-widget-splash-setting .tabs .clearFix {*overflow: hidden; *zoom: 1;}.jimu-widget-splash-setting .tabs .clearFix:after {display: table; content: \"\"; width: 0; clear: both;}.jimu-widget-splash-setting .tabs .view{height: 100%; overflow-y: auto;}.jimu-widget-splash-setting .tabs .jimu-tab>.jimu-viewstack{padding-bottom: 30px;}.jimu-widget-splash-setting .tabs .colorPickerEditor {}.jimu-widget-splash-setting .tabs .colorPickerEditor .jimu-color-picker{display: inline-block; width: 30px; height: 30px;}.jimu-widget-splash-setting .tabs .colorPickerEditor .dijitSpinner.dijitNumberTextBox.dijitValidationTextBox{width:66px; height:30px;}.jimu-widget-splash-setting .dijitSliderImageHandleH{top: -7px;}.jimu-widget-splash-setting .dijitSliderImageHandle.dijitSliderImageHandleH{background-image: url(\"../../images/sliderball.png\"); background-position: 0 0;}.jimu-widget-splash-setting .tabs .dijitSliderThumbHover{background-image: url(\"../../images/sliderball_hover.png\"); background-position: 0 0;}.jimu-widget-splash-setting .dijitSlider .dijitSliderProgressBarH,.jimu-widget-splash-setting .dijitSlider .dijitSliderLeftBumper{border-color: #24b5cc; background-color: #24b5cc; background-image: -webkit-linear-gradient(top, #24b5cc 0px, #24b5cc 1px, rgba(255, 255, 255, 0) 2px); background-image: -o-linear-gradient(top, #24b5cc 0px, #24b5cc 1px, rgba(255, 255, 255, 0) 2px); background-image: linear-gradient(top, #24b5cc 0px, #24b5cc 1px, rgba(255, 255, 255, 0) 2px);}.jimu-widget-splash-setting .dijitSlider .dijitSliderRemainingBarH,.jimu-widget-splash-setting .dijitSlider .dijitSliderRightBumper{border-color: #d7d7d7; background-color: #d7d7d7;}.jimu-widget-splash-setting .tabs .colorPickerEditor .trans{font-family: \"Avenir Light\"; font-size: 12px; padding: 0 10px 0 20px; letter-spacing: 0.33px;}.jimu-widget-splash-setting .tabs .sliderbar {width: 80px;}.jimu-widget-splash-setting .content-tab{}.jimu-widget-splash-setting .content-tab .editor-container{}.jimu-widget-splash-setting .content-tab .editor-container .dijitEditorIFrameContainer textarea {resize: none;}.jimu-widget-splash-setting .appearance-tab{overflow-y: auto; height: 490px;}.jimu-widget-splash-setting .appearance-tab .size-selector .size-box-container{display: inline-block; text-align: center; margin: 0 10px 0 0; width: 80px; -o-text-overflow: ellipsis; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}.jimu-widget-splash-setting .appearance-tab .size-selector .size-box{width:80px; height:60px; background: no-repeat; margin-bottom: 5px;}.jimu-widget-splash-setting .appearance-tab .size-selector .percent25{background: url(\"../../images/percent25.svg\") center center no-repeat;;}.jimu-widget-splash-setting .appearance-tab .size-selector .percent25.selected{background: url(\"../../images/percent25_selected.svg\") center center no-repeat;;}.jimu-widget-splash-setting .appearance-tab .size-selector .percent50{background: url(\"../../images/percent50.svg\") center center no-repeat;;}.jimu-widget-splash-setting .appearance-tab .size-selector .percent50.selected{background: url(\"../../images/percent50_selected.svg\") center center no-repeat;;}.jimu-widget-splash-setting .appearance-tab .size-selector .percent75{background: url(\"../../images/percent75.svg\") center center no-repeat;;}.jimu-widget-splash-setting .appearance-tab .size-selector .percent75.selected{background: url(\"../../images/percent75_selected.svg\") center center no-repeat;;}.jimu-widget-splash-setting .appearance-tab .size-selector .percent100{background: url(\"../../images/percent100.svg\") center center no-repeat;;}.jimu-widget-splash-setting .appearance-tab .size-selector .percent100.selected{background: url(\"../../images/percent100_selected.svg\") center center no-repeat;;}.jimu-widget-splash-setting .appearance-tab .size-selector .custom{background: url(\"../../images/custom.svg\") center center no-repeat;;}.jimu-widget-splash-setting .appearance-tab .size-selector .custom.selected{background: url(\"../../images/custom_selected.svg\") center center no-repeat;;}.jimu-widget-splash-setting .appearance-tab .size-selector .custom-label{vertical-align: top; line-height: 20px;}.jimu-rtl .jimu-widget-splash-setting .appearance-tab .sizes>:first-child{margin-right: 0;}.jimu-widget-splash-setting .appearance-tab .size-selector .wh{margin: 0 14px;}.jimu-widget-splash-setting .appearance-tab .size-selector .wh .wh-item{display: inline-block; margin-right: 10px;}.jimu-widget-splash-setting .appearance-tab .size-selector .wh .wh-item .lable{font-family: \"Avenir Medium\"; font-size: 12px; color: #353535; margin:0 0 5px 0; width: 96px; -o-text-overflow: ellipsis; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}.jimu-widget-splash-setting .appearance-tab .size-selector .wh .inputs{width:96px; border: 1px solid #d9dde0;}.jimu-widget-splash-setting .appearance-tab .size-selector .wh .inputs .text-box{width: 70px; border: none;}.jimu-widget-splash-setting .appearance-tab .size-selector .wh .inputs .unit{color: #898989; letter-spacing: 0;}.jimu-widget-splash-setting .appearance-tab .align-selector .align-box-container{display: inline-block; text-align: center; margin: 0 10px; width:50px; -o-text-overflow: ellipsis; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}.jimu-widget-splash-setting .appearance-tab .align-selector .align-box{width:40px; height:36px; background: no-repeat; margin: 0 5px 5px 5px;}.jimu-widget-splash-setting .appearance-tab .align-selector .top{background: url(\"../../images/top.svg\") center center no-repeat; border: none;}.jimu-widget-splash-setting .appearance-tab .align-selector .top.selected{background: url(\"../../images/top_selected.svg\") center center no-repeat; border: 1px #24B5CC solid;}.jimu-widget-splash-setting .appearance-tab .align-selector .middle{background: url(\"../../images/middle.svg\") center center no-repeat; border: none;}.jimu-widget-splash-setting .appearance-tab .align-selector .middle.selected{background: url(\"../../images/middle_selected.svg\") center center no-repeat; border: 1px #24B5CC solid;}.jimu-widget-splash-setting .appearance-tab .jimu-image-chooser{height:30px; width:124px; background: #24B5CC; border: 1px solid #24B5CC;}.jimu-widget-splash-setting .appearance-tab .file-name{font-size: 12px; line-height: 33px; height: 33px; color: #000000; margin: 0 20px 0 20px;}.jimu-widget-splash-setting .appearance-tab .types>:first-child{margin-left: 0;}.jimu-rtl .jimu-widget-splash-setting .appearance-tab .types>:first-child{margin-right: 0;}.jimu-widget-splash-setting .appearance-tab .fillstype{margin: 10px 20px 0 20px;}.jimu-widget-splash-setting .appearance-tab .buttonText{width: 290px; margin-bottom: 10px;}.jimu-widget-splash-setting .instruction span{color: #596679;}.jimu-widget-splash-setting .editor-container{position: absolute; top: 34px; bottom: 165px; left: 0; right: 0; border: 1px solid #d2dae2; background-color: #fafafc;}.jimu-widget-splash-setting .editor-container .dijitEditorIFrameContainer{position: relative; width: 100%; overflow: hidden;}.jimu-widget-splash-setting .editor-container .dijitEditorIFrameContainer {padding-top: 0;}.jimu-widget-splash-setting .editor-container .uploaderInsideNode embed {display: none;}.jimu-widget-splash-setting .splash-footer{color: #596679; height: 155px; margin-top: 20px;}.jimu-widget-splash-setting .splash-footer .require-continue{position: absolute; top: 0;}.jimu-widget-splash-setting .splash-footer .require-item{margin-bottom: 10px;}.jimu-widget-splash-setting .splash-footer .option-text{display: none; margin: 10px 0 15px 23px;}.jimu-widget-splash-setting .splash-footer .confirm-container{display: none; margin-left: 20px; margin-bottom: 10px;}.jimu-widget-splash-setting .splash-footer .confirm-text,.jimu-widget-splash-setting .splash-footer .confirm-option{width: 100%; margin-top: 10px;}.jimu-widget-splash-setting .splash-footer .spinner-label{line-height: 30px; margin-right: 10px; display: inline-block;}.jimu-widget-splash-setting .splash-footer .set-background,.jimu-widget-splash-setting .splash-footer .set-background *{vertical-align: middle;}.jimu-widget-splash-setting .splash-footer input{width: 755px; color: #7989a0;}.jimu-widget-splash-setting .dojoxEditorUploadNorm.dijitButtonDisabled {background: #ccc url(../../css/images/uploadImageIcon_disabled.gif) no-repeat 2px 2px;}",
-'*now':function(r){r(['dojo/i18n!*preload*widgets/Splash/setting/nls/Setting*["ar","bs","cs","da","de","en","el","es","et","fi","fr","he","hi","hr","id","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sl","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]']);}
+'*now':function(r){r(['dojo/i18n!*preload*widgets/Splash/setting/nls/Setting*["ar","bs","ca","cs","da","de","en","el","es","et","fi","fr","he","hi","hr","hu","id","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sl","sr","sv","th","tr","zh-cn","uk","vi","zh-hk","zh-tw","ROOT"]']);}
 }});
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13982,7 +14099,6 @@ define([
     './BackgroundSelector',
     './SizeSelector',
     './AlignSelector',
-    'dijit/registry',
     'dijit/_WidgetsInTemplateMixin',
     'dijit/Editor',
     'jimu/utils',
@@ -14011,7 +14127,7 @@ define([
   ],
   function(declare, lang, html, on, aspect, cookie, has, query,
            ColorPickerEditor, BackgroundSelector, SizeSelector, AlignSelector,
-           registry, _WidgetsInTemplateMixin,
+           _WidgetsInTemplateMixin,
            Editor, utils, BaseWidgetSetting, CheckBox, TabContainer, LoadingShelter, Deferred) {
     return declare([BaseWidgetSetting, _WidgetsInTemplateMixin], {
       baseClass: 'jimu-widget-splash-setting',
@@ -14268,19 +14384,19 @@ define([
 
       _changeRequireConfirm: function() {
         var _selectedNode = null;
-
         if (this.get('requireConfirm')) {
-          _selectedNode = this.requireConfirmSplash;
+          _selectedNode = this.requireConfirmRadio;
           html.setStyle(this.confirmContainer, 'display', 'block');
           html.setStyle(this.showOption.domNode, 'display', 'none');
         } else {
-          _selectedNode = this.noRequireConfirmSplash;
+          _selectedNode = this.noRequireRadio;
           html.setStyle(this.showOption.domNode, 'display', 'block');
           html.setStyle(this.confirmContainer, 'display', 'none');
         }
 
-        var _radio = registry.byNode(query('.jimu-radio', _selectedNode)[0]);
-        _radio.check(true);
+        if(_selectedNode && _selectedNode.setChecked){
+          _selectedNode.setChecked(true);
+        }
       },
 
       destroy: function() {
@@ -14320,12 +14436,6 @@ define([
         } else {
           def.resolve();
           return def;
-        }
-      },
-      _selectItem: function(name) {
-        var _radio = this[name];
-        if (_radio && _radio.check) {
-          _radio.check(true);
         }
       },
 

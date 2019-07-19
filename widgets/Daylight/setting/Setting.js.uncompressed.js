@@ -8,10 +8,10 @@ define(["dojo/text!./Setting.html",
 },
 'url:widgets/Daylight/setting/Setting.html':"<div>\r\n  <label>\r\n    ${nls.defaultTimeZone}\r\n    <select data-dojo-type=\"dijit/form/Select\" data-dojo-attach-point=\"zoneSelect\" class=\"zone-select\" style=\"width:50px; \"></select>\r\n  </label>\r\n</div>\r\n",
 'url:widgets/Daylight/setting/css/style.css':".jimu-widget-daylight-setting .zone-select{width: 50px; margin-left: 10px;}",
-'*now':function(r){r(['dojo/i18n!*preload*widgets/Daylight/setting/nls/Setting*["ar","bs","cs","da","de","en","el","es","et","fi","fr","he","hi","hr","id","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sl","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]']);}
+'*now':function(r){r(['dojo/i18n!*preload*widgets/Daylight/setting/nls/Setting*["ar","bs","ca","cs","da","de","en","el","es","et","fi","fr","he","hi","hr","hu","id","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sl","sr","sv","th","tr","zh-cn","uk","vi","zh-hk","zh-tw","ROOT"]']);}
 }});
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.

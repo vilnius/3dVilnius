@@ -3,7 +3,7 @@
 require({cache:{
 'widgets/Search/setting/utils':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,9 +25,10 @@ define([
   'dojo/when',
   'dojo/promise/all',
   'jimu/portalUtils',
-  // 'esri/lang',
+  'esri/lang',
   'esri/request'
-], function(lang, array, Deferred, when, all, portalUtils, /*esriLang,*/ esriRequest) {
+], function(lang, array, Deferred, when, all, portalUtils, esriLang, esriRequest) {
+  //jshint unused:false
   var mo = {
     map: null,
     layerInfosObj: null,
@@ -113,7 +114,7 @@ define([
                 name: geocode.name || this._getGeocodeName(geocode.url),
                 url: geocode.url,
                 singleLineFieldName: geocode.singleLineFieldName,
-                placeholder: geocode.placeholder ||
+                placeholder: geocode.placeholder || window.jimuNls.common.findAddressOrPlace ||
                   geocode.name || this._getGeocodeName(geocode.url),
                 maxResults: 6,
                 searchInCurrentMapExtent: false,
@@ -128,50 +129,64 @@ define([
       }));
   };
 
-  mo._getQueryTypeGeocoder = function(/*item*/) {
-    return null;
-    // var layer = this.map.getLayer(item.id);
-    // var url = null;
-    // var _layerInfo = null;
-    // var _layerId = null;
+  mo._getQueryTypeGeocoder = function(item) {
+    //var layer = this.map.getLayer(item.id);
+    var layer = this.map.findLayerById(item.id);
+    var url = null;
+    //var _layerInfo = null;
+    var _layerId = null;
 
-    // if (esriLang.isDefined(item.subLayer)) {
-    //   _layerId = item.id + "_" + item.subLayer;
-    // } else {
-    //   _layerId = item.id;
-    // }
+    /*
+    if (esriLang.isDefined(item.subLayer)) {
+      _layerId = item.id + "_" + item.subLayer;
+    } else {
+      _layerId = item.id;
+    }
+    */
+    _layerId = item.id;
 
-    // var isInMap = this.layerInfosObj.traversal(function(layerInfo) {
-    //   if (layerInfo.id === _layerId) {
-    //     _layerInfo = layerInfo;
-    //     return true;
-    //   }
+    /*
+    var isInMap = this.layerInfosObj.traversal(function(layerInfo) {
+      if (layerInfo.id === _layerId) {
+        _layerInfo = layerInfo;
+        return true;
+      }
 
-    //   return false;
-    // });
+      return false;
+    });
+    */
 
-    // if (layer && isInMap && _layerInfo) {
-    //   if (esriLang.isDefined(item.subLayer)) {
-    //     url = _layerInfo.url || (layer.url + "/" + item.subLayer);
-    //   } else {
-    //     url = _layerInfo.url || layer.url;
-    //   }
+    var subLayer = null;
+    if(layer && layer.allSublayers) {
+      subLayer = layer.allSublayers.find(function(layer) {
+        return layer.id === item.subLayer;
+      });
+    }
 
-    //   return {
-    //     name: _layerInfo.title,
-    //     layerId: _layerId,
-    //     url: url,
-    //     placeholder: item.hintText,
-    //     searchFields: [item.field.name],
-    //     displayField: item.field.name,
-    //     exactMatch: item.field.exactMatch || false,
-    //     maxResults: 6,
-    //     searchInCurrentMapExtent: false,
-    //     type: "query"
-    //   };
-    // } else {
-    //   return null;
-    // }
+    if (layer) {
+      if(layer.type === "scene") {
+        url = layer.url + "/layers/" + layer.layerId;
+      } else if (subLayer/*esriLang.isDefined(item.subLayer)*/) {
+        url = subLayer.url || (layer.url + "/" + item.subLayer);
+      } else {
+        url = layer.url + "/" + layer.layerId;
+      }
+
+      return {
+        name: layer.title,
+        layerId: _layerId,
+        url: url,
+        placeholder: item.hintText || window.jimuNls.common.findAddressOrPlace,
+        searchFields: [item.field.name],
+        displayField: item.field.name,
+        exactMatch: item.field.exactMatch || false,
+        maxResults: 6,
+        searchInCurrentMapExtent: false,
+        type: "query"
+      };
+    } else {
+      return null;
+    }
   };
 
   mo._isEsriLocator = function(url) {
@@ -251,10 +266,11 @@ define([
 
   return mo;
 });
+
 },
 'widgets/Search/setting/QuerySourceSetting':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -289,6 +305,7 @@ define([
   'jimu/utils',
   'jimu/dijit/Popup',
   'jimu/dijit/CheckBox',
+  './LayerChooserForSearch',
   'jimu/dijit/LoadingShelter',
   'dijit/form/ValidationTextBox',
   'dojo/NodeList-data'
@@ -296,7 +313,7 @@ define([
 function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
   template, lang, array, on, query, Deferred, Evented,
   _FeaturelayerSourcePopup, portalUrlUtils, esriRequest, esriLang,
-  jimuUtils, Popup, CheckBox) {
+  jimuUtils, Popup, CheckBox, LayerChooserForSearch) {
   return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Evented], {
     baseClass: 'jimu-widget-search-query-source-setting',
     templateString: template,
@@ -633,11 +650,43 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
       this._openServiceChooser();
     },
 
+    /*
+    _replace3DLayerChooser: function(featurePopup) {
+      var featurelayerChooserWithButtons3d = new FeaturelayerChooserWithButtons3d({
+        map: this.map
+      });
+      var flcContainerNode = query(".dijit-container.map-dijit-container", featurePopup.domNode)[0];
+      if(flcContainerNode) {
+        flcContainerNode.removeChild(flcContainerNode.firstChild);
+        featurelayerChooserWithButtons3d.placeAt(flcContainerNode);
+      }
+
+      //featurePopup.fls.flcMap = featurelayerChooserWithButtons3d;
+
+      featurePopup.fls.own(on(featurelayerChooserWithButtons3d, 'ok', lang.hitch(this, function(items){
+        if(items && items.length > 0){
+          featurePopup.fls.emit('ok', items);
+        }
+      })));
+
+      featurePopup.fls.own(on(featurelayerChooserWithButtons3d, 'cancel', lang.hitch(this, function(){
+        featurePopup.fls.emit('cancel');
+      })));
+
+    },
+    */
+
     _openServiceChooser: function() {
+
+      var layerChooserForSearch = new LayerChooserForSearch({
+        map: this.map,
+        mustSupportQuery: true
+      });
+
       var args = {
         titleLabel: this.nls.setLayerSource,
-
         dijitArgs: {
+          layerChooserFromMap: layerChooserForSearch,
           multiple: false,
           createMapResponse: this.map.webMapResponse,
           portalUrl: this.appConfig.portalUrl,
@@ -648,6 +697,9 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
       };
 
       var featurePopup = new _FeaturelayerSourcePopup(args);
+
+      //this._replace3DLayerChooser(featurePopup);
+
       on.once(featurePopup, 'ok', lang.hitch(this, function(item) {
         featurePopup.close();
         this.setDefinition(item.definition || {});
@@ -784,10 +836,11 @@ function(declare, html, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
     }
   });
 });
+
 },
 'jimu/dijit/_FeaturelayerSourcePopup':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -820,6 +873,12 @@ function(declare, Evented, on, lang, html, Popup, FeaturelayerSource, LoadingInd
     height: 560,
     titleLabel: '',
 
+    //dijitArgs: {
+    //  layerChooserFromMap:,// optional, default value is 'jimu/dijit/FeaturelayerChooserFromMap'
+    //  multiple: false,
+    //  createMapResponse: ,
+    //  portalUrl: ,
+    //}
     dijitArgs: null,//refer to the parameters of dijit FeaturelayerSource
 
     //events:
@@ -908,10 +967,11 @@ function(declare, Evented, on, lang, html, Popup, FeaturelayerSource, LoadingInd
 
   });
 });
+
 },
 'jimu/dijit/FeaturelayerSource':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -961,6 +1021,7 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
     //FeaturelayerChooserFromPortal options
     portalUrl: null,
 
+    layerChooserFromMap: null, // optional, default value is 'jimu/dijit/FeaturelayerChooserFromMap'
     //public methods:
     //getSelectedItems
     //getSelectedRadioType
@@ -1033,7 +1094,8 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
         },
         multiple: this.multiple,
         createMapResponse: this.createMapResponse,
-        onlyShowWebMapLayers: true
+        onlyShowWebMapLayers: true,
+        layerChooserFromMap: this.layerChooserFromMap
       };
       this.flcMap = new FeaturelayerChooserWithButtons(args1);
       this.flcMap.operationTip = this.nls.selectLayer;
@@ -1194,10 +1256,11 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
 
   });
 });
+
 },
 'jimu/dijit/_FeaturelayerChooserWithButtons':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1244,6 +1307,7 @@ function(on, Evented, lang, html, declare, _WidgetBase, _TemplatedMixin, _Widget
       '</div>' +
     '</div>',
 
+    layerChooserFromMap: null, // optional, default value is 'jimu/dijit/FeaturelayerChooserFromMap'
     //events:
     //ok
     //cancel
@@ -1261,7 +1325,11 @@ function(on, Evented, lang, html, declare, _WidgetBase, _TemplatedMixin, _Widget
 
     postCreate: function(){
       this.inherited(arguments);
-      this.layerChooser = new FeaturelayerChooserFromMap(this.options);
+      if(this.layerChooserFromMap) {
+        this.layerChooser = this.layerChooserFromMap;
+      } else {
+        this.layerChooser = new FeaturelayerChooserFromMap(this.options);
+      }
       this.layerChooser.placeAt(this.chooserContainer);
       html.setStyle(this.layerChooser.domNode, {
         width: '100%',
@@ -1302,10 +1370,11 @@ function(on, Evented, lang, html, declare, _WidgetBase, _TemplatedMixin, _Widget
 
   return FeaturelayerChooserWithButtons;
 });
+
 },
 'jimu/dijit/FeaturelayerChooserFromMap':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1410,7 +1479,7 @@ function(declare, Deferred, html, lang, LayerChooserFromMap) {
 },
 'jimu/dijit/LayerChooserFromMap':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1745,7 +1814,7 @@ define([
 
             var baseUrl = window.location.protocol + "//" + window.location.host + require.toUrl("jimu");
 
-            var imageName = this._getIconImageName(item, opened);
+            var imageName = this._getIconInfo(item, opened).imageName;
 
             if (imageName) {
               a.backgroundImage = "url(" + baseUrl + "/css/images/" + imageName + ")";
@@ -1753,6 +1822,10 @@ define([
             }
 
             return icon;
+          }),
+
+          getIconClass: lang.hitch(this, function(item, opend) {
+            return this._getIconInfo(item, opend).className;
           }),
 
           getTooltip: lang.hitch(this, function(item){
@@ -1767,44 +1840,59 @@ define([
         return item.hasChildren;
       },
 
-      _getIconImageName: function(item, opened) {
+      _getIconInfo: function(item, opened) {
         var imageName = '';
+        var className = '';
 
         if (item.type === 'ArcGISDynamicMapServiceLayer' ||
           item.type === 'ArcGISTiledMapServiceLayer') {
           if (opened) {
             imageName = 'mapserver_open.png';
+            className = 'mapservice-layer-icon open';
           } else {
             imageName = 'mapserver_close.png';
+            className = 'mapservice-layer-icon close';
           }
         } else if (item.type === 'GroupLayer') {
           if (opened) {
             imageName = 'group_layer2.png';
+            className = 'group-layer-icon open';
           } else {
             imageName = 'group_layer1.png';
+            className = 'group-layer-icon close';
           }
         } else if (item.type === 'FeatureLayer') {
           var geoType = jimuUtils.getTypeByGeometryType(item.layerInfo.layerObject.geometryType);
           if (geoType === 'point') {
             imageName = 'point_layer1.png';
+            className = 'point-layer-icon';
           } else if (geoType === 'polyline') {
             imageName = 'line_layer1.png';
+            className = 'line-layer-icon';
           } else if (geoType === 'polygon') {
             imageName = 'polygon_layer1.png';
+            className = 'polygon-layer-icon';
           }
         } else if(item.type === 'Table'){
           imageName = "table.png";
+          className = 'table-icon';
         } else if(item.type === 'ArcGISImageServiceLayer' ||
          item.type === 'ArcGISImageServiceVectorLayer'){
           imageName = 'image_layer.png';
+          className = 'iamge-layer-icon';
         } else {
           if (opened) {
             imageName = 'mapserver_open.png';
+            className = 'mapservice-layer-icon open';
           } else {
             imageName = 'mapserver_close.png';
+            className = 'mapservice-layer-icon close';
           }
         }
-        return imageName;
+        return {
+          imageName: imageName,
+          className: className
+        };
       },
 
       _onTreeOpen: function(item, node) { /*jshint unused: false*/
@@ -2507,7 +2595,8 @@ define([
 						overwrite: true,
 						parent: newParentItem,
 						oldParent: oldParentItem,
-						before: before
+						before: before,
+						isCopy: false
 					}));
 				}));
 			}else{
@@ -2515,7 +2604,8 @@ define([
 					overwrite: true,
 					parent: newParentItem,
 					oldParent: oldParentItem,
-					before: before
+					before: before,
+					isCopy: true
 				}));
 			}
 
@@ -2560,7 +2650,7 @@ define([
 },
 'jimu/dijit/_Tree':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2586,13 +2676,14 @@ define(['dojo/_base/declare',
   'dojo/query',
   'dojo/aspect',
   'dojo/on',
+  'dojo/keys',
   'dojo/Evented',
   'dijit/registry',
   'dijit/Tree',
   'jimu/utils'
 ],
 function(declare, _WidgetBase, _TemplatedMixin, tnTemplate, lang, html, array,
-  dojoEvent, query, aspect, on, Evented, registry, DojoTree, jimuUtils) {
+  dojoEvent, query, aspect, on, keys, Evented, registry, DojoTree, jimuUtils) {
   /*jshint unused: false*/
   var JimuTreeNode = declare([DojoTree._TreeNode, Evented], {
     templateString: tnTemplate,
@@ -2620,6 +2711,17 @@ function(declare, _WidgetBase, _TemplatedMixin, tnTemplate, lang, html, array,
       html.place(this.checkNode, this.contentNode, 'first');
 
       this.own(on(this.checkNode, 'click', lang.hitch(this, this._onClick)));
+      // this.own(on(this.checkNode, 'keydown', lang.hitch(this, function(evt){
+      //   if(evt.keyCode === keys.ENTER || evt.keyCode === keys.SPACE){
+      //     this._onClick(evt);
+      //   }
+      // })));
+      this.own(on(this.rowNode, 'keydown', lang.hitch(this, function(checkNode, evt){
+        evt.target = checkNode;
+        if(evt.keyCode === keys.ENTER || evt.keyCode === keys.SPACE){
+          this._onClick(evt);
+        }
+      },this.checkNode)));
 
       if(this.isLeaf){
         if(this.groupId){
@@ -2738,6 +2840,9 @@ function(declare, _WidgetBase, _TemplatedMixin, tnTemplate, lang, html, array,
       //http://stackoverflow.com/questions/12261723/
       //how-to-disable-multiple-selection-of-nodes-in-dijit-tree
       this.dndController.singular = true;
+
+      //make tree dijit focusable
+      html.setAttr(this.domNode, 'tabindex', 0);
     },
 
     removeItem: function(id){
@@ -4494,10 +4599,23 @@ define([
 			//		Focus on the specified node (which must be visible)
 			// tags:
 			//		protected
-
-			var scrollLeft = this.domNode.scrollLeft;
+                        var tmp = [];
+                        for(var domNode = this.domNode; 
+                            domNode && domNode.tagName && domNode.tagName.toUpperCase() !== 'IFRAME';
+                            domNode = domNode.parentNode) {
+                            tmp.push({
+                                domNode: domNode.contentWindow || domNode,
+                                scrollLeft: domNode.scrollLeft || 0,
+                                scrollTop: domNode.scrollTop || 0
+                            });
+                        }
 			this.focusChild(node);
-			this.domNode.scrollLeft = scrollLeft;
+			this.defer(function() {
+                            for (var i = 0, max = tmp.length; i < max; i++) {
+                                tmp[i].domNode.scrollLeft = tmp[i].scrollLeft;
+                                tmp[i].domNode.scrollTop = tmp[i].scrollTop;
+                            }
+			}, 0);
 		},
 
 		_onNodeMouseEnter: function(/*dijit/_WidgetBase*/ /*===== node =====*/){
@@ -5961,7 +6079,7 @@ define([
 },
 'jimu/dijit/FeaturelayerChooserFromPortal':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6132,23 +6250,21 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
 });
 },
 'jimu/dijit/ItemSelector':function(){
-/*
-// Copyright © 2014 - 2018 Esri. All rights reserved.
-
-TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL
-Unpublished material - all rights reserved under the
-Copyright Laws of the United States and applicable international
-laws, treaties, and conventions.
-
-For additional information, contact:
-Attn: Contracts and Legal Department
-Environmental Systems Research Institute, Inc.
-380 New York Street
-Redlands, California, 92373
-USA
-
-email: contracts@esri.com
-*/
+///////////////////////////////////////////////////////////////////////////
+// Copyright © Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
 
 define([
   'dojo/_base/declare',
@@ -6166,6 +6282,7 @@ define([
   'dojo/promise/all',
   'dojo/query',
   'dojo/on',
+  'dojo/dom-style',
   'jimu/utils',
   'jimu/portalUtils',
   'jimu/tokenUtils',
@@ -6173,9 +6290,10 @@ define([
   'jimu/dijit/ViewStack',
   'jimu/dijit/Search',
   'jimu/dijit/TabContainer3',
-  'jimu/dijit/_ItemTable'
+  'jimu/dijit/_ItemTable',
+  'dijit/form/RadioButton'
 ], function(declare, topic, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,
-  Evented, lang, dojoConfig, array, html, Deferred, all, query, on, jimuUtils, portalUtils,
+  Evented, lang, dojoConfig, array, html, Deferred, all, query, on, domStyle, jimuUtils, portalUtils,
   tokenUtils, portalUrlUtils, ViewStack, Search, TabContainer3,  _ItemTable) {
   /*jshint unused: false*/
   /* jshint maxlen: 200 */
@@ -6214,6 +6332,11 @@ define([
     typeKeywords: '',//array, such as ['Web AppBuilder'] or ['Web AppBuilder','Web Map']...
     showOnlineItems: true,
     onlyShowOnlineFeaturedItems: false,
+    showMyContent: true,
+    showMyOrganization: true,
+    showMyGroups: true,
+    showPublic: true,
+    showOnlyEditableGroups: false,
 
     //public methods:
     //getSelectedItem
@@ -6301,7 +6424,28 @@ define([
         content: this.publicTabNode
       };
 
-      var tabs = [tabMyContent, tabOrganization, tabGroup, tabPublic];
+      domStyle.set(this.mycontentTabNode, "display", "none");
+      domStyle.set(this.organizationTabNode, "display", "none");
+      domStyle.set(this.groupTabNode, "display", "none");
+      domStyle.set(this.publicTabNode, "display", "none");
+
+      var tabs = [];
+      if(this.showMyContent) {
+        tabs.push(tabMyContent);
+        domStyle.set(this.mycontentTabNode, "display", "block");
+      }
+      if(this.showMyOrganization) {
+        tabs.push(tabOrganization);
+        domStyle.set(this.organizationTabNode, "display", "block");
+      }
+      if(this.showMyGroups) {
+        tabs.push(tabGroup);
+        domStyle.set(this.groupTabNode, "display", "block");
+      }
+      if(this.showPublic) {
+        tabs.push(tabPublic);
+        domStyle.set(this.publicTabNode, "display", "block");
+      }
 
       this.tab = new TabContainer3({
         tabs: tabs
@@ -6336,14 +6480,12 @@ define([
     },
 
     _initPortalRadio: function(){
-      jimuUtils.combineRadioCheckBoxWithLabel(this.portalPublicRaido, this.portalPublicLabel);
-      jimuUtils.combineRadioCheckBoxWithLabel(this.onlinePublicRaido, this.onlinePublicLabel);
       var portalUrl = this._getPortalUrl();
       var portalServer = portalUrlUtils.getServerByUrl(portalUrl);
 
-      this.portalPublicRaido.disabled = false;
-      this.onlinePublicRaido.disabled = false;
-      this.portalPublicRaido.checked = true;
+      this.portalPublicRaido.set("disabled", false);
+      this.onlinePublicRaido.set("disabled", false);
+      this.portalPublicRaido.set("checked", true);
       var shouldHidePublicArcGIScom = false;
       if(portalUrlUtils.isArcGIScom(portalServer)){
         shouldHidePublicArcGIScom = true;
@@ -6359,7 +6501,7 @@ define([
         }
       }
       if(shouldHidePublicArcGIScom){
-        this.onlinePublicRaido.disabled = true;
+        this.onlinePublicRaido.set("disabled", true);
         html.setStyle(this.onlinePublicRaido, 'display', 'none');
         html.setStyle(this.onlinePublicLabel, 'display', 'none');
       }
@@ -6492,14 +6634,14 @@ define([
 
       var portalUrl = this._getPortalUrl();
       //portal public
-      if(!this.portalPublicRaido.disabled){
+      if(!this.portalPublicRaido.get("disabled")){
         this.publicPortalItemTable.set('portalUrl', portalUrl);
         this.publicPortalItemTable.searchAllItems(this._allPublicPortalQuery);
         this.publicPortalItemTable.set('filteredQuery', this._filterPublicPortalQuery);
       }
 
       //ArcGIS.com public
-      if(!this.onlinePublicRaido.disabled){
+      if(!this.onlinePublicRaido.get("disabled")){
         this.publicOnlineItemTable.set('portalUrl', window.location.protocol + '//www.arcgis.com');
         this.publicOnlineItemTable.searchAllItems(this._allPublicOnlineQuery);
         this.publicOnlineItemTable.set('filteredQuery', this._filterPublicOnlineQuery);
@@ -6513,11 +6655,11 @@ define([
     },
 
     _onPublicRaidoClicked: function(){
-      if(this.portalPublicRaido.checked){
+      if(this.portalPublicRaido.get("checked")){
         this.publicPortalItemTable.show();
         this.publicOnlineItemTable.hide();
       }
-      else if(this.onlinePublicRaido.checked){
+      else if(this.onlinePublicRaido.get("checked")){
         this.publicPortalItemTable.hide();
         this.publicOnlineItemTable.show();
       }
@@ -6530,12 +6672,12 @@ define([
         this.publicPortalItemTable.showFilterItemsSection();
         this.publicOnlineItemTable.showFilterItemsSection();
 
-        if (this.portalPublicRaido.checked) {
+        if (this.portalPublicRaido.get("checked")) {
           //text + this._itemTypeQueryString + ' AND access:public ' + this._typeKeywordQueryString
           this._filterPublicPortalQuery.q = text + ' ' + this._filterPublicPortalQuery.basicQ;
           this._filterPublicPortalQuery.start = 1;
           this.publicPortalItemTable.searchFilteredItems(this._filterPublicPortalQuery);
-        } else if (this.onlinePublicRaido.checked) {
+        } else if (this.onlinePublicRaido.get("checked")) {
           this._filterPublicOnlineQuery.q = text + ' ' + this._itemTypeQueryString +
           ' AND access:public ' + this._typeKeywordQueryString;
           this._filterPublicOnlineQuery.start = 1;
@@ -6674,7 +6816,7 @@ define([
 
     _searchGroups: function(user){
       this._resetGroupsSection();
-      html.setStyle(this.groupsSection, "display", "block");
+      html.setStyle(this.groupsSection, "display", "flex");
       var groups = user.getGroups();
       if (groups.length > 0) {
         html.setStyle(this.groupSearch.domNode, 'display', 'block');
@@ -6766,23 +6908,21 @@ define([
 });
 },
 'jimu/dijit/_ItemTable':function(){
-/*
-// Copyright © 2014 - 2018 Esri. All rights reserved.
-
-TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL
-Unpublished material - all rights reserved under the
-Copyright Laws of the United States and applicable international
-laws, treaties, and conventions.
-
-For additional information, contact:
-Attn: Contracts and Legal Department
-Environmental Systems Research Institute, Inc.
-380 New York Street
-Redlands, California, 92373
-USA
-
-email: contracts@esri.com
-*/
+///////////////////////////////////////////////////////////////////////////
+// Copyright © Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
 
 define([
   'dojo/_base/declare',
@@ -7155,9 +7295,143 @@ define([
   });
 });
 },
+'dijit/form/RadioButton':function(){
+define([
+	"dojo/_base/declare", // declare
+	"./CheckBox",
+	"./_RadioButtonMixin"
+], function(declare, CheckBox, _RadioButtonMixin){
+
+	// module:
+	//		dijit/form/RadioButton
+
+	return declare("dijit.form.RadioButton", [CheckBox, _RadioButtonMixin], {
+		// summary:
+		//		Same as an HTML radio, but with fancy styling.
+
+		baseClass: "dijitRadio"
+	});
+});
+
+},
+'dijit/form/_RadioButtonMixin':function(){
+define([
+	"dojo/_base/array", // array.forEach
+	"dojo/_base/declare", // declare
+	"dojo/dom-attr", // domAttr.set
+	"dojo/_base/lang", // lang.hitch
+	"dojo/query!css2", // query
+	"../registry"    // registry.getEnclosingWidget
+], function(array, declare, domAttr, lang, query, registry){
+
+	// module:
+	//		dijit/form/_RadioButtonMixin
+
+	return declare("dijit.form._RadioButtonMixin", null, {
+		// summary:
+		//		Mixin to provide widget functionality for an HTML radio button
+
+		// type: [private] String
+		//		type attribute on `<input>` node.
+		//		Users should not change this value.
+		type: "radio",
+
+		_getRelatedWidgets: function(){
+			// Private function needed to help iterate over all radio buttons in a group.
+			var ary = [];
+			query("input[type=radio]", this.focusNode.form || this.ownerDocument).forEach(// can't use name= since query doesn't support [] in the name
+				lang.hitch(this, function(inputNode){
+					if(inputNode.name == this.name && inputNode.form == this.focusNode.form){
+						var widget = registry.getEnclosingWidget(inputNode);
+						if(widget){
+							ary.push(widget);
+						}
+					}
+				})
+			);
+			return ary;
+		},
+
+		_setCheckedAttr: function(/*Boolean*/ value){
+			// If I am being checked then have to deselect currently checked radio button
+			this.inherited(arguments);
+			if(!this._created){
+				return;
+			}
+			if(value){
+				array.forEach(this._getRelatedWidgets(), lang.hitch(this, function(widget){
+					if(widget != this && widget.checked){
+						widget.set('checked', false);
+					}
+				}));
+			}
+		},
+
+		_getSubmitValue: function(/*String*/ value){
+			return value == null ? "on" : value;
+		},
+
+		_onClick: function(/*Event*/ e){
+			if(this.checked || this.disabled){ // nothing to do
+				e.stopPropagation();
+				e.preventDefault();
+				return false;
+			}
+
+			if(this.readOnly){ // ignored by some browsers so we have to resync the DOM elements with widget values
+				e.stopPropagation();
+				e.preventDefault();
+				array.forEach(this._getRelatedWidgets(), lang.hitch(this, function(widget){
+					domAttr.set(this.focusNode || this.domNode, 'checked', widget.checked);
+				}));
+				return false;
+			}
+
+			// RadioButton has some unique logic since it must enforce only a single button being checked at once
+			// For this reason the "_onClick" method does not call this.inherited
+
+			var canceled = false;
+			var previouslyCheckedButton;
+
+			array.some(this._getRelatedWidgets(), function(radioButton){
+				if(radioButton.checked){
+					previouslyCheckedButton = radioButton;
+					return true;
+				}
+				return false;
+			});
+
+			// We want to set the post-click values correctly for any event handlers, but since
+			// the event handlers could revert them, we don't want to fully update the widget state
+			// yet and trigger notifications
+			this.checked = true;
+			previouslyCheckedButton && (previouslyCheckedButton.checked = false);
+
+			// Call event handlers
+			// If event handler prevents it, the clicked radio button will not be checked
+			if(this.onClick(e) === false || e.defaultPrevented){
+				canceled = true;
+			}
+
+			// Reset internal state to how it was before the click
+			this.checked = false;
+			previouslyCheckedButton && (previouslyCheckedButton.checked = true);
+
+			if(canceled){
+				e.preventDefault();
+			}else{
+				this.set('checked', true);
+			}
+
+			return !canceled;
+		}
+	});
+});
+
+},
 'jimu/dijit/FeaturelayerServiceBrowser':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7225,7 +7499,7 @@ function(declare, _BasicServiceBrowser, lang, array, serviceBrowserRuleUtils) {
 },
 'jimu/dijit/_BasicServiceBrowser':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7256,13 +7530,13 @@ define([
   'dijit/tree/ObjectStoreModel',
   'jimu/utils',
   'jimu/dijit/_Tree',
-  'jimu/dijit/LoadingShelter'
+  'jimu/dijit/LoadingIndicator'
 ],
 function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Evented, lang, html,
  array, Deferred, all, Memory, Observable, ObjectStoreModel, jimuUtils, Tree) {
   return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Evented], {
     templateString:'<div style="width:100%;"><div data-dojo-attach-point="shelter" ' +
-    ' data-dojo-type="jimu/dijit/LoadingShelter" data-dojo-props="hidden:true"></div></div>',
+    ' data-dojo-type="jimu/dijit/LoadingIndicator" data-dojo-props="hidden:true"></div></div>',
     _store: null,
     _id: 0,
     _currentUrl: '',
@@ -7860,7 +8134,7 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Evented
 },
 'jimu/serviceBrowserRuleUtils':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8300,7 +8574,7 @@ function(lang, array, Deferred, jimuUtils, ServiceBrowserRule) {
 },
 'jimu/ServiceBrowserRule':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8468,7 +8742,7 @@ function(declare, lang, array, Deferred, jimuUtils, esriRequest, IdentityManager
 },
 'jimu/dijit/_FeaturelayerServiceChooserContent':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8519,7 +8793,7 @@ function(declare, _BasicServiceChooserContent, FeaturelayerServiceBrowser) {
 },
 'jimu/dijit/_BasicServiceChooserContent':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8778,6 +9052,296 @@ function(declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, templat
   });
 });
 },
+'widgets/Search/setting/LayerChooserForSearch':function(){
+///////////////////////////////////////////////////////////////////////////
+// Copyright © Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define([
+  'dojo/_base/declare',
+  'dojo/Deferred',
+  'dojo/_base/html',
+  'dojo/_base/lang',
+  'for3dSetting/FeaturelayerChooserFromMap3d'
+],
+function(declare, Deferred, html, lang, FeaturelayerChooserFromMap3d) {
+  //jshint unused:false
+  return declare([FeaturelayerChooserFromMap3d], {
+    declaredClass: 'jimu.dijit.FeaturelayerChooserFromMap3d',
+
+    _featureLayerFilter: function(layer) {
+      var def = new Deferred();
+      var queryable = this.mustSupportQuery ? this._isQueryable(layer) : true;
+      if(layer && layer.type === "feature" && queryable) {
+        def.resolve();
+      } else if(layer && layer.type === "scene") {
+        layer.queryFeatures().then(lang.hitch(this, function() {
+          def.resolve();
+        }), lang.hitch(this, function() {
+          def.reject();
+        }));
+      } else {
+        def.reject();
+      }
+      return def;
+    }
+
+  });
+});
+
+},
+'for3dSetting/FeaturelayerChooserFromMap3d':function(){
+///////////////////////////////////////////////////////////////////////////
+// Copyright © Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define([
+  'dojo/_base/declare',
+  'dojo/Deferred',
+  'dojo/_base/html',
+  'dojo/_base/lang',
+  './LayerChooserFromMap3d'
+],
+function(declare, Deferred, html, lang, LayerChooserFromMap3d) {
+  //jshint unused:false
+  return declare([LayerChooserFromMap3d], {
+    baseClass: 'jimu-layer-chooser-from-map-3d jimu-featurelayer-chooser-from-map-3d',
+    declaredClass: 'jimu.dijit.FeaturelayerChooserFromMap3d',
+    mustSupportQuery: null,
+
+    constructor: function(){
+      this.mustSupportQuery = false;
+    },
+
+    postMixInProperties:function(){
+      this.inherited(arguments);
+      this.layerFilter = lang.hitch(this, this._featureLayerFilter);
+    },
+
+    /*
+    postCreate: function(){
+      this.inherited(arguments);
+      this.layerFilter = lang.hitch(this, this._featureLayerFilter);
+      //html.addClass(this.domNode, 'jimu-layer-chooser-from-map-3d');
+    },
+    */
+
+    _isQueryable: function(layer) {
+      if(layer &&
+         layer.capabilities &&
+         layer.capabilities.operations &&
+         layer.capabilities.operations.supportsQuery) {
+        return true;
+      }
+    },
+
+    _featureLayerFilter: function(layer) {
+      var def = new Deferred();
+      var queryable = this.mustSupportQuery ? this._isQueryable(layer) : true;
+      if(layer && layer.type === "feature" && queryable) {
+        def.resolve();
+      } else {
+        def.reject();
+      }
+      return def;
+    }
+
+  });
+});
+
+},
+'for3dSetting/LayerChooserFromMap3d':function(){
+///////////////////////////////////////////////////////////////////////////
+// Copyright © Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define([
+  'dojo/on',
+  'dojo/Evented',
+  'dojo/query',
+  'dojo/Deferred',
+  'dojo/promise/all',
+  'dojo/_base/lang',
+  'dojo/_base/html',
+  'dojo/_base/declare',
+  'dijit/_WidgetBase',
+  'dijit/_TemplatedMixin',
+  'dijit/_WidgetsInTemplateMixin',
+  'jimu/dijit/LoadingIndicator'
+],
+function(on, Evented, query, Deferred, all, lang, html, declare, _WidgetBase,
+_TemplatedMixin, _WidgetsInTemplateMixin, LoadingIndicator) {
+
+  var baseClassArr = [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Evented];
+
+  var Clazz = declare(baseClassArr, {
+    baseClass: 'jimu-layer-chooser-from-map-3d',
+    declaredClass: 'builder.for3dSetting.LayerChooserFromMap3d',
+    templateString: '<div>' +
+      '<div class="chooser-container" data-dojo-attach-point="chooserContainer"></div>' +
+      '</div>',
+
+    layerFilter: null,
+    _selectedLayer: null,
+
+    constructor: function(options){
+      this.options = options;
+    },
+
+    postMixInProperties: function(){
+      this.nls = lang.clone(window.jimuNls.common);
+      if(!this.layerFilter) {
+        this.layerFilter = function(layer) {
+          var def = new Deferred();
+          //jshint unused:false
+          def.resolve();
+          return def;
+        };
+      }
+    },
+
+    postCreate: function(){
+      this.inherited(arguments);
+      this.loadingIndecator = new LoadingIndicator({
+        hidden: false
+      }).placeAt(this.domNode);
+      this.createLayerChooser();
+    },
+
+    createLayerChooser: function() {
+      var createdLayers = [];
+      this.map.layers.forEach(lang.hitch(this, function(layer) {
+        if(layer.allSublayers) {
+          layer.allSublayers.forEach(lang.hitch(this, function(sublayer) {
+            var subFeatureLayer = sublayer.createFeatureLayer();
+            if(subFeatureLayer) {
+              // working around for incorrect subFeatureLayer.url
+              // it's a bug of js-api?
+              subFeatureLayer._urlAddedByWab = sublayer.url;
+              createdLayers.push(this._createLayerItem(subFeatureLayer));
+            }
+          }));
+        } else {
+          // working around for incorrect layer.url
+          // confirmed, every layerId substring will be cutted from the layer.url after creating a new 'FeatreLayer'
+          // it's a bug of js-api?
+          if(layer.type === "scene") {
+            layer._urlAddedByWab = layer.url + "/layers/" + layer.layerId;
+          } else {
+            layer._urlAddedByWab = layer.url + "/" + layer.layerId;
+          }
+          createdLayers.push(this._createLayerItem(layer));
+        }
+      }));
+      all(createdLayers).then(lang.hitch(this, function(){
+        this.loadingIndecator.hide();
+      }));
+    },
+
+    _createLayerItem: function(layer) {
+      var retDef = new Deferred();
+      var layerItem = html.create("div", {
+        'class': "layer-item",
+        'innerHTML': layer.title
+      }, this.chooserContainer);
+
+      this.own(on(layerItem, 'click', lang.hitch(this, this._layerItemClick, layer)));
+      if(layer.loaded) {
+        this._showLayerItem(layer, layerItem);
+        retDef.resolve();
+      } else {
+        layer.load();
+        layer.when(lang.hitch(this, function() {
+          this._showLayerItem(layer, layerItem);
+          retDef.resolve();
+        }), lang.hitch(this, function() {
+          retDef.resolve();
+        }));
+      }
+      return retDef;
+    },
+
+    _showLayerItem: function(layer, layerItem) {
+      this.layerFilter(layer).then(lang.hitch(this, function() {
+        html.addClass(layerItem, 'enable');
+      }), lang.hitch(this, function() {
+        html.removeClass(layerItem, 'enable');
+      }));
+    },
+
+    _layerItemClick: function(layer, evt) {
+      query(".layer-item.selected", this.chooserContainer).forEach(function(node) {
+        html.removeClass(node, 'selected');
+      });
+      html.addClass(evt.target, 'selected');
+
+      this._selectedLayer = layer;
+      // compatible with LayerChooserFromMap.js
+      this.emit('tree-click');
+    },
+
+    getSelectedItems: function(){
+      var items = [];
+      if(this._selectedLayer) {
+        items.push({
+          name: this._selectedLayer.title,
+          url: this._selectedLayer._urlAddedByWab || this._selectedLayer.url,
+          layerInfo: {
+            id: this._selectedLayer.id
+          }
+        });
+      }
+      return items;
+    }
+
+    /*
+    startup: function(){
+      this.inherited(arguments);
+      this.layerChooser.startup();
+    }
+    */
+  });
+
+  return Clazz;
+});
+
+},
 'dojo/NodeList-data':function(){
 define([
 	"./_base/kernel", "./query", "./_base/lang", "./_base/array", "./dom-attr"
@@ -8981,7 +9545,7 @@ define([
 },
 'widgets/Search/setting/LocatorSourceSetting':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9457,7 +10021,7 @@ define(
 },
 'jimu/dijit/_GeocodeServiceChooserContent':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9500,7 +10064,7 @@ function(declare, _BasicServiceChooserContent, GeocodeServiceBrowser) {
 },
 'jimu/dijit/GeocodeServiceBrowser':function(){
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9569,16 +10133,16 @@ define(["dojo/text!./Setting.html",
 'url:dijit/templates/TreeNode.html':"<div class=\"dijitTreeNode\" role=\"presentation\"\r\n\t><div data-dojo-attach-point=\"rowNode\" class=\"dijitTreeRow\" role=\"presentation\"\r\n\t\t><span data-dojo-attach-point=\"expandoNode\" class=\"dijitInline dijitTreeExpando\" role=\"presentation\"></span\r\n\t\t><span data-dojo-attach-point=\"expandoNodeText\" class=\"dijitExpandoText\" role=\"presentation\"></span\r\n\t\t><span data-dojo-attach-point=\"contentNode\"\r\n\t\t\tclass=\"dijitTreeContent\" role=\"presentation\">\r\n\t\t\t<span role=\"presentation\" class=\"dijitInline dijitIcon dijitTreeIcon\" data-dojo-attach-point=\"iconNode\"></span\r\n\t\t\t><span data-dojo-attach-point=\"labelNode,focusNode\" class=\"dijitTreeLabel\" role=\"treeitem\"\r\n\t\t\t\t   tabindex=\"-1\" aria-selected=\"false\" id=\"${id}_label\"></span>\r\n\t\t</span\r\n\t></div>\r\n\t<div data-dojo-attach-point=\"containerNode\" class=\"dijitTreeNodeContainer\" role=\"presentation\"\r\n\t\t style=\"display: none;\" aria-labelledby=\"${id}_label\"></div>\r\n</div>\r\n",
 'url:dijit/templates/Tree.html':"<div role=\"tree\">\r\n\t<div class=\"dijitInline dijitTreeIndent\" style=\"position: absolute; top: -9999px\" data-dojo-attach-point=\"indentDetector\"></div>\r\n\t<div class=\"dijitTreeExpando dijitTreeExpandoLoading\" data-dojo-attach-point=\"rootLoadingIndicator\"></div>\r\n\t<div data-dojo-attach-point=\"containerNode\" class=\"dijitTreeContainer\" role=\"presentation\">\r\n\t</div>\r\n</div>\r\n",
 'url:jimu/dijit/templates/FeaturelayerChooserFromPortal.html':"<div>\r\n\t<div class=\"selector-container\" data-dojo-attach-point=\"selectorContainer\"></div>\r\n\t<div class=\"service-browser-container\" data-dojo-attach-point=\"serviceBrowserContainer\"></div>\r\n\t<div class=\"footer\">\r\n\t\t<div class=\"jimu-btn jimu-float-trailing cancel jimu-btn-vacation\" data-dojo-attach-point=\"btnCancel\" data-dojo-attach-event=\"onclick:_onBtnCancelClicked\">${nls.cancel}</div>\r\n\t\t<div class=\"jimu-btn jimu-float-trailing next jimu-state-disabled\" data-dojo-attach-point=\"btnNext\" data-dojo-attach-event=\"onclick:_onBtnNextClicked\">${nls.next}</div>\r\n\t\t<div class=\"jimu-btn jimu-float-trailing ok jimu-state-disabled\" data-dojo-attach-point=\"btnOk\" data-dojo-attach-event=\"onclick:_onBtnOkClicked\">${nls.ok}</div>\r\n\t\t<div class=\"jimu-btn jimu-float-trailing back\" data-dojo-attach-point=\"btnBack\" data-dojo-attach-event=\"onclick:_onBtnBackClicked\">${nls.back}</div>\r\n\t</div>\r\n</div>",
-'url:jimu/dijit/templates/ItemSelector.html':"\r\n<div>\r\n\t<div class=\"setting-tab-container\">\r\n\t\t<div data-dojo-attach-point=\"tabNode\"></div>\r\n\r\n\t\t<div class=\"tab-content mycontent-tab\" data-dojo-attach-point=\"mycontentTabNode\">\r\n\t\t\t<div class=\"tab-content-main mycontent-tab-content-main\">\r\n\t\t\t\t<div data-dojo-attach-point=\"mycontentSearch\" data-dojo-type=\"jimu/dijit/Search\" data-dojo-props='searchWhenInput:false' data-dojo-attach-event=\"onSearch:_onMyContentSearch\" style=\"position:absolute;width:100%;top:0;\"></div>\r\n\t\t\t\t<div data-dojo-attach-point=\"mycontentItemTable\" data-dojo-type=\"jimu/dijit/_ItemTable\" data-dojo-props='types:${_itemTypes},typeKeywords:${_typeKeywords}' style=\"top:50px;\"></div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"tab-content organization-tab\" data-dojo-attach-point=\"organizationTabNode\">\r\n\t\t\t<div class=\"tab-content-main organization-tab-content-main\">\r\n\t\t\t\t<div data-dojo-attach-point=\"organizationSearch\" data-dojo-type=\"jimu/dijit/Search\" data-dojo-props='searchWhenInput:false' data-dojo-attach-event=\"onSearch:_onOrganizationSearch\" style=\"position:absolute;width:100%;top:0;\"></div>\r\n\t\t\t\t<div data-dojo-attach-point=\"organizationItemTable\" data-dojo-type=\"jimu/dijit/_ItemTable\" data-dojo-props='types:${_itemTypes},typeKeywords:${_typeKeywords}' style=\"top:50px;\"></div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"tab-content group-tab\" data-dojo-attach-point=\"groupTabNode\">\r\n\t\t\t<div class=\"tab-content-main group-tab-content-main\">\r\n\t\t\t\t<div class=\"groups-section\" style=\"position:absolute;width:100%;top:50px;\" data-dojo-attach-point=\"groupsSection\">\r\n\t\t\t\t\t<span>${nls.groups}:</span>\r\n\t\t\t\t\t<select class=\"groups-select\" data-dojo-attach-point=\"groupsSelect\">\r\n\t\t\t\t\t\t<option value=\"nodata\">${nls.noneGroups}</option>\r\n\t\t\t\t\t</select>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div data-dojo-attach-point=\"groupSearch\" data-dojo-type=\"jimu/dijit/Search\" data-dojo-props='searchWhenInput:false' data-dojo-attach-event=\"onSearch:_onGroupSearch\" style=\"position:absolute;width:100%;top:0;\"></div>\r\n\t\t\t\t<div data-dojo-attach-point=\"groupItemTable\" data-dojo-type=\"jimu/dijit/_ItemTable\" data-dojo-props='types:${_itemTypes},typeKeywords:${_typeKeywords}' style=\"top:85px;\"></div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"tab-content public-tab\" data-dojo-attach-point=\"publicTabNode\">\r\n\t\t\t<div class=\"tab-content-main public-tab-content-main\">\r\n\t\t\t\t<div data-dojo-attach-point=\"publicSearch\" data-dojo-type=\"jimu/dijit/Search\" data-dojo-props='searchWhenInput:false' data-dojo-attach-event=\"onSearch:_onPublicSearch\" style=\"position:absolute;width:100%;top:0;\"></div>\r\n\t\t\t\t<div class=\"public-search-radios\">\r\n\t\t\t\t\t<input data-dojo-attach-point=\"portalPublicRaido\" type=\"radio\" name=\"publicSearchRadio\" class=\"jimu-float-leading portal-public-radio jimu-radio-btn\" />\r\n\t\t\t\t\t<label data-dojo-attach-point=\"portalPublicLabel\" class=\"jimu-float-leading portal-public-label\">Portal</label>\r\n\t\t\t\t\t<input data-dojo-attach-point=\"onlinePublicRaido\" type=\"radio\" name=\"publicSearchRadio\" class=\"jimu-float-leading online-public-radio jimu-radio-btn\" />\r\n\t\t\t\t\t<label data-dojo-attach-point=\"onlinePublicLabel\" class=\"jimu-float-leading online-public-label\">ArcGIS Online</label>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div data-dojo-attach-point=\"publicItemSection\" class=\"public-item-section\">\r\n\t\t\t\t\t<div data-dojo-attach-point=\"publicPortalItemTable\" data-dojo-type=\"jimu/dijit/_ItemTable\" data-dojo-props='types:${_itemTypes},typeKeywords:${_typeKeywords}'></div>\r\n\t\t\t\t\t<div data-dojo-attach-point=\"publicOnlineItemTable\" data-dojo-type=\"jimu/dijit/_ItemTable\" data-dojo-props='types:${_itemTypes},typeKeywords:${_typeKeywords}'></div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"signin-section\" data-dojo-attach-point=\"signinSection\" style=\"display:none;\">\r\n\t\t<div class=\"signin-tip\">${nls.signInTip}</div>\r\n\t</div>\r\n</div>",
+'url:jimu/dijit/templates/ItemSelector.html':"\r\n<div>\r\n\t<div class=\"setting-tab-container\">\r\n\t\t<div data-dojo-attach-point=\"tabNode\"></div>\r\n\r\n\t\t<div class=\"tab-content mycontent-tab\" data-dojo-attach-point=\"mycontentTabNode\">\r\n\t\t\t<div class=\"tab-content-main mycontent-tab-content-main\">\r\n\t\t\t\t<div data-dojo-attach-point=\"mycontentSearch\" data-dojo-type=\"jimu/dijit/Search\" data-dojo-props='searchWhenInput:false' data-dojo-attach-event=\"onSearch:_onMyContentSearch\" style=\"position:absolute;width:100%;top:0;\"></div>\r\n\t\t\t\t<div data-dojo-attach-point=\"mycontentItemTable\" data-dojo-type=\"jimu/dijit/_ItemTable\" data-dojo-props='types:${_itemTypes},typeKeywords:${_typeKeywords}' style=\"top:50px;\"></div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"tab-content organization-tab\" data-dojo-attach-point=\"organizationTabNode\">\r\n\t\t\t<div class=\"tab-content-main organization-tab-content-main\">\r\n\t\t\t\t<div data-dojo-attach-point=\"organizationSearch\" data-dojo-type=\"jimu/dijit/Search\" data-dojo-props='searchWhenInput:false' data-dojo-attach-event=\"onSearch:_onOrganizationSearch\" style=\"position:absolute;width:100%;top:0;\"></div>\r\n\t\t\t\t<div data-dojo-attach-point=\"organizationItemTable\" data-dojo-type=\"jimu/dijit/_ItemTable\" data-dojo-props='types:${_itemTypes},typeKeywords:${_typeKeywords}' style=\"top:50px;\"></div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"tab-content group-tab\" data-dojo-attach-point=\"groupTabNode\">\r\n\t\t\t<div class=\"tab-content-main group-tab-content-main\">\r\n\t\t\t\t<div class=\"groups-section\" data-dojo-attach-point=\"groupsSection\">\r\n\t\t\t\t\t<div>${nls.groups}:</div>\r\n\t\t\t\t\t<select class=\"groups-select\" data-dojo-attach-point=\"groupsSelect\">\r\n\t\t\t\t\t\t<option value=\"nodata\">${nls.noneGroups}</option>\r\n\t\t\t\t\t</select>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div data-dojo-attach-point=\"groupSearch\" data-dojo-type=\"jimu/dijit/Search\" data-dojo-props='searchWhenInput:false' data-dojo-attach-event=\"onSearch:_onGroupSearch\" style=\"position:absolute;width:100%;top:0;\"></div>\r\n\t\t\t\t<div data-dojo-attach-point=\"groupItemTable\" data-dojo-type=\"jimu/dijit/_ItemTable\" data-dojo-props='types:${_itemTypes},typeKeywords:${_typeKeywords}' style=\"top:85px;\"></div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"tab-content public-tab\" data-dojo-attach-point=\"publicTabNode\">\r\n\t\t\t<div class=\"tab-content-main public-tab-content-main\">\r\n\t\t\t\t<div data-dojo-attach-point=\"publicSearch\" data-dojo-type=\"jimu/dijit/Search\" data-dojo-props='searchWhenInput:false' data-dojo-attach-event=\"onSearch:_onPublicSearch\" style=\"position:absolute;width:100%;top:0;\"></div>\r\n\t\t\t\t<div class=\"public-search-radios\">\r\n\t\t\t\t\t<fieldset id=\"publicSearchRaido\">\r\n\t\t\t\t\t\t<input data-dojo-attach-point=\"portalPublicRaido\" data-dojo-type=\"dijit/form/RadioButton\" \r\n\t\t\t\t\t\t\tid=\"portalPublicRaido\" name=\"publicSearchRaido\" class=\"jimu-float-leading portal-public-radio\" />\r\n\t\t\t\t\t\t<label data-dojo-attach-point=\"portalPublicLabel\" for=\"portalPublicRaido\" class=\"jimu-float-leading portal-public-label\">Portal</label>\r\n\r\n\t\t\t\t\t\t<input data-dojo-attach-point=\"onlinePublicRaido\" data-dojo-type=\"dijit/form/RadioButton\"\r\n\t\t\t\t\t\t\tid=\"onlinePublicRaido\" name=\"publicSearchRaido\" class=\"jimu-float-leading online-public-radio\" />\r\n\t\t\t\t\t\t<label data-dojo-attach-point=\"onlinePublicLabel\" for=\"onlinePublicRaido\" class=\"jimu-float-leading portal-public-label\">ArcGIS Online</label>\r\n\t\t\t\t\t</fieldset>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div data-dojo-attach-point=\"publicItemSection\" class=\"public-item-section\">\r\n\t\t\t\t\t<div data-dojo-attach-point=\"publicPortalItemTable\" data-dojo-type=\"jimu/dijit/_ItemTable\" data-dojo-props='types:${_itemTypes},typeKeywords:${_typeKeywords}'></div>\r\n\t\t\t\t\t<div data-dojo-attach-point=\"publicOnlineItemTable\" data-dojo-type=\"jimu/dijit/_ItemTable\" data-dojo-props='types:${_itemTypes},typeKeywords:${_typeKeywords}'></div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"signin-section\" data-dojo-attach-point=\"signinSection\" style=\"display:none;\">\r\n\t\t<div class=\"signin-tip\">${nls.signInTip}</div>\r\n\t</div>\r\n</div>",
 'url:jimu/dijit/templates/_ItemTable.html':"<div>\r\n\t<div class=\"items-section all-items-section\" data-dojo-attach-point=\"allItemsSection\">\r\n\t\t<div class=\"items-table-div\" data-dojo-attach-point=\"allItemsTableDiv\" data-dojo-attach-event=\"onscroll:_onAllItemsSectionScroll\">\r\n\t\t\t<table class=\"items-table\" cellpadding=\"10\" data-dojo-attach-point=\"allItemsTable\" data-dojo-attach-event=\"onclick:_onItemsTableClicked\">\r\n\t\t\t\t<tbody data-dojo-attach-point=\"allItemTbody\"></tbody>\r\n\t\t\t</table>\r\n\t\t</div>\r\n\t\t<div data-dojo-type=\"jimu/dijit/LoadingIndicator\" data-dojo-attach-point=\"allItemsShelter\" data-dojo-props='hidden:true'></div>\r\n\t</div>\r\n\t<div class=\"items-section filtered-items-section\" data-dojo-attach-point=\"filteredItemsSection\">\r\n\t\t<div class=\"items-table-div\" data-dojo-attach-point=\"filteredItemsTableDiv\" data-dojo-attach-event=\"onscroll:_onFilteredItemsSectionScroll\">\r\n\t\t\t<table class=\"items-table\" cellpadding=\"10\" data-dojo-attach-point=\"filteredItemsTable\" data-dojo-attach-event=\"onclick:_onItemsTableClicked\">\r\n\t\t\t\t<tbody data-dojo-attach-point=\"filteredItemsTbody\"></tbody>\r\n\t\t\t</table>\r\n\t\t</div>\r\n\t\t<div class=\"search-none-tip-section\" data-dojo-attach-point=\"searchNoneTipSection\" style=\"display:none;\">\r\n\t\t\t<span class=\"search-none-icon jimu-icon jimu-icon-error\"></span>\r\n\t\t\t<span class=\"search-none-tip jimu-state-error-text\">${nls.searchNone}</span>\r\n\t\t</div>\r\n\t\t<div data-dojo-type=\"jimu/dijit/LoadingIndicator\" data-dojo-attach-point=\"filteredItemShelter\" data-dojo-props='hidden:true'></div>\r\n\t</div>\r\n</div>",
 'url:jimu/dijit/templates/_BasicServiceChooserContent.html':"<div>\r\n\t<div class=\"content-section\">\r\n\t\t<table class=\"layout\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"80px\" align=\"right\"></col>\r\n\t\t\t\t<col width=\"auto\"></col>\r\n\t\t\t\t<col width=\"170px\"></col>\r\n\t\t\t</colgroup>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"first-td\">\r\n\t\t\t\t\t\t<span>URL:</span>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<div data-dojo-attach-point=\"urlInput\" data-dojo-type=\"jimu/dijit/URLInput\" style=\"width:100%;\"></div>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<div class=\"jimu-btn jimu-state-disabled validate-btn jimu-float-trailing\" data-dojo-attach-point=\"btnValidate\" data-dojo-attach-event=\"onclick:_onBtnValidateClick\">${nls.validate}</div>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr data-dojo-attach-point=\"exampleTr\" class=\"example-tr\">\r\n\t\t\t\t\t<td class=\"first-td\" style=\"padding-top:5px;\">\r\n\t\t\t\t\t\t<span title=\"${nls.example}:\">${nls.example}:</span>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td data-dojo-attach-point=\"exampleTd\" colspan=\"2\" style=\"padding-top:5px;font-style:italic;color:#ccc;\">\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n\t\t<div class=\"service-browser-container\" data-dojo-attach-point=\"serviceBrowserContainer\">\r\n\t\t\t<div class=\"error-section\" data-dojo-attach-point=\"errorSection\">\r\n\t\t\t\t<span class=\"jimu-icon jimu-icon-error\"></span>\r\n\t\t\t\t<span class=\"error-message\" data-dojo-attach-point=\"errorNode\"></span>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"operations\">\r\n\t\t<div class=\"jimu-btn jimu-float-trailing cancel jimu-btn-vacation\" data-dojo-attach-event=\"onclick:_onBtnCancelClick\">${nls.cancel}</div>\r\n\t\t<div class=\"jimu-btn jimu-float-trailing jimu-state-disabled ok\" data-dojo-attach-point=\"btnOk\" data-dojo-attach-event=\"onclick:_onBtnOkClick\">${nls.ok}</div>\r\n\t</div>\r\n\t<div data-dojo-attach-point=\"loading\" data-dojo-type=\"jimu/dijit/LoadingIndicator\" data-dojo-props='hidden:true'></div>\r\n</div>",
-'url:widgets/Search/setting/LocatorSourceSetting.html':"<div>\r\n  <div class=\"source-tips jimu-ellipsis\" title=\"${nls.locatorTips}\" data-dojo-attach-point=\"tipsNode\">\r\n    <em>${nls.locatorTips}</em>\r\n  </div>\r\n  <div class=\"source-url-section\">\r\n    <table class=\"source-table\" cellspacing=\"0\">\r\n      <tbody>\r\n        <tr>\r\n          <td class=\"first\">\r\n            <span class=\"source-label\">${nls.locatorUrl}</span>\r\n          </td>\r\n          <td class=\"second\">\r\n            <div data-dojo-attach-point=\"locatorUrl\" data-dojo-type=\"dijit/form/ValidationTextBox\" data-dojo-props=\"required:true,trim:true,disabled:true,style:{width:'100%'}\"></div>\r\n          </td>\r\n          <td class=\"third\">\r\n            <span class=\"jimu-btn\" title=\"${nls.set}\" data-dojo-attach-event=\"click:_onSetLocatorUrlClick\">${nls.set}</span>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td class=\"first\"></td>\r\n          <td class=\"second\">\r\n            <span data-dojo-attach-point=\"messageNode\" class=\"tip\"></span>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <div class=\"source-details-section\" data-dojo-attach-point=\"detailsSection\">\r\n    <table class=\"source-table\" cellspacing=\"0\">\r\n      <tbody>\r\n        <tr>\r\n          <td class=\"first\">${nls.locatorName}</td>\r\n          <td class=\"second\">\r\n            <input type=\"text\" data-dojo-type=\"dijit/form/ValidationTextBox\" data-dojo-attach-point=\"locatorName\" data-dojo-attach-event=\"Blur: _onLocatorNameBlur\"\r\n            placeHolder=\"${nls.locatorName}\"\r\n            required=\"true\" data-dojo-props='style:{width:\"100%\"}'/>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td class=\"first\">${nls.placeholder}</td>\r\n          <td class=\"second\">\r\n            <input type=\"text\" data-dojo-type=\"dijit/form/TextBox\" data-dojo-attach-point=\"placeholder\"\r\n            data-dojo-attach-event=\"Blur: _onPlaceholderBlur\"\r\n            placeHolder=\"${nls.placeholder}\" data-dojo-props='style:{width:\"100%\"}'/>\r\n          </td>\r\n        </tr>\r\n        <tr class=\"hide-country-code-row country-code-row\" data-dojo-attach-point=\"countryCodeRow\">\r\n          <td class=\"first\">${nls.countryCode}</td>\r\n          <td class=\"second\">\r\n            <input type=\"text\" data-dojo-type=\"dijit/form/TextBox\" data-dojo-attach-point=\"countryCode\"\r\n            data-dojo-attach-event=\"Blur:_onCountryCodeBlur\"\r\n            placeHolder=\"${nls.countryCodeEg} USA,CHN\" data-dojo-props='style:{width:\"97%\"}'/>\r\n            <a class=\"jimu-float-trailing\" target=\"_blank\" href=\"https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm\" style=\"line-height:30px;\">?</a>\r\n            <span class=\"example\">${nls.countryCodeHint}</span>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td class=\"first\">\r\n            <span class=\"source-label\">${nls.maxSuggestions}</span>\r\n          </td>\r\n          <td class=\"second\">\r\n            <div class=\"source-tips\" title=\"${nls.locatorTips}\" data-dojo-attach-point=\"tipsNode\">\r\n              <em>${nls.locatorTips}</em>\r\n            </div>\r\n            <div data-dojo-attach-point=\"maxSuggestions\" data-dojo-type=\"dijit/form/NumberTextBox\" data-dojo-props=\"constraints:{min:1,places:0},style:{width:'100%'},value:6\"></div>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td class=\"first\">\r\n            <span class=\"source-label\">${nls.maxResults}</span>\r\n          </td>\r\n          <td class=\"second\">\r\n            <div data-dojo-attach-point=\"maxResults\" data-dojo-type=\"dijit/form/NumberTextBox\" data-dojo-props=\"constraints:{min:1,places:0},style:{width:'100%'}\"></div>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td class=\"first\">\r\n            <span class=\"source-label\">${nls.zoomScale}</span>\r\n          </td>\r\n          <td class=\"second\">\r\n            <span class=\"jimu-float-leading\" style=\"line-height:30px;\">1: </span>\r\n            <div class=\"jimu-float-trailing\" data-dojo-attach-point=\"zoomScale\" data-dojo-type=\"dijit/form/NumberTextBox\" data-dojo-props=\"constraints:{min:1},style:{width:'96%'},value:50000\"></div>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <table class=\"source-table\" cellspacing=\"0\">\r\n      <tbody>\r\n        <tr>\r\n          <td class=\"first\">\r\n            <div data-dojo-attach-point=\"searchInCurrentMapExtent\"></div>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <div data-dojo-attach-point=\"shelter\" data-dojo-type=\"jimu/dijit/LoadingShelter\" data-dojo-props=\"hidden:true\"></div>\r\n</div>",
-'url:widgets/Search/setting/Setting.html':"<div>\r\n  <div class=\"sources-setting\">\r\n    <span class=\"group-label\">${nls.sourceSetting}</span>\r\n    <div class=\"instruction\">\r\n      <p>${nls.instruction2}</p>\r\n    </div>\r\n    <div class=\"dropdown-button\" role=\"button\">\r\n      <div class=\"button\">\r\n        <span class=\"button-text\">${nls.add}</span>\r\n      </div>\r\n      <ul class=\"dropdown-menu\" role=\"menu\" data-dojo-attach-event=\"click:_onMenuItemClick\">\r\n        <li class=\"dropdown-item\" type=\"locator\">${nls.geocoder}</li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"sources\">\r\n      <div class=\"source-list jimu-float-leading\">\r\n        <div class=\"source-list-table\" data-dojo-attach-point=\"sourceList\" style=\"100%\"></div>\r\n      </div>\r\n      <div class=\"source-setting jimu-float-trailing\" data-dojo-attach-point=\"sourceSettingNode\"></div>\r\n    </div>\r\n  </div>\r\n  <div class=\"general-setting\">\r\n    <span class=\"group-label\">${nls.generalSetting}</span>\r\n    <table class=\"general-setting-table\">\r\n      <tr>\r\n        <td class=\"first\">\r\n          <span class=\"source-label\">${nls.allPlaceholder}</span>\r\n        </td>\r\n        <td class=\"second\">\r\n          <div data-dojo-attach-point=\"allPlaceholder\" data-dojo-type=\"dijit/form/ValidationTextBox\" data-dojo-attach-event=\"Blur:_onAllPlaceholderBlur\" data-dojo-props=\"trim:true,style:{width:'100%'}\"></div>\r\n        </td>\r\n      </tr>\r\n    </table>\r\n    <table class=\"general-setting-table\">\r\n      <tr>\r\n        <td class=\"first\">\r\n          <div data-dojo-attach-point=\"showInfoWindowOnSelect\"></div>\r\n        </td>\r\n      </tr>\r\n    </table>\r\n  </div>\r\n  <div data-dojo-attach-point=\"shelter\" data-dojo-type=\"jimu/dijit/LoadingIndicator\" data-dojo-props=\"hidden:true\"></div>\r\n</div>\r\n",
+'url:widgets/Search/setting/LocatorSourceSetting.html':"<div>\r\n  <div class=\"source-tips jimu-ellipsis\" title=\"${nls.locatorTips}\" data-dojo-attach-point=\"tipsNode\">\r\n    <em>${nls.locatorTips}</em>\r\n  </div>\r\n  <div class=\"source-url-section\">\r\n    <table class=\"source-table\" cellspacing=\"0\">\r\n      <tbody>\r\n        <tr>\r\n          <td class=\"first\">\r\n            <span class=\"source-label\">${nls.locatorUrl}</span>\r\n          </td>\r\n          <td class=\"second\">\r\n            <div data-dojo-attach-point=\"locatorUrl\" data-dojo-type=\"dijit/form/ValidationTextBox\" data-dojo-props=\"required:true,trim:true,disabled:true,style:{width:'100%'}\"></div>\r\n          </td>\r\n          <td class=\"third\">\r\n            <span class=\"jimu-btn\" title=\"${nls.set}\" data-dojo-attach-event=\"click:_onSetLocatorUrlClick\">${nls.set}</span>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td class=\"first\"></td>\r\n          <td class=\"second\" colspan=\"2\">\r\n            <span data-dojo-attach-point=\"messageNode\" class=\"tip\"></span>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <div class=\"source-details-section\" data-dojo-attach-point=\"detailsSection\">\r\n    <table class=\"source-table\" cellspacing=\"0\">\r\n      <tbody>\r\n        <tr>\r\n          <td class=\"first\">${nls.locatorName}</td>\r\n          <td class=\"second\">\r\n            <input type=\"text\" data-dojo-type=\"dijit/form/ValidationTextBox\" data-dojo-attach-point=\"locatorName\" data-dojo-attach-event=\"Blur: _onLocatorNameBlur\"\r\n            placeHolder=\"${nls.locatorName}\"\r\n            required=\"true\" data-dojo-props='style:{width:\"100%\"}'/>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td class=\"first\">${nls.placeholder}</td>\r\n          <td class=\"second\">\r\n            <input type=\"text\" data-dojo-type=\"dijit/form/TextBox\" data-dojo-attach-point=\"placeholder\"\r\n            data-dojo-attach-event=\"Blur: _onPlaceholderBlur\"\r\n            placeHolder=\"${nls.placeholder}\" data-dojo-props='style:{width:\"100%\"}'/>\r\n          </td>\r\n        </tr>\r\n        <tr class=\"hide-country-code-row country-code-row\" data-dojo-attach-point=\"countryCodeRow\">\r\n          <td class=\"first\">${nls.countryCode}</td>\r\n          <td class=\"second\">\r\n            <input type=\"text\" data-dojo-type=\"dijit/form/TextBox\" data-dojo-attach-point=\"countryCode\"\r\n            data-dojo-attach-event=\"Blur:_onCountryCodeBlur\"\r\n            placeHolder=\"${nls.countryCodeEg} USA,CHN\" data-dojo-props='style:{width:\"97%\"}'/>\r\n            <a class=\"jimu-float-trailing\" target=\"_blank\" href=\"https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm\" style=\"line-height:30px;\">?</a>\r\n            <span class=\"example\">${nls.countryCodeHint}</span>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td class=\"first\">\r\n            <span class=\"source-label\">${nls.maxSuggestions}</span>\r\n          </td>\r\n          <td class=\"second\">\r\n            <div class=\"source-tips\" title=\"${nls.locatorTips}\" data-dojo-attach-point=\"tipsNode\">\r\n              <em>${nls.locatorTips}</em>\r\n            </div>\r\n            <div data-dojo-attach-point=\"maxSuggestions\" data-dojo-type=\"dijit/form/NumberTextBox\" data-dojo-props=\"constraints:{min:1,places:0},style:{width:'100%'},value:6\"></div>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td class=\"first\">\r\n            <span class=\"source-label\">${nls.maxResults}</span>\r\n          </td>\r\n          <td class=\"second\">\r\n            <div data-dojo-attach-point=\"maxResults\" data-dojo-type=\"dijit/form/NumberTextBox\" data-dojo-props=\"constraints:{min:1,places:0},style:{width:'100%'}\"></div>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td class=\"first\">\r\n            <span class=\"source-label\">${nls.zoomScale}</span>\r\n          </td>\r\n          <td class=\"second\">\r\n            <span class=\"jimu-float-leading\" style=\"line-height:30px;\">1: </span>\r\n            <div class=\"jimu-float-trailing\" data-dojo-attach-point=\"zoomScale\" data-dojo-type=\"dijit/form/NumberTextBox\" data-dojo-props=\"constraints:{min:1},style:{width:'96%'},value:50000\"></div>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <table class=\"source-table\" cellspacing=\"0\">\r\n      <tbody>\r\n        <tr>\r\n          <td class=\"first\">\r\n            <div data-dojo-attach-point=\"searchInCurrentMapExtent\"></div>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n  <div data-dojo-attach-point=\"shelter\" data-dojo-type=\"jimu/dijit/LoadingShelter\" data-dojo-props=\"hidden:true\"></div>\r\n</div>\r\n",
+'url:widgets/Search/setting/Setting.html':"<div>\r\n  <div class=\"sources-setting\">\r\n    <span class=\"group-label\">${nls.sourceSetting}</span>\r\n    <div class=\"instruction\">\r\n      <p>${nls.instruction2}</p>\r\n    </div>\r\n    <div class=\"dropdown-button\" role=\"button\">\r\n      <div class=\"button\">\r\n        <span class=\"button-text\">${nls.add}</span>\r\n      </div>\r\n      <ul class=\"dropdown-menu\" role=\"menu\" data-dojo-attach-event=\"click:_onMenuItemClick\">\r\n        <li class=\"dropdown-item\" type=\"query\">${nls.searchableLayer}</li>\r\n        <li class=\"dropdown-item\" type=\"locator\">${nls.geocoder}</li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"sources\">\r\n      <div class=\"source-list jimu-float-leading\">\r\n        <div class=\"source-list-table\" data-dojo-attach-point=\"sourceList\" style=\"100%\"></div>\r\n      </div>\r\n      <div class=\"source-setting jimu-float-trailing\" data-dojo-attach-point=\"sourceSettingNode\"></div>\r\n    </div>\r\n  </div>\r\n  <div class=\"general-setting\">\r\n    <span class=\"group-label\">${nls.generalSetting}</span>\r\n    <table class=\"general-setting-table\">\r\n      <tr>\r\n        <td class=\"first\">\r\n          <span class=\"source-label\">${nls.allPlaceholder}</span>\r\n        </td>\r\n        <td class=\"second\">\r\n          <div data-dojo-attach-point=\"allPlaceholder\" data-dojo-type=\"dijit/form/ValidationTextBox\" data-dojo-attach-event=\"Blur:_onAllPlaceholderBlur\" data-dojo-props=\"trim:true,style:{width:'100%'}\"></div>\r\n        </td>\r\n      </tr>\r\n    </table>\r\n    <table class=\"general-setting-table\">\r\n      <tr>\r\n        <td class=\"first\">\r\n          <div data-dojo-attach-point=\"showInfoWindowOnSelect\"></div>\r\n        </td>\r\n      </tr>\r\n    </table>\r\n  </div>\r\n  <div data-dojo-attach-point=\"shelter\" data-dojo-type=\"jimu/dijit/LoadingIndicator\" data-dojo-props=\"hidden:true\"></div>\r\n</div>\r\n",
 'url:widgets/Search/setting/css/style.css':".jimu-widget-search-setting{overflow: hidden; width: 100%; margin-top: 20px; color: #596679; font-size: 14px;}.jimu-widget-search-setting .group-label{display: inline-block; margin-bottom: 10px; font-weight: bold;}.jimu-widget-search-setting .instruction{font-size: 12px;}.jimu-widget-search-setting .dropdown-button {margin: 8px 0; display: inline-block; position: relative; padding-left: 16px; color: #518dca; background: url(images/add_icon.png) no-repeat left; cursor: pointer;}.jimu-rtl .jimu-widget-search-setting .dropdown-button{padding-left: 0; padding-right: 16px; background-position: right;}.jimu-widget-search-setting .dropdown-button .dropdown-menu{position: absolute; display: none; list-style-type: none; top: 16px; left: 0; margin: 0; padding: 0; background: #fafafa; color: #7989a0; z-index: 999;}.jimu-rtl .jimu-widget-search-setting .dropdown-button .dropdown-menu{right: 0; left: auto;}.jimu-widget-search-setting .dropdown-button:hover .dropdown-menu{display: inline-block;}.jimu-widget-search-setting .dropdown-menu .dropdown-item{white-space: nowrap; height: 30px; padding: 0 25px; line-height: 30px;}.jimu-widget-search-setting .dropdown-menu .dropdown-item:hover{background: #edf2f5; color: #15a4fa;}.jimu-widget-search-setting .sources{height: 366px;}.jimu-widget-search-setting .source-list{width: 270px; height: 100%;}.jimu-widget-search-setting .source-setting{width: 660px; position: relative;}.jimu-widget-search-setting .source-setting .source-tips{display: none; font-size: 12px; color: #a0acbf;}.jimu-widget-search-setting .source-setting .source-tips-show{display: block;}.jimu-widget-search-setting .general-setting .group-label{margin-top: 20px; margin-bottom: 5px;}.jimu-widget-search-setting .source-table,.jimu-widget-search-setting .general-setting-table{width: 100%;}.jimu-widget-search-setting .search-fields-selector {display: inline-block; margin: 6px 0; width: 18px; height: 18px; background: url(images/selector.png) no-repeat center;}.jimu-widget-search-setting .jimu-widget-search-locator-source-setting .source-details-section .country-code-row td{padding-bottom: 35px; position: relative;}.jimu-widget-search-setting .jimu-widget-search-locator-source-setting .source-details-section .country-code-row .example{position: absolute; top: 35px; left: 0; font-size: 12px;}.jimu-rtl .jimu-widget-search-setting .jimu-widget-search-locator-source-setting .source-details-section .country-code-row .example{left: auto; right: 0;}.jimu-widget-search-setting .jimu-widget-search-locator-source-setting .source-details-section .hide-country-code-row {display: none;}.jimu-widget-search-setting .source-url-section .source-table > tbody > tr:first-child > td {padding-bottom: 5px;}.jimu-widget-search-setting .source-table > tbody > tr > td,.jimu-widget-search-setting .general-setting-table > tbody > tr > td{padding-bottom: 10px;}.jimu-widget-search-setting .source-table > tbody > tr > .first,.jimu-widget-search-setting .general-setting-table > tbody > tr > .first{width: auto; text-align: left; padding-right: 10px; white-space: nowrap;}.jimu-widget-search-setting .source-table > tbody > tr > .second{width:550px;}.jimu-widget-search-setting .general-setting-table > tbody > tr > .second{width: 650px;}.jimu-widget-search-setting .source-table > tbody > tr > .third{width: 70px; padding-left: 10px;}.jimu-rtl .jimu-widget-search-setting .source-table > tbody > tr > .first,.jimu-rtl .jimu-widget-search-setting .general-setting-table > tbody > tr > .first{padding-left: 10px; padding-right: 0;}.jimu-rtl .jimu-widget-search-setting .source-table > tbody > tr > .first,.jimu-rtl .jimu-widget-search-setting .general-setting-table > tbody > tr > .first{text-align: right; padding-left: 10px; padding-right: auto;}.jimu-rtl .jimu-widget-search-setting .source-table > tbody > tr > .third{padding-left: 0; padding-right: 10px;}.jimu-widget-query-source-setting .source-url-section .source-table > tbody > tr > .second {width: 455px;}.jimu-widget-search-setting .source-table .jimu-btn{padding: 0; line-height: 30px; width: 60px;}.jimu-widget-search-setting .source-table > tbody > tr > .second .tip{font-style: italic; font-size: 12px; color: #a0acbf; width: 100%; display: inline-block;}.jimu-widget-search-setting .source-table .error-message{color: #e84b4b !important;}.jimu-widget-search-setting .jimu-basic-service-chooser {width: auto;}.override-geocode-service-chooser-content {width: 580px !important; min-height: 150px !important;}.override-geocode-service-chooser-content .service-browser-container{display: none;}.jimu-widget-search-query-source-setting-fields .fields-checkbox{width: 167px; margin-bottom: 20px; color: #596679; font-size: 14px; margin-left: 30px;}.jimu-widget-search-query-source-setting-fields .fields-checkbox .label{width: 140px;}.jimu-rtl .jimu-widget-search-query-source-setting-fields .fields-checkbox{margin-right: 30px; margin-left: auto;}",
-'*now':function(r){r(['dojo/i18n!*preload*widgets/Search/setting/nls/Setting*["ar","bs","cs","da","de","en","el","es","et","fi","fr","he","hi","hr","id","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sl","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]']);}
+'*now':function(r){r(['dojo/i18n!*preload*widgets/Search/setting/nls/Setting*["ar","bs","ca","cs","da","de","en","el","es","et","fi","fr","he","hi","hr","hu","id","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sl","sr","sv","th","tr","zh-cn","uk","vi","zh-hk","zh-tw","ROOT"]']);}
 }});
 ///////////////////////////////////////////////////////////////////////////
-// Copyright © 2014 - 2018 Esri. All Rights Reserved.
+// Copyright © Esri. All Rights Reserved.
 //
 // Licensed under the Apache License Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9669,6 +10233,7 @@ define([
         //     this.layerInfosObj = layerInfosObj;
         // utils.setMap(this.map);
         // utils.setLayerInfosObj(this.layerInfosObj);
+        utils.setMap(this.sceneView.map);
         utils.setAppConfig(this.appConfig);
         when(utils.getConfigInfo(this.config)).then(lang.hitch(this, function(config) {
           if (!this.domNode) {
@@ -9750,9 +10315,9 @@ define([
         var itemType = evt && evt.target && html.getAttr(evt.target, "type");
         if (itemType === "locator") {
           this._addNewLocator();
-        }/* else if (itemType === "query") {
+        } else if (itemType === "query") {
           this._addNewQuerySource();
-        }*/
+        }
       },
 
       _addNewLocator: function() {

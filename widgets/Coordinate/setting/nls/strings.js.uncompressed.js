@@ -51,10 +51,16 @@
 
     displayOrderLonLatTips: "Coordinates display order:",
     lonLatTips: "Longitude / Latitude(X, Y)",
-    latLonTips: "Latitude / Longitude(Y, X)"
+    latLonTips: "Latitude / Longitude(Y, X)",
+
+    eyeAltUnit: "EyeAlt unit:",
+    elevationUnit: "Elevation unit:",
+    english: "english",
+    metric: "metric"
   }),
   "ar": 1,
   "bs": 1,
+  "ca": 1,
   "cs": 1,
   "da": 1,
   "de": 1,
@@ -66,6 +72,7 @@
   "he": 1,
   "hi": 1,
   "hr": 1,
+  "hu": 1,
   "it": 1,
   "id": 1,
   "ja": 1,
@@ -84,6 +91,7 @@
   "sv": 1,
   "th": 1,
   "tr": 1,
+  "uk": 1,
   "vi": 1,
   "zh-cn": 1,
   "zh-hk": 1,

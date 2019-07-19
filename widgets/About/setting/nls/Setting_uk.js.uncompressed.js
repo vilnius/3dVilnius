@@ -1,0 +1,19 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+define({
+'dijit/_editor/nls/commands':{"bold":"Напівжирний","copy":"Копіювати","cut":"Вирізати","delete":"Видалити","indent":"Відступ","insertHorizontalRule":"Горизонтальне правило","insertOrderedList":"Нумерований список","insertUnorderedList":"Список з маркерами","italic":"Курсив","justifyCenter":"По центру","justifyFull":"Вирівняти","justifyLeft":"По лівому краю","justifyRight":"По правому краю","outdent":"Зменшити відступ","paste":"Вставити","redo":"Повторити","removeFormat":"Видалити формат","selectAll":"Вибрати всі","strikethrough":"Закреслений","subscript":"Надрядковий знак","superscript":"Надрядковий знак","underline":"Підкреслений","undo":"Скасувати","unlink":"Видаліть посилання","createLink":"Створити посилання","toggleDir":"Перемкнути напрямок","insertImage":"Вставити зображення","insertTable":"Вставити/змінити таблицю","toggleTableBorder":"Перемкнути рамки таблиці","deleteTable":"Видалити таблицю","tableProp":"Властивість таблиці","htmlToggle":"Вихідний текст HTML","foreColor":"Колір тексту","hiliteColor":"Колір фону","plainFormatBlock":"Формат абзацу","formatBlock":"Формат абзацу","fontSize":"Розмір шрифту","fontName":"Назва шрифту","tabIndent":"Табуляція","fullScreen":"Повноекранний режим","viewSource":"Переглянути вихідний текст HTML","print":"Друк","newPage":"Створити сторінку","systemShortcut":"Дія \"${0}\" доступна у вашому браузері лише за допомогою клавіш швидкого доступу. Використовуйте ${1}.","ctrlKey":"ctrl+${0}","appleKey":"⌘${0}","_localized":{}}
+,
+'dijit/_editor/nls/FontChoice':{"fontSize":"Розмір","fontName":"Шрифт","formatBlock":"Формат","serif":"із засічками","sans-serif":"без засічок","monospace":"непропорційний","cursive":"курсив","fantasy":"вишуканий","noFormat":"Немає","p":"Абзац","h1":"Заголовок","h2":"Підзаголовок","h3":"Вкладений підзаголовок","pre":"Попередній формат","1":"найменший","2":"дуже малий","3":"малий","4":"середній","5":"великий","6":"дуже великий","7":"найбільший","_localized":{}}
+,
+'dojox/editor/plugins/nls/Preview':{"preview":"Попередній перегляд","_localized":{}}
+,
+'dojox/editor/plugins/nls/FindReplace':{"findLabel":"Знайти:","findTooltip":"Введіть текст для пошуку","replaceLabel":"Замінити на","replaceTooltip":"Введіть текст заміни","findReplace":"Найти та замінити","matchCase":"Враховувати регістр","matchCaseTooltip":"Враховувати регістр","backwards":"Назад","backwardsTooltip":"Пошук тексту у зворотному напрямку","replaceAllButton":"Замінити всі","replaceAllButtonTooltip":"Замінити весь текст","findButton":"Знайти","findButtonTooltip":"Знайти текст","replaceButton":"Замінити","replaceButtonTooltip":"Замінити текст","replaceDialogText":"Замінено ${0} входжень.","eofDialogText":"Останнє входження ${0}","eofDialogTextFind":"знайдено","eofDialogTextReplace":"замінено","_localized":{}}
+,
+'dojox/editor/plugins/nls/PasteFromWord':{"pasteFromWord":"Вставити з Word","instructions":"Вставка вмісту з Word до текстового поля.  Після вибору вмісту для вставки натисніть кнопку Вставити.  Для скасування вставки тексту натисніть кнопку Скасувати.","_localized":{}}
+,
+'dojox/editor/plugins/nls/InsertAnchor':{"insertAnchor":"Вставити мітку","title":"Властивості мітки","anchor":"Ім'я:","text":"Опис:","set":"Встановити","cancel":"Скасувати","_localized":{}}
+,
+'dojox/editor/plugins/nls/Blockquote':{"blockquote":"Блок цитат","_localized":{}}
+,
+'widgets/About/setting/nls/strings':{"instruction":"Створюйте зміст, який відображається у цьому віджеті.","defaultContent":"Додавайте текст, посилання та графічні зображення.","productVersion":"Версія продукту: ","kernelVersion":"Версія ядра: ","_localized":{}}
+});
