@@ -6,7 +6,9 @@
     highlightLocation: "Highlight location",
     useTracking: "Watch for location changes",
     warning: "Incorrect input",
-    zoomScale: "Zoom scale"
+    zoomScale: "Zoom scale",
+    useCompass: "Show compass orientation",
+    useAccCircle: "Show location accuracy"
   }),
   "ar": 1,
   "bs": 1,

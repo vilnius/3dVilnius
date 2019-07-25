@@ -7,7 +7,7 @@
         "right": 0,
         "bottom": 20
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/Coordinate/Widget",
       "position": {
@@ -15,28 +15,28 @@
         "top": 10,
         "marginLeft": -187
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/Compass/Widget",
       "position": {
         "right": 10,
         "top": 10
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/FullScreen/Widget",
       "position": {
         "right": 10,
         "top": 52
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/Splash/Widget",
       "visible": false,
       "position": {
         "relativeTo": "browser"
       },
-      "version": "2.12"
+      "version": "2.13"
     }]
   },
 
@@ -55,16 +55,16 @@
     },
     "widgets": [{
       "uri": "widgets/ZoomSlider/Widget",
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/MyLocation/Widget",
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/Navigate/Widget",
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/Home/Widget",
-      "version": "2.12"
+      "version": "2.13"
     }]
   }
 }

@@ -15,5 +15,5 @@
 ,
 'dojox/editor/plugins/nls/Blockquote':{"blockquote":"Blokksitat","_localized":{}}
 ,
-'widgets/About/setting/nls/strings':{"instruction":"Opprett innholdet som skal vises i denne widgeten.","defaultContent":"Legg til tekst, koblinger og små grafikkelementer her.","productVersion":"Produktversjon: ","kernelVersion":"Kjerneversjon: ","_localized":{}}
+'widgets/About/setting/nls/strings':{"instruction":"Opprett innholdet som skal vises i dette miniprogrammet.","defaultContent":"Legg til tekst, koblinger og små grafikkelementer her.","productVersion":"Produktversjon: ","kernelVersion":"Kjerneversjon: ","_localized":{}}
 });

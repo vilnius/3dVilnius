@@ -8,7 +8,7 @@
         "relativeTo": "map",
         "zIndex": 0
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "themes/LaunchpadTheme/widgets/Header/Widget",
       "position": {
@@ -18,7 +18,7 @@
         "height": 46,
         "relativeTo": "map"
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/Search/Widget",
       "position": {
@@ -26,63 +26,63 @@
         "top": 16,
         "zIndex": 1
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/ZoomSlider/Widget",
       "position": {
         "left": 17,
         "top": 78
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/Home/Widget",
       "position": {
         "left": 17,
         "top": 153
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/MyLocation/Widget",
       "position": {
         "left": 17,
         "top": 191
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/Navigate/Widget",
       "position": {
         "left": 17,
         "top": 229
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/Coordinate/Widget",
       "position": {
         "left": 10,
         "bottom": 24
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/Compass/Widget",
       "position": {
         "right": 20,
         "top": 69
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/FullScreen/Widget",
       "position": {
         "right": 20,
         "top": 111
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "uri": "widgets/Splash/Widget",
       "visible": false,
       "position": {
         "relativeTo": "browser"
       },
-      "version": "2.12"
+      "version": "2.13"
     }, {
       "position": {
         "right": 20,

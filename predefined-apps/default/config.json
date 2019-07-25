@@ -11,7 +11,7 @@
       "red",
       "yellow"
     ],
-    "version": "2.12"
+    "version": "2.13"
   },
   "portalUrl": "",
   "appId": "",
@@ -38,7 +38,7 @@
           "paddingRight": 0,
           "relativeTo": "browser"
         },
-        "version": "2.12"
+        "version": "2.13"
       },
       {
         "uri": "widgets/Search/Widget",
@@ -47,7 +47,7 @@
           "top": 10,
           "relativeTo": "map"
         },
-        "version": "2.12"
+        "version": "2.13"
       },
       {
         "uri": "widgets/ZoomSlider/Widget",
@@ -55,7 +55,7 @@
           "left": 10,
           "top": 10
         },
-        "version": "2.12"
+        "version": "2.13"
       },
       {
         "uri": "widgets/Home/Widget",
@@ -63,7 +63,7 @@
           "left": 10,
           "top": 85
         },
-        "version": "2.12"
+        "version": "2.13"
       },
       {
         "uri": "widgets/MyLocation/Widget",
@@ -71,7 +71,7 @@
           "left": 10,
           "top": 123
         },
-        "version": "2.12"
+        "version": "2.13"
       },
       {
         "uri": "widgets/Navigate/Widget",
@@ -79,7 +79,7 @@
           "left": 10,
           "top": 161
         },
-        "version": "2.12"
+        "version": "2.13"
       },
       {
         "uri": "widgets/Compass/Widget",
@@ -87,7 +87,7 @@
           "right": 10,
           "top": 10
         },
-        "version": "2.12"
+        "version": "2.13"
       },
       {
         "uri": "widgets/FullScreen/Widget",
@@ -95,7 +95,7 @@
           "right": 10,
           "top": 52
         },
-        "version": "2.12"
+        "version": "2.13"
       },
       {
         "uri": "widgets/Coordinate/Widget",
@@ -103,7 +103,7 @@
           "left": 0,
           "bottom": 16
         },
-        "version": "2.12"
+        "version": "2.13"
       },
       {
         "uri": "widgets/Splash/Widget",
@@ -111,7 +111,7 @@
         "position": {
           "relativeTo": "browser"
         },
-        "version": "2.12"
+        "version": "2.13"
       }
     ]
   },
@@ -141,11 +141,11 @@
     "widgets": [
       {
         "uri": "widgets/Daylight/Widget",
-        "version": "2.12"
+        "version": "2.13"
       },
       {
         "uri": "widgets/Slides/Widget",
-        "version": "2.12"
+        "version": "2.13"
       }
     ]
   },
@@ -161,7 +161,7 @@
       "height": 29
     }
   },
-  "wabVersion": "2.12",
+  "wabVersion": "2.13",
   "_buildInfo": {
     "widgetManifestsMerged": true
   }

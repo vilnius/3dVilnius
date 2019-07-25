@@ -41,6 +41,13 @@ define([
       templateString: template,
       nls: null,
 
+      postMixInProperties: function () {
+        if (!this.nls.transparency) {
+          this.nls.transparency = window.jimuNls.transparency.transparency;//for the deleted nls, ver 2.12
+        }
+        this.inherited(arguments);
+      },
+
       postCreate: function() {
         this.colorPicker = new ColorPicker({
           color: this._defaultColor

@@ -25,6 +25,7 @@
     imageFill: "Image fill",
     chooseFile: "Choose file",
     noFileChosen: "No file chosen",
+    transparency: "Transparency",
     sizeFill: "Fill",
     sizeFit: "Fit",
     sizeStretch: "Stretch to fill",

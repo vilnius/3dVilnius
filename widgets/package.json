@@ -1,6 +1,6 @@
 {
 	"name": "widgets",
-	"version": "2.12",
+	"version": "2.13",
 	"main": "main",
 	"dependencies": {
 		"dojo": "",

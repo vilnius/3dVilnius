@@ -1,5 +1,5 @@
 // All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://atviras.vplanas.lt/portal/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
 ///////////////////////////////////////////////////////////////////////////
 // Copyright © Esri. All Rights Reserved.
 //
@@ -79,7 +79,7 @@ var
 
   //This version number will be appended to URL to avoid cache.
   //The reason we do not use wabVersion is to avoid force user to change wabVersion when they are customizing app.
-  deployVersion = '2.12';
+  deployVersion = '2.13';
 
 // console.time('before map');
 
@@ -92,10 +92,10 @@ var
 (function(global){
   //init API URL
   var queryObject = getQueryObject();
-  var apiVersion = '4.11';
+  var apiVersion = '4.12';
   ////////uncomment the following line when downloading the app
 
-  apiUrl = 'https://atviras.vplanas.lt/portal/jsapi/jsapi4';
+  apiUrl = 'https://js.arcgis.com/4.12';
 
   //////////////////////////////////////////////////////////////
   allCookies = getAllCookies();
