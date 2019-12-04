@@ -149,7 +149,7 @@
           "left": 10,
           "top": 85
         },
-        "version": "2.13"
+        "version": "2.14"
       },
       {
         "uri": "widgets/Navigate/Widget",
@@ -157,7 +157,7 @@
           "left": 10,
           "top": 122
         },
-        "version": "2.13",
+        "version": "2.14",
         "visible": true
       },
       {
@@ -167,7 +167,7 @@
           "left": 10,
           "top": 159
         },
-        "version": "2.13",
+        "version": "2.14",
         "visible": false
       },
       {
@@ -176,7 +176,7 @@
           "right": 10,
           "top": 10
         },
-        "version": "2.13",
+        "version": "2.14",
         "visible": false
       },
       {
@@ -193,7 +193,7 @@
         "position": {
           "relativeTo": "browser"
         },
-        "version": "2.13",
+        "version": "2.14",
         "visible": false
       },
       {
@@ -204,7 +204,7 @@
           "right": 25,
           "bottom": 25
         },
-        "version": "2.13"
+        "version": "2.14"
       },
       {
         "position": {

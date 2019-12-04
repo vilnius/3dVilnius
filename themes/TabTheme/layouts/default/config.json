@@ -10,7 +10,7 @@
         "paddingRight": 240,
         "relativeTo": "browser"
       },
-      "version": "2.13"
+      "version": "2.14"
     }, {
       "uri": "themes/TabTheme/widgets/Footer/Widget",
       "position": {
@@ -20,7 +20,7 @@
         "height": 24,
         "relativeTo": "browser"
       },
-      "version": "2.13"
+      "version": "2.14"
     }, {
       "uri": "themes/TabTheme/widgets/SidebarController/Widget",
       "position": {
@@ -29,7 +29,7 @@
         "bottom": 24,
         "relativeTo": "browser"
       },
-      "version": "2.13"
+      "version": "2.14"
     }, {
       "uri": "widgets/Search/Widget",
       "position": {
@@ -38,63 +38,63 @@
         "zIndex": 102,
         "relativeTo": "browser"
       },
-      "version": "2.13"
+      "version": "2.14"
     }, {
       "uri": "widgets/ZoomSlider/Widget",
       "position": {
         "left": 10,
         "top": 10
       },
-      "version": "2.13"
+      "version": "2.14"
     }, {
       "uri": "widgets/Home/Widget",
       "position": {
         "left": 10,
         "top": 85
       },
-      "version": "2.13"
+      "version": "2.14"
     }, {
       "uri": "widgets/MyLocation/Widget",
       "position": {
         "left": 10,
         "top": 123
       },
-      "version": "2.13"
+      "version": "2.14"
     }, {
       "uri": "widgets/Navigate/Widget",
       "position": {
         "left": 10,
         "top": 161
       },
-      "version": "2.13"
+      "version": "2.14"
     }, {
       "uri": "widgets/Compass/Widget",
       "position": {
         "right": 10,
         "top": 10
       },
-      "version": "2.13"
+      "version": "2.14"
     }, {
       "uri": "widgets/FullScreen/Widget",
       "position": {
         "right": 10,
         "top": 52
       },
-      "version": "2.13"
+      "version": "2.14"
     }, {
       "uri": "widgets/Coordinate/Widget",
       "position": {
         "left": 0,
         "bottom": 16
       },
-      "version": "2.13"
+      "version": "2.14"
     }, {
       "uri": "widgets/Splash/Widget",
       "visible": false,
       "position": {
         "relativeTo": "browser"
       },
-      "version": "2.13"
+      "version": "2.14"
     }]
   },
 

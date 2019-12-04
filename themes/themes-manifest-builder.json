@@ -56,8 +56,8 @@
         "description": "this is layout1"
       }
     ],
-    "version": "2.13",
-    "wabVersion": "2.13",
+    "version": "2.14",
+    "wabVersion": "2.14",
     "author": "Esri R&D Center Beijing",
     "description": "",
     "copyright": "",
@@ -222,8 +222,8 @@
         "description": "Theme widget controller"
       }
     ],
-    "version": "2.13",
-    "wabVersion": "2.13",
+    "version": "2.14",
+    "wabVersion": "2.14",
     "author": "@SpatialAgent",
     "description": "",
     "copyright": "",
@@ -388,8 +388,8 @@
         "description": "Widget controller"
       }
     ],
-    "version": "2.13",
-    "wabVersion": "2.13",
+    "version": "2.14",
+    "wabVersion": "2.14",
     "author": "@SpatialAgent",
     "description": "",
     "copyright": "",
@@ -554,8 +554,8 @@
         "description": "this is theme widget controller"
       }
     ],
-    "version": "2.13",
-    "wabVersion": "2.13",
+    "version": "2.14",
+    "wabVersion": "2.14",
     "author": "Esri R&D Center Beijing",
     "description": "",
     "copyright": "",
@@ -733,8 +733,8 @@
         "description": "this is the third layout"
       }
     ],
-    "version": "2.13",
-    "wabVersion": "2.13",
+    "version": "2.14",
+    "wabVersion": "2.14",
     "author": "Esri R&D Center Beijing",
     "description": "",
     "copyright": "",
@@ -860,8 +860,8 @@
         "description": "this is an alternative layout"
       }
     ],
-    "version": "2.13",
-    "wabVersion": "2.13",
+    "version": "2.14",
+    "wabVersion": "2.14",
     "author": "Esri R&D Center Beijing",
     "description": "",
     "copyright": "",
@@ -1028,8 +1028,8 @@
         "description": "this is theme widget controller"
       }
     ],
-    "version": "2.13",
-    "wabVersion": "2.13",
+    "version": "2.14",
+    "wabVersion": "2.14",
     "author": "Esri R&D Center Beijing",
     "description": "",
     "copyright": "",
@@ -1242,8 +1242,8 @@
         "description": "this is theme footer widget"
       }
     ],
-    "version": "2.13",
-    "wabVersion": "2.13",
+    "version": "2.14",
+    "wabVersion": "2.14",
     "author": "Esri R&D Center Beijing",
     "description": "",
     "copyright": "",

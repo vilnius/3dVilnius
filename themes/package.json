@@ -1,6 +1,6 @@
 {
 	"name": "libs",
-	"version": "2.13",
+	"version": "2.14",
 	"main": "main",
 	"description": "ArcGIS Web Application stemapp libs",
 	"bugs": "",

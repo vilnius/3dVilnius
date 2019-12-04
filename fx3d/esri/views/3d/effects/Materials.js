@@ -1,0 +1,2 @@
+//>>built
+define(["esri/core/declare","esri/core/Accessor","esri/core/Evented"],function(b,c,d){return b([c,d],{declaredClass:"esri.views.3d.effects.Materials",effectName:"Materials",getOldActiveUnit:function(a){return a._activeTextureUnit>a.parameters.maxVertexTextureImageUnits-1&&console.warn("Many textures are binded now, 3DFx lib may be work abnormally."),0}})});
